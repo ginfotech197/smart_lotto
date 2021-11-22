@@ -1,0 +1,101 @@
+<div *ngIf="!showCurrentResult && !showResultSheet">
+  <div id="title-3-div">
+    <div id="title-3-div-child-1"></div>
+    <!-- <div id="title-3-div-child-2" style="text-align: center; color: white;"><button type="button" class="btn btn-danger glow" [routerLink]="['/player']" style="font-size: x-large;border: 5px solid yellow; border-style: double; border-radius: 10px;">Play Online</button></div> -->
+  </div>
+
+
+
+  <div  style="padding-top: 10px;" >
+    <div class="d-flex" style="background-color: rgb(29, 236, 236);">
+      <div class="col-2">
+        <span class="mt-2  mr-2" style="font-size: large;color: rgb(216, 0, 0); text-align: end;">Next draw: {{activeDrawTime.visibleTime}}</span>
+      </div>
+      <div class="col-2" style="padding-top: 10px;">
+        <button class="ml-5 btn" style="background-image: url('/assets/images/logo.gif');" (click)="viewResult()">View Results</button>
+      </div>
+      <div class="col-4" style="text-align: end; padding-left: 50px;">
+        <div id="title-3-div-child-2" style="text-align: center; color: white;"><button type="button" class="btn btn-danger glow" [routerLink]="['/player']" style="font-size: x-large;border: 5px solid yellow; border-style: double; border-radius: 10px;">Play Online</button></div>
+      </div>
+      <div class="clock-container clock2 ml-5 mt-2 pt-1 col-1 " *ngIf="alwaysTime" style="font-size: large; width: 150px;">
+        <div class="time">{{alwaysTime}}</div>
+      </div>
+      <div class="col-1" style="color: rgb(230, 0, 0); font-weight: bold;">
+        {{currentDate}}
+      </div>
+    </div>
+
+
+    <table class="table table-bordered">
+      <thead>
+        <tr style="background-color: rgb(54, 54, 54); color: white;" *ngIf="twoDigitNumberSet[0]!=undefined">
+          <th scope="col">Sereise Name</th>
+          <th scope="col">SR</th>
+
+          <th scope="col" >{{twoDigitNumberSet[0].number_set}}</th>
+          <th scope="col">{{twoDigitNumberSet[1].number_set}}</th>
+          <th scope="col">{{twoDigitNumberSet[2].number_set}}</th>
+          <th scope="col">{{twoDigitNumberSet[3].number_set}}</th>
+          <th scope="col">{{twoDigitNumberSet[4].number_set}}</th>
+          <th scope="col">{{twoDigitNumberSet[5].number_set}}</th>
+          <th scope="col">{{twoDigitNumberSet[6].number_set}}</th>
+          <th scope="col">{{twoDigitNumberSet[7].number_set}}</th>
+          <th scope="col">{{twoDigitNumberSet[8].number_set}}</th>
+          <th scope="col">{{twoDigitNumberSet[9].number_set}}</th>
+          <th scope="col" *ngIf="lastResult[0]!=undefined">{{lastResult[0].visible_time}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr [style.background-color]="colorName[i]" style=" font-weight: bold; font-size: 30px;" *ngFor="let row of gameTypes; let i = index">
+          <td scope="col">{{row.gameName}}</td>
+          <td scope="col">{{row.seriesName}}</td>
+          <td scope="col"><input style="max-width: 50px; max-height: 25px;"></td>
+          <td scope="col"><input style="max-width: 50px; max-height: 25px;"></td>
+          <td scope="col"><input style="max-width: 50px; max-height: 25px;"></td>
+          <td scope="col"><input style="max-width: 50px; max-height: 25px;"></td>
+          <td scope="col"><input style="max-width: 50px; max-height: 25px;"></td>
+          <td scope="col"><input style="max-width: 50px; max-height: 25px;"></td>
+          <td scope="col"><input style="max-width: 50px; max-height: 25px;"></td>
+          <td scope="col"><input style="max-width: 50px; max-height: 25px;"></td>
+          <td scope="col"><input style="max-width: 50px; max-height: 25px;"></td>
+          <td scope="col"><input style="max-width: 50px; max-height: 25px;"></td>
+          <td scope="col" *ngIf="lastResult[0]!=undefined">{{lastResult[i].visible_number}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="row" style="text-align: center; padding-left: 550px;">
+      <!-- <button class="mr-2 btn btn-warning" (click)="viewResult()">View Results</button> -->
+
+
+    </div>
+
+
+
+  <!-- <div class="row" style="text-align: center; padding-left: 550px;">
+    <button class="mr-2 btn btn-warning" (click)="viewResult()">View Results</button>
+    <button class="mr-2 btn btn-warning" [routerLink]="'/terminalReport'" >View Report</button>
+    <button class="mr-2 btn btn-warning" (click)="saveUserPlayInputDetails()">save</button>
+    <button class="mr-2 btn btn-warning" (click)="clear()">Clear</button>
+
+    <div class="ml-2" style="color: rgb(0, 0, 0); padding-left: 110px; font-size: 30px;">
+
+      <div style=" border: 3px double black; padding-right: 50px; padding-left: 10px; background-color: #eec0c6; background-image: linear-gradient(315deg, #eec0c6 0%, #7ee8fa 74%);">Total:<label style="background-color: rgba(247, 157, 84, 0); padding-left: 20px;">{{totalTicketPurchased}}</label></div>
+
+    </div>
+
+  </div> -->
+
+</div>
+
+<!--<div >-->
+</div>
+
+<div *ngIf="showResultSheet" >
+  <app-result-sheet></app-result-sheet>
+</div>
+
+<div *ngIf="showCurrentResult" >
+  <app-current-result></app-current-result>
+</div>
+
+

@@ -1,0 +1,115 @@
+<div *ngIf="!showCurrentResult && !showResultSheet">
+
+
+
+  <div  style="padding-top: 20px;" >
+    <div class="d-flex" style="background-color: blue;">
+      <div class="col-2">
+        <i class="bi bi-bookmark-star-fill" style="font-size: 25px; color: white;"></i>
+        <span class="logo" style="color: white;">{{user.userName}}</span>
+      </div>
+      <!-- <div class="col-1"> -->
+        <!-- <button class="ml-1 mr-1" style="font-size: large;  background-color: rgb(255, 147, 46); border-radius: 5px; width: 80px; text-align: center; border: 2px solid greenyellow; border-style: dotted;" mat-button
+                        [routerLink]="['/chart']"
+                        routerLinkActive="MyActiveMenu"
+                        [routerLinkActiveOptions]="{exact: true}">Result</button> -->
+      <!-- </div> -->
+      <div class="col-2" style="color: white;">
+        Balc: {{user.balance}}
+      </div>
+      <div class="col-4">
+        <span class="mt-2  mr-2" style="font-size: large;color: white; text-align: center;">Next draw: {{activeDrawTime.visibleTime}}</span>
+      </div>
+      <div class="clock-container clock2 ml-1 mt-1 pt-1 col-1 " *ngIf="alwaysTime" style="font-size: large; width: 150px">
+        <div class="time">{{alwaysTime}}</div>
+      </div>
+    </div>
+    <!-- {{showCurrentResult}} -->
+    <table class="table table-bordered">
+      <thead>
+        <tr style="background-color: rgb(54, 54, 54); color: white;" *ngIf="twoDigitNumberSet[0]!=undefined">
+          <th scope="col">Sereise Name</th>
+          <th scope="col">SR</th>
+
+          <th scope="col" >{{twoDigitNumberSet[0].number_set}}</th>
+          <th scope="col">{{twoDigitNumberSet[1].number_set}}</th>
+          <th scope="col">{{twoDigitNumberSet[2].number_set}}</th>
+          <th scope="col">{{twoDigitNumberSet[3].number_set}}</th>
+          <th scope="col">{{twoDigitNumberSet[4].number_set}}</th>
+          <th scope="col">{{twoDigitNumberSet[5].number_set}}</th>
+          <th scope="col">{{twoDigitNumberSet[6].number_set}}</th>
+          <th scope="col">{{twoDigitNumberSet[7].number_set}}</th>
+          <th scope="col">{{twoDigitNumberSet[8].number_set}}</th>
+          <th scope="col">{{twoDigitNumberSet[9].number_set}}</th>
+          <th scope="col" *ngIf="lastResult[0]!=undefined">{{lastResult[0].visible_time}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr [style.background-color]="colorName[i]" style=" font-weight: bold; font-size: 30px;" *ngFor="let row of gameTypes; let i = index">
+          <td scope="col">{{row.gameName}}</td>
+          <td scope="col">{{row.seriesName}}</td>
+          <td scope="col"><input (change)="changeInputDetails(row,inputData[row.gameTypeId][0],twoDigitNumberSet[0].id)" [(ngModel)]= "inputData[row.gameTypeId][0]" style="max-width: 50px; max-height: 25px;"></td>
+          <td scope="col"><input (change)="changeInputDetails(row,inputData[row.gameTypeId][1],twoDigitNumberSet[1].id)" [(ngModel)]= "inputData[row.gameTypeId][1]" style="max-width: 50px; max-height: 25px;"></td>
+          <td scope="col"><input (change)="changeInputDetails(row,inputData[row.gameTypeId][2],twoDigitNumberSet[2].id)" [(ngModel)]= "inputData[row.gameTypeId][2]" style="max-width: 50px; max-height: 25px;"></td>
+          <td scope="col"><input (change)="changeInputDetails(row,inputData[row.gameTypeId][3],twoDigitNumberSet[3].id)" [(ngModel)]= "inputData[row.gameTypeId][3]" style="max-width: 50px; max-height: 25px;"></td>
+          <td scope="col"><input (change)="changeInputDetails(row,inputData[row.gameTypeId][4],twoDigitNumberSet[4].id)" [(ngModel)]= "inputData[row.gameTypeId][4]" style="max-width: 50px; max-height: 25px;"></td>
+          <td scope="col"><input (change)="changeInputDetails(row,inputData[row.gameTypeId][5],twoDigitNumberSet[5].id)" [(ngModel)]= "inputData[row.gameTypeId][5]" style="max-width: 50px; max-height: 25px;"></td>
+          <td scope="col"><input (change)="changeInputDetails(row,inputData[row.gameTypeId][6],twoDigitNumberSet[6].id)" [(ngModel)]= "inputData[row.gameTypeId][6]" style="max-width: 50px; max-height: 25px;"></td>
+          <td scope="col"><input (change)="changeInputDetails(row,inputData[row.gameTypeId][7],twoDigitNumberSet[7].id)" [(ngModel)]= "inputData[row.gameTypeId][7]" style="max-width: 50px; max-height: 25px;"></td>
+          <td scope="col"><input (change)="changeInputDetails(row,inputData[row.gameTypeId][8],twoDigitNumberSet[8].id)" [(ngModel)]= "inputData[row.gameTypeId][8]" style="max-width: 50px; max-height: 25px;"></td>
+          <td scope="col"><input (change)="changeInputDetails(row,inputData[row.gameTypeId][9],twoDigitNumberSet[9].id)" [(ngModel)]= "inputData[row.gameTypeId][9]" style="max-width: 50px; max-height: 25px;"></td>
+
+<!--          <td scope="col"><input #value1 (change)="changeInputDetails(row,value1.value,twoDigitNumberSet[0].id)" style="max-width: 50px; max-height: 25px;"></td>-->
+<!--          <td scope="col"><input #value2 (change)="changeInputDetails(row,value2.value,twoDigitNumberSet[1].id)" style="max-width: 50px; max-height: 25px;"></td>-->
+<!--          <td scope="col"><input #value3 (change)="changeInputDetails(row,value3.value,twoDigitNumberSet[2].id)" style="max-width: 50px; max-height: 25px;"></td>-->
+<!--          <td scope="col"><input #value4 (change)="changeInputDetails(row,value4.value,twoDigitNumberSet[3].id)" style="max-width: 50px; max-height: 25px;"></td>-->
+<!--          <td scope="col"><input #value5 (change)="changeInputDetails(row,value5.value,twoDigitNumberSet[4].id)" style="max-width: 50px; max-height: 25px;"></td>-->
+<!--          <td scope="col"><input #value6 (change)="changeInputDetails(row,value6.value,twoDigitNumberSet[5].id)" style="max-width: 50px; max-height: 25px;"></td>-->
+<!--          <td scope="col"><input #value7 (change)="changeInputDetails(row,value7.value,twoDigitNumberSet[6].id)" style="max-width: 50px; max-height: 25px;"></td>-->
+<!--          <td scope="col"><input #value8 (change)="changeInputDetails(row,value8.value,twoDigitNumberSet[7].id)" style="max-width: 50px; max-height: 25px;"></td>-->
+<!--          <td scope="col"><input #value9 (change)="changeInputDetails(row,value9.value,twoDigitNumberSet[8].id)" style="max-width: 50px; max-height: 25px;"></td>-->
+<!--          <td scope="col"><input #value10 (change)="changeInputDetails(row,value10.value,twoDigitNumberSet[9].id)" style="max-width: 50px; max-height: 25px;"></td>-->
+          <td scope="col" *ngIf="lastResult[0]!=undefined" >{{lastResult[i].visible_number}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- <pre>
+      {{totalTicketPurchased}}
+    </pre> -->
+  </div>
+  <!-- <div>
+    <label style="background-color: aquamarine; border: 3px double black; border-radius: 5px; font-size: 25px; font-weight: bold;">{{totalTicketPurchased}}</label>
+  </div> -->
+  <div class="row" style="text-align: center; padding-left: 550px;">
+    <button class="mr-2 btn btn-warning" (click)="viewResult()">View Results</button>
+    <button class="mr-2 btn btn-warning" [routerLink]="'/terminalReport'" >View Report</button>
+    <button class="mr-2 btn btn-warning" (click)="saveUserPlayInputDetails()">save</button>
+    <button class="mr-2 btn btn-warning" (click)="clear()">Clear</button>
+
+    <div class="ml-2" style="color: rgb(0, 0, 0); padding-left: 110px; font-size: 30px;">
+      <!-- Total:<label style="background-color: rgb(247, 157, 84); border: 3px double black; border-radius: 5px; font-size: 25px; font-weight: bold;">{{totalTicketPurchased}}</label> -->
+      <div style=" border: 3px double black; padding-right: 50px; padding-left: 10px; background-color: #eec0c6; background-image: linear-gradient(315deg, #eec0c6 0%, #7ee8fa 74%);">Total:<label style="background-color: rgba(247, 157, 84, 0); padding-left: 20px;">{{totalTicketPurchased}}</label></div>
+
+    </div>
+
+  </div>
+  <!-- <div>
+    <label style="background-color: aquamarine; border: 3px double black; border-radius: 5px; font-size: 15px; font-weight: bold;">{{totalTicketPurchased}}</label>
+  </div> -->
+
+  <!-- <div style="color: rgb(253, 253, 253);">
+    <pre>
+      {{gameTypes | json}}
+    </pre>
+  </div>  -->
+</div>
+<!-- <pre>
+  {{todayLastResult | json}}
+</pre> -->
+<div *ngIf="showResultSheet" >
+   <app-result-sheet></app-result-sheet>
+</div>
+
+<div *ngIf="showCurrentResult" >
+  <app-current-result></app-current-result>
+</div>
