@@ -133,6 +133,12 @@ const routes: Routes = [
   },
 
   {
+    path: 'twelveCards',
+    loadChildren: () => import('./modules/general/twelve-cards/twelve-cards.module')
+      .then(mod => mod.TwelveCardsModule)
+  },
+
+  {
     path: 'bi-icon',
     loadChildren: () => import('./modules/general/bi-icon/bi-icon.module')
       .then(mod => mod.BiIconModule)
