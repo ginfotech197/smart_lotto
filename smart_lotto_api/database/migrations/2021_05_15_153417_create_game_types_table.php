@@ -15,6 +15,7 @@ class CreateGameTypesTable extends Migration
     {
         Schema::create('game_types', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('game_id')->references('id')->on('games')->onDelete('cascade');
             $table->string('game_type_name',20)->nullable(true);
             $table->string('game_name',20)->nullable(true);
             $table->string('series_name',2)->nullable(true);

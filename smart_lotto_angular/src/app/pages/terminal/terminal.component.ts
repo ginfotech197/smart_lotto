@@ -83,7 +83,7 @@ export class TerminalComponent implements OnInit {
   public previousChip = 10;
   public selectedChipValue = 10;
   public counter = 0;
-  public colorName = ['#FE0C4D', '#85FE0C', '#1DA4FE', '#FE7701', '#BB01FE'];
+  public colorName = ['#ff1493', '#ffd700', '#8a2be2', '#66cdaa', '#dc143c'];
   copyNumberMatrix: SingleNumber[];
   copySingleNumber: SingleNumber[];
   isProduction = environment.production;

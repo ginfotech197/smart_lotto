@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 
 use App\Models\DrawMaster;
+use App\Models\Game;
 use App\Models\GameType;
 use App\Models\Message;
 use App\Models\SingleNumber;
@@ -342,13 +343,19 @@ class DatabaseSeeder extends Seeder
 
 
         ]);
+        Game::insert([
+            ['game_name'=>'Jodi-2D','inforce'=> 1],
+            ['game_name'=>'Card','inforce'=> 1]
+
+        ]);
 
         GameType::insert([
-            ['game_type_name'=>'Jodi','game_name'=>'(0.55 * 20)','series_name'=>'A','game_type_initial' => '' ,'mrp'=> 10.00, 'winning_price'=>90, 'winning_bonus_percent'=>0.2, 'commission'=>0.00, 'payout'=>50,'default_payout'=>150],
-            ['game_type_name'=>'Jodi','game_name'=>'(0.55 * 20)','series_name'=>'B','game_type_initial' => '' ,'mrp'=> 10.00, 'winning_price'=>90, 'winning_bonus_percent'=>0.2, 'commission'=>0.00, 'payout'=>50,'default_payout'=>150],
-            ['game_type_name'=>'Jodi','game_name'=>'(0.55 * 20)','series_name'=>'C','game_type_initial' => '' ,'mrp'=> 10.00, 'winning_price'=>90, 'winning_bonus_percent'=>0.2, 'commission'=>0.00, 'payout'=>50,'default_payout'=>150],
-            ['game_type_name'=>'Jodi','game_name'=>'(0.55 * 20)','series_name'=>'D','game_type_initial' => '' ,'mrp'=> 10.00, 'winning_price'=>90, 'winning_bonus_percent'=>0.2, 'commission'=>0.00, 'payout'=>50,'default_payout'=>150],
-            ['game_type_name'=>'Jodi','game_name'=>'(0.55 * 20)','series_name'=>'E','game_type_initial' => '' ,'mrp'=> 10.00, 'winning_price'=>90, 'winning_bonus_percent'=>0.2, 'commission'=>0.00, 'payout'=>50,'default_payout'=>150]
+            ['game_id'=>1,'game_type_name'=>'Jodi','game_name'=>'(0.55 * 20)','series_name'=>'A','game_type_initial' => '' ,'mrp'=> 10.00, 'winning_price'=>90, 'winning_bonus_percent'=>0.2, 'commission'=>0.00, 'payout'=>50,'default_payout'=>150],
+            ['game_id'=>1,'game_type_name'=>'Jodi','game_name'=>'(0.55 * 20)','series_name'=>'B','game_type_initial' => '' ,'mrp'=> 10.00, 'winning_price'=>90, 'winning_bonus_percent'=>0.2, 'commission'=>0.00, 'payout'=>50,'default_payout'=>150],
+            ['game_id'=>1,'game_type_name'=>'Jodi','game_name'=>'(0.55 * 20)','series_name'=>'C','game_type_initial' => '' ,'mrp'=> 10.00, 'winning_price'=>90, 'winning_bonus_percent'=>0.2, 'commission'=>0.00, 'payout'=>50,'default_payout'=>150],
+            ['game_id'=>1,'game_type_name'=>'Jodi','game_name'=>'(0.55 * 20)','series_name'=>'D','game_type_initial' => '' ,'mrp'=> 10.00, 'winning_price'=>90, 'winning_bonus_percent'=>0.2, 'commission'=>0.00, 'payout'=>50,'default_payout'=>150],
+            ['game_id'=>1,'game_type_name'=>'Jodi','game_name'=>'(0.55 * 20)','series_name'=>'E','game_type_initial' => '' ,'mrp'=> 10.00, 'winning_price'=>90, 'winning_bonus_percent'=>0.2, 'commission'=>0.00, 'payout'=>50,'default_payout'=>150],
+            ['game_id'=>2,'game_type_name'=>'Card','game_name'=>'12-card-deck','series_name'=>'','game_type_initial' => '' ,'mrp'=> 10.00, 'winning_price'=>90, 'winning_bonus_percent'=>0.2, 'commission'=>0.00, 'payout'=>50,'default_payout'=>150]
 
         ]);
 

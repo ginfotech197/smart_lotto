@@ -14,7 +14,7 @@ import {CommonService} from './services/common.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnDestroy{
-  title = 'Gold star plus';
+  title = 'Smart Lotto';
   active = 1;
   events: string[] = [];
   opened: boolean;
@@ -44,13 +44,13 @@ export class AppComponent implements OnInit, OnDestroy{
     this.canonicalService.setCanonicalURL();
     this.pageTitle.setTitle(this.title);
     this.metaService.addTags([
-      { name: 'keywords', content: 'gold star plus' },
+      { name: 'keywords', content: 'Smart Lotto' },
       { name: 'robots', content: 'index, follow' },
-      { name: 'author', content: 'gold star plus' },
+      { name: 'author', content: 'Smart Lotto' },
       { name: 'date', content: '2021-05-25', scheme: 'YYYY-MM-DD' },
       { charset: 'UTF-8' },
-      { description: 'Gold star plus WEBSITE ⭐ Today All Bazi Tips Gold Star Plus Result Live Update. Kolkata Gold star plus Result . कोलकाता फटाफट RESULT, Prediction the result and win, try your luck..\n' +
-          '‎Gold star plus · ‎OLD Kolkata  Gold star plus Result · ‎Kolkata fun lucky number · ‎Kolkata FF FUN result since 1960' }
+      { description: 'Smart Lotto WEBSITE ⭐ Today All Bazi Tips Smart Lotto Result Live Update. Kolkata Smart Lotto Result . कोलकाता फटाफट RESULT, Prediction the result and win, try your luck..\n' +
+          '‎Smart Lotto · ‎OLD Kolkata  Smart Lotto Result · ‎Kolkata fun lucky number · ‎Kolkata FF FUN result since 1960' }
     ]);
 
 
