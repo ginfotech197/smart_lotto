@@ -1,8 +1,55 @@
 
 
-  <div class="" style="text-align: center; font-weight: bolder;color: rgb(27, 59, 245);background-image: linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet); color: white;" *ngIf="!isAuthenticated">
-    <img src="assets/images/logo.png" width="120" style="padding-bottom: 0px;" alt=""><span class="h1" style="font-size: 4vw; text-align: center;color: white;">Smart Lotto</span><img src="assets/images/logo.png" width="120" style="padding-bottom: px;" alt="">
-  </div>
+  <div class=""  *ngIf="!isAuthenticated">
+    <!-- <img src="assets/images/lottoLogo.png" width="120" style="padding-bottom: 0px;" alt="">
+    <span class="h1" style="font-size: 4vw; text-align: center;color: white;">Smart Lotto</span>
+    <img src="assets/images/lottoLogo.png" width="120" style="padding-bottom: px;" alt=""> -->
+    <mat-toolbar color="golden" style="background-color: blue;background-position: center top;width: 100%;max-width: 1360px; position: relative; background-repeat: no-repeat;">
+
+      <mat-toolbar-row fxLayoutAlign="space-between center" *ngIf="!deviceXs">
+        <div fxLayout="row">
+
+          <div fxLayout="row" class="mb-2 mt-1" style="color: white;">
+            <div class="" style="">
+            <div>SM010003</div>
+            <div class="d-flex">
+              <div class="col-4">Hide Bal:</div>
+              <div class="col-4 ml-4">Rs.0.16</div>
+            </div>
+          </div>
+
+
+          </div>
+
+        </div>
+        <div fxLayout="" class="ml-2">
+          <img src="assets/images/lottoLogo.png" width="75" alt="">
+          <div style="font-weight: bolder; font-size: 50px; padding-top: 10px; color: white;" class="mt-2">Smart Lotto</div>
+          <img src="assets/images/lottoLogo.png" width="75" alt="">
+
+          <!-- <div class="time">{{alwaysTime}}</div> -->
+        </div>
+        <div fxLayout="row" style="border-radius: 8px; color: white;">
+          <div class="" style="">
+            <div class="ml-3">Time Left : 00:13:47</div>
+            <div class="">
+              <div class="col-4 ml-5">Date</div>
+              <div class="d-flex">
+                <div>09/11/2021</div>
+                <div class="ml-3">9:31:13</div>
+              </div>
+
+              <!-- <div class="col-4 ml-4">Rs.0.16</div> -->
+            </div>
+          </div>
+        </div>
+
+        <!-- <div fxLayout="row" style="background-color: #ff0f0f !important; border-radius: 8px;">
+            <button mat-button *ngIf="isAuthenticated" (click)="logout()" style="color: white;">Logout<i class="ri-logout-circle-r-line ri-2x"></i></button>
+        </div> -->
+      </mat-toolbar-row>
+  <!-- </div> -->
+
 
 
 
