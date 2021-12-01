@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\CardCombination;
+use App\Models\CardDrawMaster;
 use App\Models\DrawMaster;
 use App\Models\Game;
 use App\Models\GameType;
@@ -549,6 +550,20 @@ class DatabaseSeeder extends Seeder
         ['rank_name'=>'King','suit_name'=>'Diamon','rank_initial'=>'K'],
         ['rank_name'=>'King','suit_name'=>'Heart','rank_initial'=>'K'],
         ['rank_name'=>'King','suit_name'=>'Spade','rank_initial'=>'K'],
+
+    ]);
+
+    CardDrawMaster::insert([
+
+        //5 min difference
+
+        ['card_draw_name'=> 'Good morning','start_time'=>'12:00','end_time'=>'09:00','time_diff'=>'15','visible_time'=>'09:00 am','active'=>1],
+        ['card_draw_name'=> 'Good morning','start_time'=>'09:00','end_time'=>'09:05','time_diff'=>'15','visible_time'=>'09:15 am','active'=>0],
+        ['card_draw_name'=> 'Good afternoon','start_time'=>'09:05','end_time'=>'09:10','time_diff'=>'15','visible_time'=>'09:30 am','active'=>0],
+        ['card_draw_name'=> 'Good evening','start_time'=>'09:10','end_time'=>'09:15','time_diff'=>'15','visible_time'=>'09:45 am','active'=>0],
+        ['card_draw_name'=> 'Lets play','start_time'=>'09:15','end_time'=>'09:20','time_diff'=>'15','visible_time'=>'10:00 am','active'=>0],
+
+
 
     ]);
 
