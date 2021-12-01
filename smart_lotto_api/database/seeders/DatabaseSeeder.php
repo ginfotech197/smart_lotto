@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-
+use App\Models\CardCombination;
 use App\Models\DrawMaster;
 use App\Models\Game;
 use App\Models\GameType;
@@ -531,6 +531,24 @@ class DatabaseSeeder extends Seeder
         ['result_masters_id'=>5,'game_type_id'=>'3','two_digit_number_combination_id'=>23],
         ['result_masters_id'=>5,'game_type_id'=>'4','two_digit_number_combination_id'=>24],
         ['result_masters_id'=>5,'game_type_id'=>'5','two_digit_number_combination_id'=>25],
+
+    ]);
+
+    CardCombination::insert([
+        ['rank_name'=>'Jack','suit_name'=>'Club','rank_initial'=>'J'],
+        ['rank_name'=>'Jack','suit_name'=>'Diamon','rank_initial'=>'J'],
+        ['rank_name'=>'Jack','suit_name'=>'Heart','rank_initial'=>'J'],
+        ['rank_name'=>'Jack','suit_name'=>'Spade','rank_initial'=>'J'],
+
+        ['rank_name'=>'Queen','suit_name'=>'Club','rank_initial'=>'Q'],
+        ['rank_name'=>'Queen','suit_name'=>'Diamon','rank_initial'=>'Q'],
+        ['rank_name'=>'Queen','suit_name'=>'Heart','rank_initial'=>'Q'],
+        ['rank_name'=>'Queen','suit_name'=>'Spade','rank_initial'=>'Q'],
+
+        ['rank_name'=>'King','suit_name'=>'Club','rank_initial'=>'K'],
+        ['rank_name'=>'King','suit_name'=>'Diamon','rank_initial'=>'K'],
+        ['rank_name'=>'King','suit_name'=>'Heart','rank_initial'=>'K'],
+        ['rank_name'=>'King','suit_name'=>'Spade','rank_initial'=>'K'],
 
     ]);
 
