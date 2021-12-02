@@ -449,7 +449,8 @@ export class TerminalComponent implements OnInit {
           numberCombinationId: value.numberCombinationId,
           singleNumberId: value.singleNumberId,
           quantity: this.selectedChip,
-          mrp: this.gameTypes[0].mrp
+          mrp: this.gameTypes[0].mrp,
+
         };
         this.userGameInput.push(tempPlayDetails);
         value.quantity = this.selectedChip;

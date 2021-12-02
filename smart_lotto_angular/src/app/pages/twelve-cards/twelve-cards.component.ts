@@ -14,7 +14,7 @@ import {GameTypeService} from '../../services/game-type.service';
 export class TwelveCardsComponent implements OnInit {
   activeDrawTime: DrawTime;
   user: User;
-  playDetails: [] = [];
+  playDetails: any[] = [];
   gameTypes: GameType[] = [];
 
 
@@ -44,12 +44,17 @@ export class TwelveCardsComponent implements OnInit {
   }
 
   detailsData(value: string, gameCombination){
-    console.log(value, gameCombination);
     const tempPlayDetail = {
-      quantity: this.activeDrawTime.drawId,
+      gameTypeId: this.gameTypes[0].gameTypeId,
+      quantity: value,
       cardCombinationId: gameCombination,
-      mrp: this.gameTypes[0].mrp
+      mrp: this.gameTypes[0].mrp,
+      payout: this.gameTypes[0].payout,
+      commission: this.gameTypes[0].commission
     };
+
+    // @ts-ignore
+    this.playDetails.push(tempPlayDetail);
   }
 
   saveUserInput(){
@@ -59,6 +64,7 @@ export class TwelveCardsComponent implements OnInit {
     };
 
     console.log(playMaster);
+    console.log(this.playDetails);
   }
 
 }
