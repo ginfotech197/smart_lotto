@@ -114,13 +114,14 @@
   <!-- <div>
     <label style="background-color: aquamarine; border: 3px double black; border-radius: 5px; font-size: 25px; font-weight: bold;">{{totalTicketPurchased}}</label>
   </div> -->
-  <div class="row" style="text-align: center; padding-left: 550px;">
+  <div class="row" style="text-align: center; padding-left: 350px;">
+    <button class="mr-2 btn btn-warning" [routerLink]="'/twelveCards'" >View Cards</button>
     <button class="mr-2 btn btn-warning" (click)="viewResult()">View Results</button>
     <button class="mr-2 btn btn-warning" [routerLink]="'/terminalReport'" >View Report</button>
     <button class="mr-2 btn btn-warning" (click)="saveUserPlayInputDetails()">save</button>
     <button class="mr-2 btn btn-warning" (click)="clear()">Clear</button>
 
-    <div class="ml-2" style="color: rgb(0, 0, 0); padding-left: 110px; font-size: 30px;">
+    <div class="ml-2" style="color: rgb(0, 0, 0); padding-left: 120px; font-size: 30px;">
       <!-- Total:<label style="background-color: rgb(247, 157, 84); border: 3px double black; border-radius: 5px; font-size: 25px; font-weight: bold;">{{totalTicketPurchased}}</label> -->
       <div style=" border: 3px double black; padding-right: 50px; padding-left: 10px; background-color: #eec0c6; background-image: linear-gradient(315deg, #eec0c6 0%, #7ee8fa 74%);">Total:<label style="background-color: rgba(247, 157, 84, 0); padding-left: 20px;">{{totalTicketPurchased}}</label></div>
 
