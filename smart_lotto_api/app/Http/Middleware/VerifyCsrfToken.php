@@ -12,7 +12,7 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        'https://playsmartwin.com/smart_lotto_api_api/public/api/*',
-        'https://playsmartwin.com/smart_lotto_api_api/public/api/*'
+        'https://bhagyadata.com/smart_lotto_api_api/public/api/*',
+        'https://bhagyadata.com/smart_lotto_api_api/public/api/*'
     ];
 }
