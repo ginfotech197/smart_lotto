@@ -17,7 +17,7 @@ class GameTypeController extends Controller
     public function index()
     {
         // $result = GameType::where('gam')->get();
-        $result = GameType::where('game_id',1)->get();
+        $result = GameType::where('game_id',2)->get();
 //        $result = get_age('1977-05-20');
         return response()->json(['success'=>1,'data'=> GameTypeResource::collection($result)], 200,[],JSON_NUMERIC_CHECK);
     }

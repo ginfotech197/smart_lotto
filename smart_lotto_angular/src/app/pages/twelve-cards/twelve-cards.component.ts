@@ -3,6 +3,8 @@ import {CommonService} from '../../services/common.service';
 import {DrawTime} from '../../models/DrawTime.model';
 import {User} from '../../models/user.model';
 import {AuthService} from '../../services/auth.service';
+import {GameType} from '../../models/GameType.model';
+import {GameTypeService} from '../../services/game-type.service';
 
 @Component({
   selector: 'app-twelve-cards',
@@ -12,10 +14,20 @@ import {AuthService} from '../../services/auth.service';
 export class TwelveCardsComponent implements OnInit {
   activeDrawTime: DrawTime;
   user: User;
+  playDetails: [] = [];
+  gameTypes: GameType[] = [];
 
 
 
-  constructor(private commonService: CommonService, private authService: AuthService) { }
+  constructor(private commonService: CommonService, private authService: AuthService, private gameTypeService: GameTypeService) {
+    this.gameTypes = this.gameTypeService.getGameType();
+    this.gameTypeService.getGameTypeListener().subscribe((response: GameType[]) => {
+      this.gameTypes = response;
+      console.log(this.gameTypes);
+    });
+
+    console.log(this.gameTypes);
+  }
 
   ngOnInit(): void {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -31,8 +43,13 @@ export class TwelveCardsComponent implements OnInit {
 
   }
 
-  detailsData(value: string){
-    console.log(value);
+  detailsData(value: string, gameCombination){
+    console.log(value, gameCombination);
+    const tempPlayDetail = {
+      quantity: this.activeDrawTime.drawId,
+      cardCombinationId: gameCombination,
+      mrp: this.gameTypes[0].mrp
+    };
   }
 
   saveUserInput(){
