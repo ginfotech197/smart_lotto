@@ -48,6 +48,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.commonService.value$.asObservable().subscribe(response => {
       // console.log(response);
       // this.alwaysTime = response;
+      this.authService.userBehaviorSubject.subscribe(user => {
+        this.user = user;
+      });
     });
 
     this.commonService.currentTimeBehaviorSubject.asObservable().subscribe(response => {

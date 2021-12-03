@@ -345,10 +345,13 @@
 
         <div fxLayout="row" class="mb-2 mt-1" style="color: white;">
           <div class="" style="">
-          <div>SM010003</div>
+          <!-- <div>SM010003</div> -->
+        <i class="bi bi-bookmark-star-fill" style="font-size: 25px; color: rgb(0, 0, 0);"></i>
+
+          {{user.userName}}
           <div class="d-flex">
-            <div class="col-4">Bal:</div>
-            <div class="col-4 ml-4">Rs.0.16</div>
+            <div class="col-4">Bal: {{user.balance}}</div>
+            <!-- <div class="col-4 ml-4">Rs.0.16</div> -->
           </div>
         </div>
 
