@@ -5,6 +5,8 @@ import {User} from '../../models/user.model';
 import {AuthService} from '../../services/auth.service';
 import {GameType} from '../../models/GameType.model';
 import {GameTypeService} from '../../services/game-type.service';
+import Swal from 'sweetalert2';
+import {PlayGameService} from '../../services/play-game.service';
 
 @Component({
   selector: 'app-twelve-cards',
@@ -19,7 +21,7 @@ export class TwelveCardsComponent implements OnInit {
 
 
 
-  constructor(private commonService: CommonService, private authService: AuthService, private gameTypeService: GameTypeService) {
+  constructor(private commonService: CommonService, private authService: AuthService, private gameTypeService: GameTypeService, private playGameService: PlayGameService) {
     this.gameTypes = this.gameTypeService.getGameType();
     this.gameTypeService.getGameTypeListener().subscribe((response: GameType[]) => {
       this.gameTypes = response;
@@ -58,12 +60,21 @@ export class TwelveCardsComponent implements OnInit {
   }
 
   saveUserInput(){
-    const playMaster = {
-      drawMasterId: this.activeDrawTime.drawId,
-      userId: this.user.userId,
+    // const playMaster = {
+    //   drawMasterId: this.activeDrawTime.drawId,
+    //   userId: this.user.userId,
+    // };
+
+    const masterData = {
+      playMaster: {drawMasterId: this.activeDrawTime.drawId, terminalId: this.user.userId},
+      playDetails: this.playDetails
     };
 
-    console.log(playMaster);
+
+    this.playGameService.saveUserPlayInputDetails(masterData).subscribe(response => {
+    });
+
+    console.log(masterData);
     console.log(this.playDetails);
   }
 
