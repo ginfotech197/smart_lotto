@@ -82,7 +82,7 @@ export class TwelveCardsComponent implements OnInit {
     };
 
 
-    this.playGameService.saveUserPlayInputDetails(masterData).subscribe(response => {
+    this.playGameService.saveUserPlayInputDetailsCard(masterData).subscribe(response => {
       if (response.success === 1){
         this.inputData = [];
         for (let i = 1; i <= 11 ; i++){
