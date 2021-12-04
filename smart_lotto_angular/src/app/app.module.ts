@@ -76,6 +76,9 @@ import {NgMarqueeModule} from 'ng-marquee-improved';
 import {MatProgressBar, MatProgressBarModule} from '@angular/material/progress-bar';
 // import { TwelveCardsComponent } from './pages/twelve-cards/twelve-cards.component';
 import { TwelveCardsModule } from './modules/general/twelve-cards/twelve-cards.module';
+import { CardResultModule } from './modules/general/twelve-cards/card-result/card-result.module';
+// import { CardResultComponent } from './pages/twelve-cards/card-result/card-result.component';
+// import { CardResultModule } from './modules/general/card-result/card-result.module';
 // import { StockistResultComponent } from './pages/stockistPanel/stockist-result/stockist-result.component';
 // import { StockistResultModule } from './modules/general/stockistPanel/stockist-result/stockist-result.module';
 // import { ResultModule } from './modules/general/result/result.module';
@@ -106,6 +109,7 @@ import { TwelveCardsModule } from './modules/general/twelve-cards/twelve-cards.m
 @NgModule({
   declarations: [
     AppComponent,
+    // CardResultComponent,
     // TwelveCardsComponent,
     // StockistResultComponent,
     // StockistReportComponent,
@@ -185,6 +189,8 @@ import { TwelveCardsModule } from './modules/general/twelve-cards/twelve-cards.m
     MatTabsModule,
     NgMarqueeModule,
     TwelveCardsModule,
+    CardResultModule,
+    // CardResultModule,
     // StockistResultModule,
     // ResultModule,
     // MasterTerminalModule,

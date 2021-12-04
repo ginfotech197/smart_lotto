@@ -19,6 +19,7 @@ export class TwelveCardsComponent implements OnInit {
   playDetails: any[] = [];
   gameTypes: GameType[] = [];
   inputData: any[];
+  cardResultVisibility= false;
 
 
 
@@ -38,6 +39,7 @@ export class TwelveCardsComponent implements OnInit {
     for (let i = 1; i <= 11 ; i++){
       this.inputData[i] = [];
     }
+    this.cardResultVisibility= false;
 
     const user = JSON.parse(localStorage.getItem('user'));
 

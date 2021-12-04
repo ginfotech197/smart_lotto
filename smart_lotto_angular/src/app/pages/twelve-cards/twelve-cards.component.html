@@ -44,10 +44,18 @@
         </tr>
       </tbody>
       </table>
-      <button (click)="saveUserInput()">save</button>
+      <button class="btn btn-light" (click)="saveUserInput()">save</button>
+
     </div>
 
-    
+
+    <div style="padding-left: 3%;">
+      <button class="btn btn-primary" (click)="cardResultVisibility=!cardResultVisibility">{{cardResultVisibility?"Hide":"Card Result"}}</button>
+      <div *ngIf="cardResultVisibility">
+        <app-card-result></app-card-result>
+      </div>
+
+    </div>
 
 
 

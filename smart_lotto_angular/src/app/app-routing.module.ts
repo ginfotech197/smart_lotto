@@ -14,6 +14,7 @@ import {AuthGuardStockistServiceService} from './services/auth-guard-stockist-se
 import {BiIconComponent} from './pages/bi-icon/bi-icon.component';
 import {ManualResultComponent} from './pages/cpanel/manual-result/manual-result.component';
 import {MasterStockistComponent} from './pages/cpanel/master-stockist/master-stockist.component';
+import { CardResultComponent } from './pages/twelve-cards/card-result/card-result.component';
 
 
 
@@ -24,6 +25,8 @@ import {MasterStockistComponent} from './pages/cpanel/master-stockist/master-sto
 // @ts-ignore
 const routes: Routes = [
   {path: '', component: HomeComponent},
+  {path: 'cardResult', component: CardResultComponent},
+
   // {path: 'chart', component: HomeComponent},
   // {
   //   path: '',
@@ -135,7 +138,7 @@ const routes: Routes = [
   {
     path: 'twelveCards',
     loadChildren: () => import('./modules/general/twelve-cards/twelve-cards.module')
-      .then(mod => mod.TwelveCardsModule)
+      .then(mod => mod.TwelveCardsModule),
   },
 
   {
@@ -143,6 +146,12 @@ const routes: Routes = [
     loadChildren: () => import('./modules/general/bi-icon/bi-icon.module')
       .then(mod => mod.BiIconModule)
   },
+
+  // {
+  //   path: 'cardResult',
+  //   loadChildren: () => import('./modules/general/card-result/card-result-routing.module')
+  //     .then(mod => mod.CardResultModule)
+  // },
   { path: 'Receipt', loadChildren: () => import('./pages/cpanel/receipt/receipt.module').then(m => m.ReceiptModule) },
   // {path: 'auth', component: AuthComponent},
   // {path: 'player', component: AuthComponent},
