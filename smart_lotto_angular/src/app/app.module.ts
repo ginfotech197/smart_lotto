@@ -74,7 +74,7 @@ import { MasterStockistComponent } from './pages/cpanel/master-stockist/master-s
 import {MatTabsModule} from '@angular/material/tabs';
 import {NgMarqueeModule} from 'ng-marquee-improved';
 import {MatProgressBar, MatProgressBarModule} from '@angular/material/progress-bar';
-import { TwelveCardsComponent } from './pages/twelve-cards/twelve-cards.component';
+// import { TwelveCardsComponent } from './pages/twelve-cards/twelve-cards.component';
 import { TwelveCardsModule } from './modules/general/twelve-cards/twelve-cards.module';
 // import { StockistResultComponent } from './pages/stockistPanel/stockist-result/stockist-result.component';
 // import { StockistResultModule } from './modules/general/stockistPanel/stockist-result/stockist-result.module';
@@ -106,7 +106,7 @@ import { TwelveCardsModule } from './modules/general/twelve-cards/twelve-cards.m
 @NgModule({
   declarations: [
     AppComponent,
-    TwelveCardsComponent,
+    // TwelveCardsComponent,
     // StockistResultComponent,
     // StockistReportComponent,
     // MasterTerminalComponent,

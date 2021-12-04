@@ -465,33 +465,6 @@ export class TerminalComponent implements OnInit {
     }
   }
 
-  changeChip(value){
-    this.selectedChip = value;
-    // if (this.previousChip === 0){
-    //   this.previousChip = value;
-    // }
-    // if (this.previousChip !== this.selectedChip){
-    //   this.counter = 0;
-    // }
-    // if (this.selectedChip === 10 ){
-    //   this.counter  = this.counter + 1;
-    //   this.selectedChipValue = this.selectedChip * this.counter;
-    // }
-    // if (this.selectedChip === 20 ){
-    //   this.counter  = this.counter + 1;
-    //   this.selectedChipValue = this.selectedChip * this.counter;
-    // }
-    // if (this.selectedChip === 50 ){
-    //   this.counter  = this.counter + 1;
-    //   this.selectedChipValue = this.selectedChip * this.counter;
-    // }
-    // if (this.selectedChip === 100 ){
-    //   this.counter  = this.counter + 1;
-    //   this.selectedChipValue = this.selectedChip * this.counter;
-    // }
-    // console.log(this.counter + ' ' + this.selectedChipValue);
-  }
-
   resetMatrixValue(){
     this.userGameInput = [];
     this.singleNumbers = JSON.parse(JSON.stringify(this.copySingleNumber));

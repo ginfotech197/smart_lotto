@@ -18,6 +18,7 @@ export class TwelveCardsComponent implements OnInit {
   user: User;
   playDetails: any[] = [];
   gameTypes: GameType[] = [];
+  inputData: any[];
 
 
 
@@ -25,13 +26,19 @@ export class TwelveCardsComponent implements OnInit {
     this.gameTypes = this.gameTypeService.getGameType();
     this.gameTypeService.getGameTypeListener().subscribe((response: GameType[]) => {
       this.gameTypes = response;
-      console.log(this.gameTypes);
+      // console.log(this.gameTypes);
     });
 
-    console.log(this.gameTypes);
+    // console.log(this.gameTypes);
   }
 
   ngOnInit(): void {
+
+    this.inputData = [];
+    for (let i = 1; i <= 11 ; i++){
+      this.inputData[i] = [];
+    }
+
     const user = JSON.parse(localStorage.getItem('user'));
 
     this.authService.userBehaviorSubject.subscribe(user => {
@@ -46,6 +53,7 @@ export class TwelveCardsComponent implements OnInit {
   }
 
   detailsData(value: string, gameCombination){
+
     const tempPlayDetail = {
       gameTypeId: this.gameTypes[0].gameTypeId,
       quantity: value,
@@ -54,9 +62,12 @@ export class TwelveCardsComponent implements OnInit {
       payout: this.gameTypes[0].payout,
       commission: this.gameTypes[0].commission
     };
+    // console.log(tempPlayDetail);
 
     // @ts-ignore
     this.playDetails.push(tempPlayDetail);
+    // console.log(this.playDetails);
+
   }
 
   saveUserInput(){
@@ -72,10 +83,17 @@ export class TwelveCardsComponent implements OnInit {
 
 
     this.playGameService.saveUserPlayInputDetails(masterData).subscribe(response => {
+      if (response.success === 1){
+        this.inputData = [];
+        for (let i = 1; i <= 11 ; i++){
+          this.inputData[i] = [];
+        }
+        this.playDetails = [];
+      }
     });
 
-    console.log(masterData);
-    console.log(this.playDetails);
+    // console.log(masterData);
+    // console.log(this.playDetails);
   }
 
 }

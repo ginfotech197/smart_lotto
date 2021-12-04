@@ -34,44 +34,39 @@ class CentralController extends Controller
             $payout = ($totalSale * ($gameType->payout)) / 100;
             $targetValue = floor($payout / $gameType->winning_price);
             // result less than equal to target value
-            $result = DB::select(DB::raw("select two_digit_number_sets.id as two_digit_number_set_id,two_digit_number_sets.number_set,
-two_digit_number_combinations.id as two_digit_number_combination_id,
-sum(play_details.quantity) as total_quantity
-from play_details
-inner join play_masters ON play_masters.id = play_details.play_master_id
-inner join two_digit_number_sets ON two_digit_number_sets.id = play_details.two_digit_number_set_id
-inner join two_digit_number_combinations on two_digit_number_combinations.two_digit_number_set_id = two_digit_number_sets.id
-where play_masters.draw_master_id = $lastDrawId and play_details.game_type_id=$i and date(play_details.created_at)= " . "'" . $today . "'" . "
-group by two_digit_number_sets.number_set,two_digit_number_sets.id,two_digit_number_combinations.id
-having sum(play_details.quantity)<= $targetValue
+            $result = DB::select(DB::raw("select card_combinations.id as card_combination_id,
+sum(card_play_details.quantity) as total_quantity
+from card_play_details
+inner join card_play_masters ON card_play_masters.id = card_play_details.card_play_master_id
+inner join card_combinations ON card_combinations.id = card_play_details.card_combination_id
+where card_play_masters.card_draw_master_id = $lastDrawId and card_play_details.game_type_id=$i and date(card_play_details.created_at)= " . "'" . $today . "'" . "
+group by card_combinations.id
+having sum(card_play_details.quantity)<= $targetValue
 order by rand() limit 1"));
 
             // select empty item for result
             if (empty($result)) {
                 // empty value
-                $result = DB::select(DB::raw("SELECT two_digit_number_sets.id as two_digit_number_set_id,two_digit_number_combinations.id as two_digit_number_combination_id
-FROM two_digit_number_sets
-inner join two_digit_number_combinations on two_digit_number_combinations.two_digit_number_set_id = two_digit_number_sets.id
-WHERE two_digit_number_sets.id NOT IN(SELECT DISTINCT
-play_details.two_digit_number_set_id FROM play_details
-INNER JOIN play_masters on play_details.play_master_id= play_masters.id
-WHERE  DATE(play_masters.created_at) = " . "'" . $today . "'" . " and play_masters.draw_master_id = $lastDrawId
-and play_details.game_type_id=$i)
+                $result = DB::select(DB::raw("SELECT card_combinations.id as card_combination_id
+FROM card_combinations
+WHERE card_combinations.id NOT IN(SELECT DISTINCT
+card_play_details.card_combination_id FROM card_play_details
+INNER JOIN card_play_masters on card_play_details.card_play_master_id= card_play_masters.id
+WHERE  DATE(card_play_masters.created_at) = " . "'" . $today . "'" . " and card_play_masters.card_draw_master_id = $lastDrawId
+and card_play_details.game_type_id=$i)
 ORDER by rand() LIMIT 1"));
             }
 
             // result greater than equal to target value
             if (empty($result)) {
-                $result = DB::select(DB::raw("select two_digit_number_sets.id as two_digit_number_set_id,two_digit_number_sets.number_set,
-two_digit_number_combinations.id as two_digit_number_combination_id,
-sum(play_details.quantity) as total_quantity
-from play_details
-inner join play_masters ON play_masters.id = play_details.play_master_id
-inner join two_digit_number_sets ON two_digit_number_sets.id = play_details.two_digit_number_set_id
-inner join two_digit_number_combinations on two_digit_number_combinations.two_digit_number_set_id = two_digit_number_sets.id
-where play_masters.draw_master_id = $lastDrawId and play_details.game_type_id=$i and date(play_details.created_at)= " . "'" . $today . "'" . "
-group by two_digit_number_sets.number_set,two_digit_number_sets.id,two_digit_number_combinations.id
-having sum(play_details.quantity)>= $targetValue
+                $result = DB::select(DB::raw("select card_combinations.id as card_combination_id,
+sum(card_play_details.quantity) as total_quantity
+from card_play_details
+inner join card_play_masters ON card_play_masters.id = card_play_details.card_play_master_id
+inner join card_combinations ON card_combinations.id = card_play_details.card_combination_id
+where card_play_masters.card_draw_master_id = $lastDrawId and card_play_details.game_type_id=$i and date(card_play_details.created_at)= " . "'" . $today . "'" . "
+group by card_combinations.id
+having sum(card_play_details.quantity)>= $targetValue
 order by rand() limit 1"));
             }
 
