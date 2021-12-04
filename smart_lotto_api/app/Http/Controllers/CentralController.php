@@ -28,9 +28,9 @@ class CentralController extends Controller
         $playMasterObj->updateCancellation();
         $totalGame = GameType::count();
 
-        for($i=1;$i<=$totalGame;$i++) {
-            $totalSale = $playMasterControllerObj->get_total_sale($today, $lastDrawId, $i);
-            $gameType = GameType::find($i);
+//        for($i=1;$i<=$totalGame;$i++) {
+            $totalSale = $playMasterControllerObj->get_total_sale($today, $lastDrawId, 6);
+            $gameType = GameType::find(6);
             $payout = ($totalSale * ($gameType->payout)) / 100;
             $targetValue = floor($payout / $gameType->winning_price);
             // result less than equal to target value
@@ -39,7 +39,7 @@ sum(card_play_details.quantity) as total_quantity
 from card_play_details
 inner join card_play_masters ON card_play_masters.id = card_play_details.card_play_master_id
 inner join card_combinations ON card_combinations.id = card_play_details.card_combination_id
-where card_play_masters.card_draw_master_id = $lastDrawId and card_play_details.game_type_id=$i and date(card_play_details.created_at)= " . "'" . $today . "'" . "
+where card_play_masters.card_draw_master_id = $lastDrawId and card_play_details.game_type_id=6 and date(card_play_details.created_at)= " . "'" . $today . "'" . "
 group by card_combinations.id
 having sum(card_play_details.quantity)<= $targetValue
 order by rand() limit 1"));
@@ -53,7 +53,7 @@ WHERE card_combinations.id NOT IN(SELECT DISTINCT
 card_play_details.card_combination_id FROM card_play_details
 INNER JOIN card_play_masters on card_play_details.card_play_master_id= card_play_masters.id
 WHERE  DATE(card_play_masters.created_at) = " . "'" . $today . "'" . " and card_play_masters.card_draw_master_id = $lastDrawId
-and card_play_details.game_type_id=$i)
+and card_play_details.game_type_id=6)
 ORDER by rand() LIMIT 1"));
             }
 
@@ -64,14 +64,14 @@ sum(card_play_details.quantity) as total_quantity
 from card_play_details
 inner join card_play_masters ON card_play_masters.id = card_play_details.card_play_master_id
 inner join card_combinations ON card_combinations.id = card_play_details.card_combination_id
-where card_play_masters.card_draw_master_id = $lastDrawId and card_play_details.game_type_id=$i and date(card_play_details.created_at)= " . "'" . $today . "'" . "
+where card_play_masters.card_draw_master_id = $lastDrawId and card_play_details.game_type_id=6 and date(card_play_details.created_at)= " . "'" . $today . "'" . "
 group by card_combinations.id
 having sum(card_play_details.quantity)>= $targetValue
 order by rand() limit 1"));
             }
 
 
-            $two_digit_result_id = $result[0]->two_digit_number_combination_id;
+            $two_digit_result_id = $result[0]->card_combination_id;
 
             DrawMaster::query()->update(['active' => 0]);
             if (!empty($nextGameDrawObj)) {
@@ -80,8 +80,8 @@ order by rand() limit 1"));
 
 
             $resultMasterController = new ResultMasterController();
-            $jsonData = $resultMasterController->save_auto_result($lastDrawId, $two_digit_result_id, $gameType->id);
-        }
+            $jsonData = $resultMasterController->save_auto_result($lastDrawId, $two_digit_result_id, 6);
+//        }
 
         $resultCreatedObj = json_decode($jsonData->content(),true);
 

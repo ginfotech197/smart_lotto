@@ -494,46 +494,46 @@ class DatabaseSeeder extends Seeder
             ['two_digit_number_set_id'=>10,'visible_number'=>'99'],
         ]);
 
-       ResultMaster::insert([
-           ['draw_master_id'=>1,'game_date'=>'2021-05-24'],
-           ['draw_master_id'=>2,'game_date'=>'2021-05-24'],
-           ['draw_master_id'=>3,'game_date'=>'2021-05-24'],
-           ['draw_master_id'=>4,'game_date'=>'2021-05-24'],
-           ['draw_master_id'=>5,'game_date'=>'2021-05-24'],
-       ]);
-
-       ResultDetail::insert([
-        ['result_masters_id'=>1,'game_type_id'=>'1','two_digit_number_combination_id'=>1],
-        ['result_masters_id'=>1,'game_type_id'=>'2','two_digit_number_combination_id'=>2],
-        ['result_masters_id'=>1,'game_type_id'=>'3','two_digit_number_combination_id'=>3],
-        ['result_masters_id'=>1,'game_type_id'=>'4','two_digit_number_combination_id'=>4],
-        ['result_masters_id'=>1,'game_type_id'=>'5','two_digit_number_combination_id'=>5],
-
-        ['result_masters_id'=>2,'game_type_id'=>'1','two_digit_number_combination_id'=>6],
-        ['result_masters_id'=>2,'game_type_id'=>'2','two_digit_number_combination_id'=>7],
-        ['result_masters_id'=>2,'game_type_id'=>'3','two_digit_number_combination_id'=>8],
-        ['result_masters_id'=>2,'game_type_id'=>'4','two_digit_number_combination_id'=>9],
-        ['result_masters_id'=>2,'game_type_id'=>'5','two_digit_number_combination_id'=>10],
-
-        ['result_masters_id'=>3,'game_type_id'=>'1','two_digit_number_combination_id'=>11],
-        ['result_masters_id'=>3,'game_type_id'=>'2','two_digit_number_combination_id'=>12],
-        ['result_masters_id'=>3,'game_type_id'=>'3','two_digit_number_combination_id'=>13],
-        ['result_masters_id'=>3,'game_type_id'=>'4','two_digit_number_combination_id'=>14],
-        ['result_masters_id'=>3,'game_type_id'=>'5','two_digit_number_combination_id'=>15],
-
-        ['result_masters_id'=>4,'game_type_id'=>'1','two_digit_number_combination_id'=>16],
-        ['result_masters_id'=>4,'game_type_id'=>'2','two_digit_number_combination_id'=>17],
-        ['result_masters_id'=>4,'game_type_id'=>'3','two_digit_number_combination_id'=>18],
-        ['result_masters_id'=>4,'game_type_id'=>'4','two_digit_number_combination_id'=>19],
-        ['result_masters_id'=>4,'game_type_id'=>'5','two_digit_number_combination_id'=>20],
-
-        ['result_masters_id'=>5,'game_type_id'=>'1','two_digit_number_combination_id'=>21],
-        ['result_masters_id'=>5,'game_type_id'=>'2','two_digit_number_combination_id'=>22],
-        ['result_masters_id'=>5,'game_type_id'=>'3','two_digit_number_combination_id'=>23],
-        ['result_masters_id'=>5,'game_type_id'=>'4','two_digit_number_combination_id'=>24],
-        ['result_masters_id'=>5,'game_type_id'=>'5','two_digit_number_combination_id'=>25],
-
-    ]);
+//       ResultMaster::insert([
+//           ['draw_master_id'=>1,'game_date'=>'2021-05-24'],
+//           ['draw_master_id'=>2,'game_date'=>'2021-05-24'],
+//           ['draw_master_id'=>3,'game_date'=>'2021-05-24'],
+//           ['draw_master_id'=>4,'game_date'=>'2021-05-24'],
+//           ['draw_master_id'=>5,'game_date'=>'2021-05-24'],
+//       ]);
+//
+//       ResultDetail::insert([
+//        ['result_masters_id'=>1,'game_type_id'=>'1','two_digit_number_combination_id'=>1],
+//        ['result_masters_id'=>1,'game_type_id'=>'2','two_digit_number_combination_id'=>2],
+//        ['result_masters_id'=>1,'game_type_id'=>'3','two_digit_number_combination_id'=>3],
+//        ['result_masters_id'=>1,'game_type_id'=>'4','two_digit_number_combination_id'=>4],
+//        ['result_masters_id'=>1,'game_type_id'=>'5','two_digit_number_combination_id'=>5],
+//
+//        ['result_masters_id'=>2,'game_type_id'=>'1','two_digit_number_combination_id'=>6],
+//        ['result_masters_id'=>2,'game_type_id'=>'2','two_digit_number_combination_id'=>7],
+//        ['result_masters_id'=>2,'game_type_id'=>'3','two_digit_number_combination_id'=>8],
+//        ['result_masters_id'=>2,'game_type_id'=>'4','two_digit_number_combination_id'=>9],
+//        ['result_masters_id'=>2,'game_type_id'=>'5','two_digit_number_combination_id'=>10],
+//
+//        ['result_masters_id'=>3,'game_type_id'=>'1','two_digit_number_combination_id'=>11],
+//        ['result_masters_id'=>3,'game_type_id'=>'2','two_digit_number_combination_id'=>12],
+//        ['result_masters_id'=>3,'game_type_id'=>'3','two_digit_number_combination_id'=>13],
+//        ['result_masters_id'=>3,'game_type_id'=>'4','two_digit_number_combination_id'=>14],
+//        ['result_masters_id'=>3,'game_type_id'=>'5','two_digit_number_combination_id'=>15],
+//
+//        ['result_masters_id'=>4,'game_type_id'=>'1','two_digit_number_combination_id'=>16],
+//        ['result_masters_id'=>4,'game_type_id'=>'2','two_digit_number_combination_id'=>17],
+//        ['result_masters_id'=>4,'game_type_id'=>'3','two_digit_number_combination_id'=>18],
+//        ['result_masters_id'=>4,'game_type_id'=>'4','two_digit_number_combination_id'=>19],
+//        ['result_masters_id'=>4,'game_type_id'=>'5','two_digit_number_combination_id'=>20],
+//
+//        ['result_masters_id'=>5,'game_type_id'=>'1','two_digit_number_combination_id'=>21],
+//        ['result_masters_id'=>5,'game_type_id'=>'2','two_digit_number_combination_id'=>22],
+//        ['result_masters_id'=>5,'game_type_id'=>'3','two_digit_number_combination_id'=>23],
+//        ['result_masters_id'=>5,'game_type_id'=>'4','two_digit_number_combination_id'=>24],
+//        ['result_masters_id'=>5,'game_type_id'=>'5','two_digit_number_combination_id'=>25],
+//
+//    ]);
 
     CardCombination::insert([
         ['rank_name'=>'Jack','suit_name'=>'Club','rank_initial'=>'J'],

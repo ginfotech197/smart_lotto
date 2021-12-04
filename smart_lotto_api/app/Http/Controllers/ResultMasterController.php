@@ -130,7 +130,7 @@ class ResultMasterController extends Controller
         if(isset($resultMaster->id)){
             $resultDetails = new ResultDetail();
             $resultDetails->result_masters_id = $resultMaster->id;
-            $resultDetails->two_digit_number_combination_id = $two_digit_for_result;
+            $resultDetails->card_combination_id = $two_digit_for_result;
             $resultDetails->game_type_id = $game_type_id;
             $resultDetails->save();
         }
