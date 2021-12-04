@@ -118,10 +118,10 @@ class ResultMasterController extends Controller
             $two_digit_for_result = $two_digit_number_combination_id;
         }
 
-        $tempData = CardResultMaster::select()->where('draw_master_id',$draw_id)->where('game_date',Carbon::today())->first();
+        $tempData = CardResultMaster::select()->where('card_draw_master_id',$draw_id)->where('game_date',Carbon::today())->first();
         if(empty($tempData)) {
             $resultMaster = new CardResultMaster();
-            $resultMaster->draw_master_id = $draw_id;
+            $resultMaster->card_draw_master_id = $draw_id;
 //        $resultMaster->two_digit_number_combination_id = $two_digit_for_result;
             $resultMaster->game_date = Carbon::today();
             $resultMaster->save();
@@ -131,7 +131,7 @@ class ResultMasterController extends Controller
 
         if(isset($resultMaster->id)){
             $resultDetails = new CardResultDetail();
-            $resultDetails->result_masters_id = $resultMaster->id;
+            $resultDetails->card_result_masters_id = $resultMaster->id;
             $resultDetails->card_combination_id = $two_digit_for_result;
             $resultDetails->game_type_id = $game_type_id;
             $resultDetails->save();
