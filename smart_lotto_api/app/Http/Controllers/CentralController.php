@@ -35,39 +35,39 @@ class CentralController extends Controller
             $targetValue = floor($payout / $gameType->winning_price);
             // result less than equal to target value
             $result = DB::select(DB::raw("select card_combinations.id as card_combination_id,
-sum(card_play_details.quantity) as total_quantity
-from card_play_details
-inner join card_play_masters ON card_play_masters.id = card_play_details.card_play_master_id
-inner join card_combinations ON card_combinations.id = card_play_details.card_combination_id
-where card_play_masters.card_draw_master_id = $lastDrawId and card_play_details.game_type_id=6 and date(card_play_details.created_at)= " . "'" . $today . "'" . "
-group by card_combinations.id
-having sum(card_play_details.quantity)<= $targetValue
-order by rand() limit 1"));
+                sum(card_play_details.quantity) as total_quantity
+                from card_play_details
+                inner join card_play_masters ON card_play_masters.id = card_play_details.card_play_master_id
+                inner join card_combinations ON card_combinations.id = card_play_details.card_combination_id
+                where card_play_masters.card_draw_master_id = $lastDrawId and card_play_details.game_type_id=6 and date(card_play_details.created_at)= " . "'" . $today . "'" . "
+                group by card_combinations.id
+                having sum(card_play_details.quantity)<= $targetValue
+                order by rand() limit 1"));
 
             // select empty item for result
             if (empty($result)) {
                 // empty value
                 $result = DB::select(DB::raw("SELECT card_combinations.id as card_combination_id
-FROM card_combinations
-WHERE card_combinations.id NOT IN(SELECT DISTINCT
-card_play_details.card_combination_id FROM card_play_details
-INNER JOIN card_play_masters on card_play_details.card_play_master_id= card_play_masters.id
-WHERE  DATE(card_play_masters.created_at) = " . "'" . $today . "'" . " and card_play_masters.card_draw_master_id = $lastDrawId
-and card_play_details.game_type_id=6)
-ORDER by rand() LIMIT 1"));
+                    FROM card_combinations
+                    WHERE card_combinations.id NOT IN(SELECT DISTINCT
+                    card_play_details.card_combination_id FROM card_play_details
+                    INNER JOIN card_play_masters on card_play_details.card_play_master_id= card_play_masters.id
+                    WHERE  DATE(card_play_masters.created_at) = " . "'" . $today . "'" . " and card_play_masters.card_draw_master_id = $lastDrawId
+                    and card_play_details.game_type_id=6)
+                    ORDER by rand() LIMIT 1"));
             }
 
             // result greater than equal to target value
             if (empty($result)) {
                 $result = DB::select(DB::raw("select card_combinations.id as card_combination_id,
-sum(card_play_details.quantity) as total_quantity
-from card_play_details
-inner join card_play_masters ON card_play_masters.id = card_play_details.card_play_master_id
-inner join card_combinations ON card_combinations.id = card_play_details.card_combination_id
-where card_play_masters.card_draw_master_id = $lastDrawId and card_play_details.game_type_id=6 and date(card_play_details.created_at)= " . "'" . $today . "'" . "
-group by card_combinations.id
-having sum(card_play_details.quantity)>= $targetValue
-order by rand() limit 1"));
+                    sum(card_play_details.quantity) as total_quantity
+                    from card_play_details
+                    inner join card_play_masters ON card_play_masters.id = card_play_details.card_play_master_id
+                    inner join card_combinations ON card_combinations.id = card_play_details.card_combination_id
+                    where card_play_masters.card_draw_master_id = $lastDrawId and card_play_details.game_type_id=6 and date(card_play_details.created_at)= " . "'" . $today . "'" . "
+                    group by card_combinations.id
+                    having sum(card_play_details.quantity)>= $targetValue
+                    order by rand() limit 1"));
             }
 
 
