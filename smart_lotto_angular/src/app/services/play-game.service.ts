@@ -122,6 +122,13 @@ export class PlayGameService {
     }));
   }
 
+  saveUserPlayInputDetailsCard(inputData){
+    return this.http.post<GameInputSaveResponse>(this.BASE_API_URL + '/buyTicketCard', inputData)
+      .pipe(catchError(this.errorService.serverError), tap(response => {
+        console.log('service ', response);
+      }));
+  }
+
   getTodayResult(){
     this.http.get(this.BASE_API_URL + '/dev/results/currentDate').subscribe((response: ServerResponse) => {
       this.currentDateResult = response.data;

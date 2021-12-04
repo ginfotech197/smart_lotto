@@ -81,6 +81,7 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
     Route::post('manualResult',[ManualResultController::class, 'save_manual_result']);
 
     //play_masters
+    Route::post('buyTicketCard',[PlayController::class,'save_play_details_card']);
     Route::post('buyTicket',[PlayController::class,'save_play_details']);
     Route::post('cancelTicket',[PlayMasterController::class,'cancelPlay']);
     Route::post('claimPrize',[PlayMasterController::class,'claimPrize']);
