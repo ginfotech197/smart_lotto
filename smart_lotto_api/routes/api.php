@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\CardResultMasterController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -22,6 +22,8 @@ use App\Http\Controllers\CPanelReportController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\TerminalReportController;
 use App\Http\Controllers\TwoDigitNumberSetsController;
+use App\Models\CardResultMaster;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -119,6 +121,8 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
     Route::put('terminal/resetPassword', [TerminalController::class, 'reset_terminal_password']);
 
     Route::put('cPanel/game/payout',[GameTypeController::class, 'update_payout']);
+
+    Route::get('cardResult',[CardResultMasterController::class, 'get_card_results']);
 });
 
 
@@ -213,6 +217,9 @@ Route::group(array('prefix' => 'dev'), function() {
     Route::get('balance', [PlayMasterController::class, 'get_total_balance']);
 
     Route::post('getResultByDate', [ResultMasterController::class, 'get_result_by_date']);
+
+    Route::get('cardResult',[CardResultMasterController::class, 'get_card_results']);
+
 
 });
 
