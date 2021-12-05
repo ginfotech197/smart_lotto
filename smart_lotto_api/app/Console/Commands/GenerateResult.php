@@ -46,5 +46,6 @@ class GenerateResult extends Command
         LOG::info(Carbon::today());
         $centralControllerObj = new CentralController();
         $centralControllerObj->createResult();
+        $centralControllerObj->createResultCard();
     }
 }
