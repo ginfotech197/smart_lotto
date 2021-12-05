@@ -18,7 +18,7 @@ class CreateResultDetailsTable extends Migration
 
             $table->foreignId('result_masters_id')->references('id')->on('result_masters')->onDelete('cascade');
             $table ->foreignId('game_type_id')->references('id')->on('game_types')->onDelete('cascade');
-            $table->foreignId('card_combination_id')->references('id')->on('card_combinations')->onDelete('cascade');
+            $table->foreignId('two_digit_number_combination_id')->references('id')->on('two_digit_number_combinations')->onDelete('cascade');
 
             $table->timestamps();
         });

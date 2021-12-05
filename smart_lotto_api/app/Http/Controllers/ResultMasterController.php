@@ -100,8 +100,51 @@ class ResultMasterController extends Controller
 
     }
 
-
     public function save_auto_result($draw_id,$two_digit_number_combination_id,$game_type_id)
+    {
+        //$single_number_result_id is the calculated result as per total sale
+        $manualResult = ManualResult::where('game_date',Carbon::today())
+            ->where('draw_master_id',$draw_id)->first();
+//        if(!empty($manualResult)){
+//            $single_number_for_result = $manualResult->single_number_id;requetAll
+//        }else{
+//            $selectRandomResult = SingleNumber::all()->random(1)->first();
+//            $single_number_for_result = $selectRandomResult->id;
+//        }
+        if(!empty($manualResult)){
+            $two_digit_for_result = $manualResult->two_digit_number_combination_id;
+        }else{
+            $two_digit_for_result = $two_digit_number_combination_id;
+        }
+
+        $tempData = ResultMaster::select()->where('draw_master_id',$draw_id)->where('game_date',Carbon::today())->first();
+        if(empty($tempData)) {
+            $resultMaster = new ResultMaster();
+            $resultMaster->draw_master_id = $draw_id;
+//        $resultMaster->two_digit_number_combination_id = $two_digit_for_result;
+            $resultMaster->game_date = Carbon::today();
+            $resultMaster->save();
+        }else{
+            $resultMaster = $tempData;
+        }
+
+        if(isset($resultMaster->id)){
+            $resultDetails = new ResultDetail();
+            $resultDetails->result_masters_id = $resultMaster->id;
+            $resultDetails->two_digit_number_combination_id = $two_digit_for_result;
+            $resultDetails->game_type_id = $game_type_id;
+            $resultDetails->save();
+        }
+
+        if(isset($resultMaster->id)){
+            return response()->json(['success'=>1, 'data' => 'added result'], 200);
+        }else{
+            return response()->json(['success'=>0, 'data' => 'result not added'], 500);
+        }
+    }
+
+
+    public function save_auto_result_card($draw_id,$two_digit_number_combination_id,$game_type_id)
     {
         //$single_number_result_id is the calculated result as per total sale
         $manualResult = ManualResult::where('game_date',Carbon::today())
