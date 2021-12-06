@@ -36,6 +36,12 @@ class Kernel extends ConsoleKernel
             ->cron('*/20 16-21 * * * ')
             ->timezone('Asia/Kolkata');
         $schedule->command('generate:result')->dailyAt('22:00')->timezone('Asia/Kolkata');
+
+        $schedule->command('generate:cardResult')
+            ->cron('*/05 9-20 * * * ')
+            ->timezone('Asia/Kolkata');
+        $schedule->command('generate:cardResult')->dailyAt('21:00')->timezone('Asia/Kolkata');
+
     }
 
     /**
