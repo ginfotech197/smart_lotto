@@ -6,6 +6,9 @@ use App\Models\CardResultMaster;
 use App\Http\Requests\StoreCardResultMasterRequest;
 use App\Http\Requests\UpdateCardResultMasterRequest;
 use App\Models\CardDrawMaster;
+use App\Models\ResultMaster;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CardResultMasterController extends Controller
 {
@@ -45,9 +48,36 @@ class CardResultMasterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function get_card_result_by_date(Request $request){
+
+        $date= $request['game_date'];
+        // echo $date.' test date';
+        // return response()->json(['success'=>1,'data'=>$date], 200,[],JSON_NUMERIC_CHECK);
+
+        $toDay= ResultMaster::where('game_date','2021-12-06')->get();
+
+
+        $data = DB::select("select
+        end_time
+        ,card_draw_masters.id as card_draw_id
+        ,card_result_details.card_result_masters_id
+        ,card_result_masters.game_date
+        ,card_draw_masters.visible_time
+        ,card_combinations.rank_name
+        ,card_combinations.suit_name as result
+        from card_result_details
+        inner join (select * from card_result_masters where date(game_date)='$date')
+        card_result_masters on card_result_details.card_result_masters_id = card_result_masters.id
+        inner join card_draw_masters on card_result_masters.card_draw_master_id = card_draw_masters.id
+        inner join game_types ON game_types.id = card_result_details.game_type_id
+        inner join card_combinations ON card_combinations.id = card_result_details.card_combination_id
+        ");
+
+
+
+
+        return response()->json(['success'=>1,'data1'=>$data], 200,[],JSON_NUMERIC_CHECK);
+
     }
 
     /**

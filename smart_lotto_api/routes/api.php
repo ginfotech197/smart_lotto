@@ -123,6 +123,8 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
     Route::put('cPanel/game/payout',[GameTypeController::class, 'update_payout']);
 
     Route::get('cardResult',[CardResultMasterController::class, 'get_card_results']);
+    Route::post('cardReultByDate', [CardResultMasterController::class,'get_card_result_by_date']);
+
 });
 
 
@@ -220,6 +222,7 @@ Route::group(array('prefix' => 'dev'), function() {
     Route::post('getResultByDate', [ResultMasterController::class, 'get_result_by_date']);
 
     Route::get('cardResult',[CardResultMasterController::class, 'get_card_results']);
+    Route::post('cardReultByDate', [CardResultMasterController::class,'get_card_result_by_date']);
 
 
 });
