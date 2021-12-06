@@ -1,11 +1,10 @@
 
-export class cardResult{
+export class CardResult{
   draw_date: string;
-  visible_time: string;
-  game_one?: number;
-  game_two?: number;
-  game_three?: number;
-  game_four?: number;
-  game_five?: number;
+  game_date: string;
+  end_time: string;
+  card_combination_id: number;
+  rank_name: string;
+  suit_name: string
 
 }
