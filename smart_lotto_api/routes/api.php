@@ -187,6 +187,7 @@ Route::group(array('prefix' => 'dev'), function() {
 
 
     Route::post('createAutoResult', [CentralController::class, 'createResult']);
+    Route::post('createCardAutoResult', [CentralController::class, 'createResultCard']);
     Route::post('createResultByDate', [CentralController::class, 'createResultByDate']);
     Route::post('autoResult', [ResultMasterController::class, 'save_auto_result']);
 

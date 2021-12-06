@@ -17,6 +17,7 @@ class CreateNextGameDrawsTable extends Migration
             $table->id();
             $table->integer('next_draw_id')->nullable(false);
             $table->integer('last_draw_id')->nullable(false);
+            $table->integer('game_id')->nullable(false);
             $table->timestamps();
         });
     }

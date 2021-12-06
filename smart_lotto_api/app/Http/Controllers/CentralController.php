@@ -20,7 +20,7 @@ class CentralController extends Controller
     public function createResult(){
 
         $today= Carbon::today()->format('Y-m-d');
-        $nextGameDrawObj = NextGameDraw::first();
+        $nextGameDrawObj = NextGameDraw::where('game_id',1)->first();
         $nextDrawId = $nextGameDrawObj->next_draw_id;
         $lastDrawId = $nextGameDrawObj->last_draw_id;
         $playMasterControllerObj = new PlayMasterController();
@@ -127,7 +127,7 @@ class CentralController extends Controller
     public function createResultCard(){
 
         $today= Carbon::today()->format('Y-m-d');
-        $nextGameDrawObj = NextGameDraw::first();
+        $nextGameDrawObj = NextGameDraw::where('game_id',2)->first();
         $nextDrawId = $nextGameDrawObj->next_draw_id;
         $lastDrawId = $nextGameDrawObj->last_draw_id;
         $playMasterControllerObj = new PlayMasterController();
