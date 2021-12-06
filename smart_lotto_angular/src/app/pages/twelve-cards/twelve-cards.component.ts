@@ -86,11 +86,28 @@ export class TwelveCardsComponent implements OnInit {
 
     this.playGameService.saveUserPlayInputDetailsCard(masterData).subscribe(response => {
       if (response.success === 1){
+
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Ticket purchased',
+          showConfirmButton: false,
+          timer: 1000
+        });
+
         this.inputData = [];
         for (let i = 1; i <= 11 ; i++){
           this.inputData[i] = [];
         }
         this.playDetails = [];
+      }else{
+        Swal.fire({
+          position: 'top-end',
+          icon: 'error',
+          title: 'Validation error',
+          showConfirmButton: false,
+          timer: 3000
+        });
       }
     });
 
