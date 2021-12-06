@@ -7,6 +7,7 @@ use App\Http\Requests\StoreCardResultMasterRequest;
 use App\Http\Requests\UpdateCardResultMasterRequest;
 use App\Models\CardDrawMaster;
 use App\Models\ResultMaster;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -79,6 +80,8 @@ class CardResultMasterController extends Controller
         return response()->json(['success'=>1,'data1'=>$data], 200,[],JSON_NUMERIC_CHECK);
 
     }
+
+    
 
     /**
      * Store a newly created resource in storage.
