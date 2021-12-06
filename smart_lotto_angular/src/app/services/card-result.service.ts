@@ -38,7 +38,7 @@ export class CardResultService {
         this.currentDateResultSubject.next({...this.currentDateResult});
       });
     this.http.get(this.BASE_API_URL + '/dev/cardResult').subscribe((response: ServerResponse) =>{
-      this.cardResult = response.data;
+      this.cardResult = response.data.result;
       this.cardResultSubject.next([...this.cardResult]);
       console.log(this.cardResult);
     });

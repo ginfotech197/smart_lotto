@@ -37,7 +37,7 @@ class CardResultMasterController extends Controller
 
         }
 
-        return response()->json(['success'=>1,'data'=>$result_array], 200,[],JSON_NUMERIC_CHECK);
+        return response()->json(['success'=>1,'data'=>$result_array[0]], 200,[],JSON_NUMERIC_CHECK);
     }
 
     /**

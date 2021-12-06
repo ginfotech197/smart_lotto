@@ -1,4 +1,5 @@
 <div style="padding-left: 160px;">
+  
   <table class="table table-bordered">
     <!-- <thead>
       <tr>
@@ -13,12 +14,13 @@
     </thead> -->
     <tbody>
       <tr>
-        <td style="width: 100px; text-align: center;"><div style="background-color: rgba(255, 108, 211, 0.5);">09:00</div><img src="assets/images/1.jpg" width="50" alt="" style="padding-top: 10px;"></td>
+      <td *ngFor="let row of cardResult" style="width: 100px; text-align: center;"><div style="background-color: rgba(255, 108, 211, 0.5);">{{row.end_time}}</div><img src="assets/images/{{row.card_combination_id}}.jpg" width="50" alt="" style="padding-top: 10px;"></td>        
+        <!-- <td style="width: 100px; text-align: center;"><div style="background-color: rgba(255, 108, 211, 0.5);">09:00</div><img src="assets/images/1.jpg" width="50" alt="" style="padding-top: 10px;"></td>
         <td style="width: 100px; text-align: center;"><div style="background-color: rgba(255, 108, 211, 0.5);">09:00</div><img src="assets/images/2.jpg" width="50" alt="" style="padding-top: 10px;"></td>
         <td style="width: 100px; text-align: center;"><div style="background-color: rgba(255, 108, 211, 0.5);">09:00</div><img src="assets/images/3.jpg" width="45" alt="" style="padding-top: 10px;"></td>
-        <td style="width: 100px; text-align: center;"><div style="background-color: rgba(255, 108, 211, 0.5);">09:00</div><img src="assets/images/4.jpg" width="50" alt="" style="padding-top: 10px;"></td>
+        <td style="width: 100px; text-align: center;"><div style="background-color: rgba(255, 108, 211, 0.5);">09:00</div><img src="assets/images/4.jpg" width="50" alt="" style="padding-top: 10px;"></td> -->
       </tr>
-      <tr>
+      <!-- <tr>
         <td style="width: 100px; text-align: center;"><div style="background-color: rgba(255, 108, 211, 0.5);">09:00</div><img src="assets/images/5.jpg" width="50" alt="" style="padding-top: 10px;"></td>
         <td style="width: 100px; text-align: center;"><div style="background-color: rgba(255, 108, 211, 0.5);">09:00</div><img src="assets/images/6.jpg" width="50" alt="" style="padding-top: 10px;"></td>
         <td style="width: 100px; text-align: center;"><div style="background-color: rgba(255, 108, 211, 0.5);">09:00</div><img src="assets/images/7.jpg" width="45" alt="" style="padding-top: 10px;"></td>
@@ -30,7 +32,10 @@
         <td style="width: 100px; text-align: center;"><div style="background-color: rgba(255, 108, 211, 0.5);">09:00</div><img src="assets/images/11.jpg" width="45" alt="" style="padding-top: 10px;"></td>
         <td style="width: 100px; text-align: center;"><div style="background-color: rgba(255, 108, 211, 0.5);">09:00</div><img src="assets/images/12.jpg" width="50" alt="" style="padding-top: 10px;"></td>
         <td style="width: 100px; text-align: center;"><div style="background-color: rgba(255, 108, 211, 0.5);">09:00</div><img src="assets/images/12.jpg" width="50" alt="" style="padding-top: 10px;"></td>
-      </tr>
+      </tr> -->
     </tbody>
   </table>
+  <!-- <pre>
+    {{cardResult | json}}
+  </pre> -->
 </div>
