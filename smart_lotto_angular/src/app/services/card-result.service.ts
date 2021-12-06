@@ -53,7 +53,7 @@ export class CardResultService {
   }
 
   getCardResultByDate(cardResultDate: any){
-    return this.http.post(this.BASE_API_URL + '/dev/cardReultByDate', {date: cardResultDate}).pipe(catchError(this.handleError),
+    return this.http.post(this.BASE_API_URL + '/dev/cardReultByDate', {game_date: cardResultDate}).pipe(catchError(this.handleError),
     tap(((response: {success: number, data: CardResult[]}) => {
       console.log(response);
     })));
