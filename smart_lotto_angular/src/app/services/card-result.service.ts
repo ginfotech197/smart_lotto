@@ -9,6 +9,7 @@ import {ServerResponse} from '../models/ServerResponse.model';
 import { GameResult } from '../models/GameResult.model';
 import { catchError, tap } from 'rxjs/operators';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
+import { CardResult } from '../models/CardResult.model';
 
 
 
@@ -18,10 +19,12 @@ import {HttpClient, HttpErrorResponse} from "@angular/common/http";
   providedIn: 'root'
 })
 // @ts-ignore
-export class ResultService {
+export class CardResultService {
 
   private BASE_API_URL = environment.BASE_API_URL;
   currentDateResult: CurrentGameResult;
+  cardResult: CardResult[]=[];
+  cardResultSubject = new Subject<CardResult[]>();
   resultByDateSubject = new Subject<GameResult>();
   resultByDate: GameResult;
 
@@ -34,8 +37,10 @@ export class ResultService {
         this.currentDateResult = response.data;
         this.currentDateResultSubject.next({...this.currentDateResult});
       });
-    this.http.get(this.BASE_API_URL = '/dev/cardResult').subscribe((response: ServerResponse) =>{
-      this.cardResult = response.data;
+    this.http.get(this.BASE_API_URL + '/dev/cardResult').subscribe((response: ServerResponse) =>{
+      this.cardResult = response.data.result;
+      this.cardResultSubject.next([...this.cardResult]);
+      console.log(this.cardResult);
     });
 
     // this.http.get(this.BASE_API_URL + 'getResultByDate').subscribe((response: ServerResponse) => {
@@ -52,6 +57,8 @@ export class ResultService {
       //console.log(response);
     })));
   }
+
+
 
 
 
@@ -76,6 +83,14 @@ export class ResultService {
     }else {
       return throwError(errorResponse.error.message);
     }
+  }
+
+
+  getCardDateResult(){
+    return {...this.cardResult};
+  }
+  getCardDateResultListener(){
+    return this.cardResultSubject.asObservable();
   }
 
 }

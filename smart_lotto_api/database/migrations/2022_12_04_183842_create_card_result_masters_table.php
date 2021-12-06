@@ -16,7 +16,7 @@ class CreateCardResultMastersTable extends Migration
         Schema::create('card_result_masters', function (Blueprint $table) {
             $table->id();
             $table->foreignId('card_draw_master_id')->references('id')->on('card_draw_masters')->onDelete('cascade');
-//            $table->foreignId('two_digit_number_combination_id')->references('id')->on('two_digit_number_combinations')->onDelete('cascade');
+            $table->foreignId('card_combination_id')->references('id')->on('card_combinations')->onDelete('cascade');
 
             $table->date('game_date');
 
