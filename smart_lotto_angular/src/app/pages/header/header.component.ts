@@ -12,6 +12,7 @@ import {DrawTime} from '../../models/DrawTime.model';
 import {ThemePalette} from '@angular/material/core';
 import {ProgressSpinnerMode} from '@angular/material/progress-spinner';
 import {parse} from '@fortawesome/fontawesome-svg-core';
+import {DatePipe} from '@angular/common';
 
 
 @Component({
@@ -41,6 +42,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isProduction = environment.production;
   public user: User;
   activeDrawTime: DrawTime;
+
+  pipe = new DatePipe('en-US');
+  thisYear = new Date().getFullYear();
+  thisMonth = new Date().getMonth();
+  thisDay = new Date().getDate();
+  tempToday = new Date(this.thisYear, this.thisMonth, this.thisDay);
+  today = this.pipe.transform(this.tempToday, 'dd-MM-yyyy');
 
   constructor(private authService: AuthService,  private commonService: CommonService) { }
 
