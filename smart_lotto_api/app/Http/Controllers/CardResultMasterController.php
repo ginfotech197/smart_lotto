@@ -32,8 +32,8 @@ class CardResultMasterController extends Controller
                     $join->on('card_draw_masters.id','=','card_result_masters.card_draw_master_id')
                         ->where('card_result_masters.game_date','=', $result_date);
                 })
-                ->leftJoin('card_result_details','card_result_masters.id','card_details.card_masters_id')
-                ->leftJoin('card_combinations','card_details.card_combination_id','card_combinations.id')
+                ->leftJoin('card_result_details','card_result_masters.id','card_result_details.card_result_masters_id')
+                ->leftJoin('card_combinations','card_result_details.card_combination_id','card_combinations.id')
                 // ->leftJoin('card_combinations','result_masters.card_combination_id','card_combinations.id')
                 ->get();
             $temp_array['result'] = $data;
