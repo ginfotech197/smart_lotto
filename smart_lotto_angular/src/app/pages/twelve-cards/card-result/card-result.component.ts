@@ -21,7 +21,7 @@ export class CardResultComponent implements OnInit {
   startDate = new Date(this.thisYear, this.thisMonth, this.thisDay);
   pipe = new DatePipe('en-US');
 
-  columnNumber = 5;
+  columnNumber = 4;
 
 
   constructor(private cardResultService: CardResultService) {
