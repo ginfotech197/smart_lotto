@@ -19,7 +19,9 @@ export class TwelveCardsComponent implements OnInit {
   playDetails: any[] = [];
   gameTypes: GameType[] = [];
   inputData: any[];
-  cardResultVisibility= false;
+  cardResultVisibility = false;
+  totalPurchasedPrice = 0;
+  totalPurchasedQuantity = 0;
 
 
 
@@ -55,6 +57,8 @@ export class TwelveCardsComponent implements OnInit {
   }
 
   detailsData(value: string, gameCombination){
+    let totalPrice = 0;
+    let totalQuantity = 0;
 
     const tempPlayDetail = {
       gameTypeId: this.gameTypes[0].gameTypeId,
@@ -68,8 +72,27 @@ export class TwelveCardsComponent implements OnInit {
 
     // @ts-ignore
     this.playDetails.push(tempPlayDetail);
+
+    this.playDetails.forEach(function(value){
+      totalPrice = totalPrice + (value.quantity * value.mrp);
+      // tslint:disable-next-line:radix
+      totalQuantity = totalQuantity + parseInt(value.quantity) ;
+    });
+    this.totalPurchasedPrice = totalPrice;
+    this.totalPurchasedQuantity = totalQuantity;
+
     // console.log(this.playDetails);
 
+  }
+
+  clear(){
+    this.inputData = [];
+    for (let i = 1; i <= 11 ; i++){
+      this.inputData[i] = [];
+    }
+    this.playDetails = [];
+    this.totalPurchasedPrice = 0;
+    this.totalPurchasedQuantity = 0;
   }
 
   saveUserInput(){
@@ -96,12 +119,12 @@ export class TwelveCardsComponent implements OnInit {
         });
 
         this.authService.setUserBalanceBy(response.remainingBal);
-
-        this.inputData = [];
-        for (let i = 1; i <= 11 ; i++){
-          this.inputData[i] = [];
-        }
-        this.playDetails = [];
+        this.clear();
+        // this.inputData = [];
+        // for (let i = 1; i <= 11 ; i++){
+        //   this.inputData[i] = [];
+        // }
+        // this.playDetails = [];
       }else{
         Swal.fire({
           position: 'top-end',
