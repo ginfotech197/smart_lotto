@@ -1,5 +1,5 @@
-<div style="background-image: url('/assets/images/twelve-card.background4.jpg'); background-size: cover; margin-top: 60px;border: 30px solid red;">
-  <div class=" pt-5 d-flex">
+<div style="background-image: url('/assets/images/twelve-card.background4.jpg'); background-size: cover; margin-top: 60px;border: 30px solid red; height: 530px;">
+  <div class=" pt-3 d-flex">
     <div style="padding-left: 3%;">
       <table class="table table-striped table-hover" style="max-width: 200px; background-color: rgba(238, 255, 6, 0.336);">
       <thead>
@@ -44,7 +44,9 @@
         </tr>
       </tbody>
       </table>
-      <button class="btn btn-primary" (click)="saveUserInput()">save</button>
+
+
+
 
     </div>
 
@@ -53,12 +55,33 @@
       <button class="btn btn-primary" (click)="cardResultVisibility=!cardResultVisibility">{{cardResultVisibility?"Hide":"Card Result"}}</button>
       <div *ngIf="cardResultVisibility">
         <app-card-result></app-card-result>
+
       </div>
+      <div>
+        <!-- <div class="d-flex col-6" style="max-height: 50px;">
+          <div class="ml-3">bets<br><input type="text" style="width: 100px; height: 70px; background-color: rgba(241, 143, 203, 0.199); border: 2px solid gold; border-radius: 15px;  box-shadow: 5px 10px rgba(0, 128, 0, 0.295); font-size: 50px;"></div>
+          <div class="ml-3">Tickets<input type="text" style="width: 100px; height: 70px; background-color: rgba(241, 143, 203, 0.199); border: 2px solid gold; border-radius: 15px;  box-shadow: 5px 10px rgba(0, 128, 0, 0.295); font-size: 50px;"></div>
+          <div class="ml-3">Total<input type="text" style="width: 100px; height: 70px; background-color: rgba(241, 143, 203, 0.199); border: 2px solid gold; border-radius: 15px;  box-shadow: 5px 10px rgba(0, 128, 0, 0.295); font-size: 50px;"></div>
+        </div> -->
+      </div>
+
 
     </div>
 
 
 
+
   </div>
+  <div class="d-flex">
+    <div class="col-6">
+      <button class="btn btn-primary" (click)="saveUserInput()">save</button>
+    </div>
+    <div class="d-flex col-6" style="max-height: 50px; margin-left: 100px;">
+      <div style="text-align: center;" class="ml-4">Bets<br><input type="text" style="width: 150px; height: 40px; background-color: rgba(38, 175, 255, 0.836); border: 2px solid gold; border-radius: 15px;  box-shadow: 5px 10px rgba(0, 128, 0, 0.295); font-size: 50px;"></div>
+      <div style="text-align: center;"  class="ml-4">Tickets<br><input type="text" style="width: 150px; height: 40px; background-color: rgba(38, 175, 255, 0.836); border: 2px solid gold; border-radius: 15px;  box-shadow: 5px 10px rgba(0, 128, 0, 0.295); font-size: 50px;"></div>
+      <div style="text-align: center;"  class="ml-4">Total<br><input type="text" style="width: 150px; height: 40px; background-color: rgba(38, 175, 255, 0.836); border: 2px solid gold; border-radius: 15px;  box-shadow: 5px 10px rgba(0, 128, 0, 0.295); font-size: 50px;"></div>
+    </div>
+  </div>
+
 </div>
 
