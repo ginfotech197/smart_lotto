@@ -7,6 +7,7 @@ use App\Http\Requests\StoreCardResultMasterRequest;
 use App\Http\Requests\UpdateCardResultMasterRequest;
 use App\Models\CardDrawMaster;
 use App\Models\ResultMaster;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -64,6 +65,7 @@ class CardResultMasterController extends Controller
         ,card_result_masters.game_date
         ,card_draw_masters.visible_time
         ,card_combinations.rank_name
+        ,card_result_details.card_combination_id
         ,card_combinations.suit_name as result
         from card_result_details
         inner join (select * from card_result_masters where date(game_date)='$date')
@@ -72,11 +74,39 @@ class CardResultMasterController extends Controller
         inner join game_types ON game_types.id = card_result_details.game_type_id
         inner join card_combinations ON card_combinations.id = card_result_details.card_combination_id
         ");
+        $temp_array['result'] = $data;
+        $result_array[] = $temp_array;
 
 
 
 
-        return response()->json(['success'=>1,'data1'=>$data], 200,[],JSON_NUMERIC_CHECK);
+        return response()->json(['success'=>1,'data'=>$result_array[0]], 200,[],JSON_NUMERIC_CHECK);
+
+    }
+
+    public function get_card_results_by_current_date(){
+        $result_array = array();
+
+        $result_array['game_date'] = Carbon::today()->format('Y-m-d');
+        // $today= Carbon::today()->format('Y-m-d');
+
+        $data = DB::select("select
+        end_time
+        ,card_draw_masters.id as card_draw_id
+        ,card_result_details.card_result_masters_id
+        ,card_result_masters.game_date
+        ,card_draw_masters.visible_time
+        ,card_combinations.suit_name
+        ,card_combinations.rank_name
+        from card_result_details
+        inner join (select * from card_result_masters where date(game_date)=?)card_result_masters on card_result_details.card_result_masters_id = card_result_masters.id
+        inner join card_draw_masters on card_result_masters.card_draw_master_id = card_draw_masters.id
+        inner join card_combinations ON card_combinations.id = card_result_details.card_combination_id
+        ",[ $result_array['game_date']]);
+        $result_array['result'] = $data;
+
+
+        return response()->json(['success'=>1,'data'=>$result_array], 200,[],JSON_NUMERIC_CHECK);
 
     }
 

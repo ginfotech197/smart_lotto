@@ -25,6 +25,7 @@ export class CardResultService {
   currentDateResult: CurrentGameResult;
   cardResult: CardResult[]=[];
   cardResultSubject = new Subject<CardResult[]>();
+  cardResultByDateSubject = new Subject<CardResult[]>();
   resultByDateSubject = new Subject<GameResult>();
   resultByDate: GameResult;
 
@@ -51,10 +52,10 @@ export class CardResultService {
 
   }
 
-  getResultByDate(resultDate: any){
-    return this.http.post(this.BASE_API_URL + '/dev/getResultByDate', {date: resultDate}).pipe(catchError(this.handleError),
-    tap(((response: {success: number, data: GameResult[]}) => {
-      //console.log(response);
+  getCardResultByDate(cardResultDate: any){
+    return this.http.post(this.BASE_API_URL + '/dev/cardReultByDate', {game_date: cardResultDate}).pipe(catchError(this.handleError),
+    tap(((response: {success: number, data: CardResult[]}) => {
+      console.log(response);
     })));
   }
 
@@ -73,8 +74,8 @@ export class CardResultService {
   //   return {...this.resultByDate};
   // }
 
-  getResultByDateListener(){
-    return this.resultByDateSubject.asObservable();
+  getCardResultByDateListener(){
+    return this.cardResultByDateSubject.asObservable();
   }
 
   private handleError(errorResponse: HttpErrorResponse){

@@ -8,7 +8,7 @@
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker [(ngModel)]= "startDate"></mat-datepicker>
     </mat-form-field>
-    <!-- <button mat-button type="button" class="btn btn-outline-warning" (click)="searchResultByDate()">Search</button> -->
+    <button mat-button type="button" class="btn btn-outline-warning" (click)="searchCardResultByDate()">Search</button>
   </div>
 
   <table class="table table-bordered">    
@@ -19,7 +19,8 @@
     </tbody>
   </table>
 
-  <!-- <pre>
+  
+  <pre>
     {{cardResult | json}}
-  </pre> -->
+  </pre>
 </div>

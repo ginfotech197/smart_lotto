@@ -124,6 +124,8 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
 
     Route::get('cardResult',[CardResultMasterController::class, 'get_card_results']);
     Route::post('cardReultByDate', [CardResultMasterController::class,'get_card_result_by_date']);
+    Route::get('currentCardResult',[CardResultMasterController::class, 'get_card_results_by_current_date']);
+
 
 });
 
@@ -223,6 +225,8 @@ Route::group(array('prefix' => 'dev'), function() {
 
     Route::get('cardResult',[CardResultMasterController::class, 'get_card_results']);
     Route::post('cardReultByDate', [CardResultMasterController::class,'get_card_result_by_date']);
+    Route::get('currentCardResult',[CardResultMasterController::class, 'get_card_results_by_current_date']);
+
 
 
 });
