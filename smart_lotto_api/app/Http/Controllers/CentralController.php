@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\NumberCombination;
+use App\Models\CardDrawMaster;
 use App\Models\PlayMaster;
 use Illuminate\Http\Request;
 use App\Models\NextGameDraw;
@@ -13,6 +14,7 @@ use App\Http\Controllers\NumberCombinationController;
 use App\Models\GameType;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class CentralController extends Controller
 {
@@ -130,19 +132,19 @@ class CentralController extends Controller
         $nextGameDrawObj = NextGameDraw::where('game_id',2)->first();
         $nextDrawId = $nextGameDrawObj->next_draw_id;
         $lastDrawId = $nextGameDrawObj->last_draw_id;
-        $playMasterControllerObj = new PlayMasterController();
+        $playMasterControllerObj = new CardPlayMasterController();
 
         $playMasterObj = new TerminalReportController();
         $playMasterObj->updateCancellation();
         $totalGame = GameType::count();
 
 //        for($i=1;$i<=$totalGame;$i++) {
-            $totalSale = $playMasterControllerObj->get_total_sale($today, $lastDrawId, 6);
-            $gameType = GameType::find(6);
-            $payout = ($totalSale * ($gameType->payout)) / 100;
-            $targetValue = floor($payout / $gameType->winning_price);
-            // result less than equal to target value
-            $result = DB::select(DB::raw("select card_combinations.id as card_combination_id,
+        $totalSale = $playMasterControllerObj->get_total_sale($today, $lastDrawId, 6);
+        $gameType = GameType::find(6);
+        $payout = ($totalSale * ($gameType->payout)) / 100;
+        $targetValue = floor($payout / $gameType->winning_price);
+        // result less than equal to target value
+        $result = DB::select(DB::raw("select card_combinations.id as card_combination_id,
                 sum(card_play_details.quantity) as total_quantity
                 from card_play_details
                 inner join card_play_masters ON card_play_masters.id = card_play_details.card_play_master_id
@@ -152,10 +154,10 @@ class CentralController extends Controller
                 having sum(card_play_details.quantity)<= $targetValue
                 order by rand() limit 1"));
 
-            // select empty item for result
-            if (empty($result)) {
-                // empty value
-                $result = DB::select(DB::raw("SELECT card_combinations.id as card_combination_id
+        // select empty item for result
+        if (empty($result)) {
+            // empty value
+            $result = DB::select(DB::raw("SELECT card_combinations.id as card_combination_id
                     FROM card_combinations
                     WHERE card_combinations.id NOT IN(SELECT DISTINCT
                     card_play_details.card_combination_id FROM card_play_details
@@ -163,11 +165,15 @@ class CentralController extends Controller
                     WHERE  DATE(card_play_masters.created_at) = " . "'" . $today . "'" . " and card_play_masters.card_draw_master_id = $lastDrawId
                     and card_play_details.game_type_id=6)
                     ORDER by rand() LIMIT 1"));
-            }
+        }
 
-            // result greater than equal to target value
-            if (empty($result)) {
-                $result = DB::select(DB::raw("select card_combinations.id as card_combination_id,
+
+
+
+
+        // result greater than equal to target value
+        if (empty($result)) {
+            $result = DB::select(DB::raw("select card_combinations.id as card_combination_id,
                     sum(card_play_details.quantity) as total_quantity
                     from card_play_details
                     inner join card_play_masters ON card_play_masters.id = card_play_details.card_play_master_id
@@ -176,19 +182,30 @@ class CentralController extends Controller
                     group by card_combinations.id
                     having sum(card_play_details.quantity)>= $targetValue
                     order by rand() limit 1"));
-            }
+        }
+
+        // LOG::info('$result: ',$result);
+        // LOG::info('card_combination_id: ',$result[0]->card_combination_id);
+        // LOG::info('$nextDrawId', $nextDrawId);
 
 
-            $two_digit_result_id = $result[0]->card_combination_id;
 
-            DrawMaster::query()->update(['active' => 0]);
-            if (!empty($nextGameDrawObj)) {
-                DrawMaster::findOrFail($nextDrawId)->update(['active' => 1]);
-            }
+        $two_digit_result_id = $result[0]->card_combination_id;
+
+        $test = CardDrawMaster::query()->update(['active' => 0]);
+        // LOG::info('test: ',$test);
+
+        //  return;
+
+        if (!empty($nextGameDrawObj)) {
+            CardDrawMaster::findOrFail($nextDrawId)->update(['active' => 1]);
+        }
 
 
-            $resultMasterController = new ResultMasterController();
-            $jsonData = $resultMasterController->save_auto_result_card($lastDrawId, $two_digit_result_id, 6);
+        LOG::info('cl-205');
+        LOG::info($two_digit_result_id);
+        $resultMasterController = new ResultMasterController();
+        $jsonData = $resultMasterController->save_auto_result_card($lastDrawId, $two_digit_result_id, 6);
 //        }
 
         $resultCreatedObj = json_decode($jsonData->content(),true);
@@ -199,7 +216,7 @@ class CentralController extends Controller
 
         if( !empty($resultCreatedObj) && $resultCreatedObj['success']==1){
 
-            $totalDraw = DrawMaster::count();
+            $totalDraw = CardDrawMaster::count();
             if($nextDrawId==$totalDraw){
                 $nextDrawId = 1;
             }

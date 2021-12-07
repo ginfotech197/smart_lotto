@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class CardDrawMaster extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['active'];
 }
