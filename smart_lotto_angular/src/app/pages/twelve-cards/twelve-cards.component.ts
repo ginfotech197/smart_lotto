@@ -95,6 +95,8 @@ export class TwelveCardsComponent implements OnInit {
           timer: 1000
         });
 
+        this.authService.setUserBalanceBy(response.remainingBal);
+
         this.inputData = [];
         for (let i = 1; i <= 11 ; i++){
           this.inputData[i] = [];

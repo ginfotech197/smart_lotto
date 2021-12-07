@@ -59,4 +59,5 @@ export class GameInputSaveResponse{
     // amount?: number
   };
   error?: any;
+  remainingBal?: number;
 }

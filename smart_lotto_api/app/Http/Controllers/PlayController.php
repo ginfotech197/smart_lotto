@@ -257,7 +257,7 @@ class PlayController extends Controller
             return response()->json(['success'=>0,'exception'=>$e->getMessage(),'error_line'=>$e->getLine(),'file_name' => $e->getFile()], 500);
         }
 
-        return response()->json(['success'=>1,'data'=> $amount], 200,[],JSON_NUMERIC_CHECK);
+        return response()->json(['success'=>1,'data'=> $amount, 'remainingBal' => $terminal->closing_balance], 200,[],JSON_NUMERIC_CHECK);
     }
 
     public function get_game_input_details_by_play_master_id($play_master_id){
