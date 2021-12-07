@@ -12,6 +12,7 @@ use App\Models\ResultDetail;
 use App\Models\ResultMaster;
 use App\Models\SingleNumber;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
 
 use Illuminate\Support\Str;
@@ -144,28 +145,30 @@ class ResultMasterController extends Controller
     }
 
 
-    public function save_auto_result_card($draw_id,$two_digit_number_combination_id,$game_type_id)
+    public function save_auto_result_card($draw_id,$card_combination_id,$game_type_id)
     {
         //$single_number_result_id is the calculated result as per total sale
-        $manualResult = ManualResult::where('game_date',Carbon::today())
-            ->where('draw_master_id',$draw_id)->first();
+        // $manualResult = ManualResult::where('game_date',Carbon::today())
+        //     ->where('draw_master_id',$draw_id)->first();
 //        if(!empty($manualResult)){
 //            $single_number_for_result = $manualResult->single_number_id;requetAll
 //        }else{
 //            $selectRandomResult = SingleNumber::all()->random(1)->first();
 //            $single_number_for_result = $selectRandomResult->id;
 //        }
-        if(!empty($manualResult)){
-            $two_digit_for_result = $manualResult->two_digit_number_combination_id;
-        }else{
-            $two_digit_for_result = $two_digit_number_combination_id;
-        }
+        // if($card_combination_id){
+        //     $card_combination_id_for_result = $card_combination_id;
+        // }else{
+        //     $card_combination_id_for_result = 2;
+        // }
+
+        LOG::info($card_combination_id);
+        LOG::info('rs 166');
 
         $tempData = CardResultMaster::select()->where('card_draw_master_id',$draw_id)->where('game_date',Carbon::today())->first();
         if(empty($tempData)) {
             $resultMaster = new CardResultMaster();
             $resultMaster->card_draw_master_id = $draw_id;
-//        $resultMaster->two_digit_number_combination_id = $two_digit_for_result;
             $resultMaster->game_date = Carbon::today();
             $resultMaster->save();
         }else{
@@ -175,7 +178,7 @@ class ResultMasterController extends Controller
         if(isset($resultMaster->id)){
             $resultDetails = new CardResultDetail();
             $resultDetails->card_result_masters_id = $resultMaster->id;
-            $resultDetails->card_combination_id = $two_digit_for_result;
+            $resultDetails->card_combination_id = $card_combination_id;
             $resultDetails->game_type_id = $game_type_id;
             $resultDetails->save();
         }
