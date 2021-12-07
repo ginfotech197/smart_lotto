@@ -29,6 +29,8 @@ export class CardResultService {
   resultByDateSubject = new Subject<GameResult>();
   resultByDate: GameResult;
 
+
+
   // cardResult: C
 
   currentDateResultSubject = new Subject<CurrentGameResult>();

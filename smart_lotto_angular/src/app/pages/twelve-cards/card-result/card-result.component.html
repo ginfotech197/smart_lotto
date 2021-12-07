@@ -1,5 +1,5 @@
-<div style="padding-left: 160px;">
-  
+<div style="padding-left: 100px;">
+
   <div class="ml-4">
 
     <mat-form-field appearance="fill">
@@ -8,19 +8,25 @@
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker [(ngModel)]= "startDate"></mat-datepicker>
     </mat-form-field>
-    <button mat-button type="button" class="btn btn-outline-warning" (click)="searchCardResultByDate()">Search</button>
+    <button mat-button type="button" class="btn" (click)="searchCardResultByDate()">Search</button>
   </div>
 
-  <table class="table table-bordered">    
-    <tbody>
-      <tr>
-        <td *ngFor="let row of cardResult" style="width: 100px; text-align: center;"><div style="background-color: rgba(255, 108, 211, 0.5);">{{row.end_time}}</div><img src="assets/images/{{row.card_combination_id}}.jpg" width="50" alt="" style="padding-top: 10px;"></td>                
-      </tr>        
-    </tbody>
-  </table>
+  <div style="max-height: 250px; overflow: scroll;">
+    <table class="table table-bordered" >
+      <tbody>
+        <tr *ngFor="let row of cardResult.slice(0, cardResult.length % columnNumber  === 0 ?
+        cardResult.length / columnNumber : cardResult.length / columnNumber + 1); let idx = index">
+          <td *ngFor="let row of cardResult.slice(idx * columnNumber, idx * columnNumber + columnNumber)" style="width: 100px; text-align: center;">
+            <div style="background-color: rgba(255, 108, 211, 0.5);">{{row.end_time}}</div>
+            <img src="assets/images/{{row.card_combination_id}}.jpg" width="50" alt="" style="padding-top: 10px;">
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-  
-  <pre>
+
+  <!-- <pre>
     {{cardResult | json}}
-  </pre>
+  </pre> -->
 </div>

@@ -12,7 +12,7 @@ export class CardResultComponent implements OnInit {
 
   cardResult: CardResult[]=[];
   cardResultByDate: CardResult[]=[];
-  
+
 
 
   thisYear = new Date().getFullYear();
@@ -20,6 +20,8 @@ export class CardResultComponent implements OnInit {
   thisDay = new Date().getDate();
   startDate = new Date(this.thisYear, this.thisMonth, this.thisDay);
   pipe = new DatePipe('en-US');
+
+  columnNumber = 5;
 
 
   constructor(private cardResultService: CardResultService) {
