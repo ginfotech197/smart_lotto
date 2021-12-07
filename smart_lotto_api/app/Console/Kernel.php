@@ -38,7 +38,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('generate:result')->dailyAt('22:00')->timezone('Asia/Kolkata');
 
         $schedule->command('generate:cardResult')
-            ->cron('*/05 9-20 * * * ')
+            ->cron('*/5 9-20 * * * ')
             ->timezone('Asia/Kolkata');
         $schedule->command('generate:cardResult')->dailyAt('21:00')->timezone('Asia/Kolkata');
 
