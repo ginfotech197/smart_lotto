@@ -1,0 +1,42 @@
+$color-button-green: #ffbb00;
+
+$color-text: #ecf0f1;
+
+$font-family: Arial, helvetica, sans-serif;
+$font-size: 100%;
+
+.btn:before {
+	position: absolute;
+	content:"";
+	border-top: 5px solid lighten($color-button-green, 5%);
+	border-left: 5px solid lighten($color-button-green, 5%);
+	border-right: 5px solid darken($color-button-green, 5%);
+	border-bottom: 5px solid darken($color-button-green, 5%);
+
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+
+  transition: 0.5s;
+
+}
+.btn{
+	min-width: 160px;
+	position: relative;
+	display: inline-block;
+
+	text-align: center;
+	text-transform: uppercase;
+
+	padding: 9px;
+	margin: 30px 25px;
+
+	font-size: $font-size + 10%;
+	font-weight: 600;
+
+	color: $color-text;
+  background-color: #cc2e9d;
+
+	transition: 0.5s;
+}

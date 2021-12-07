@@ -8,7 +8,7 @@
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker [(ngModel)]= "startDate"></mat-datepicker>
     </mat-form-field>
-    <button mat-button type="button" class="btn btn-outline-warning" (click)="searchCardResultByDate()">Search</button>
+    <button mat-button type="button" class="btn" (click)="searchCardResultByDate()">Search</button>
   </div>
 
   <div style="max-height: 300px; overflow: scroll;">
