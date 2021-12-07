@@ -25,14 +25,14 @@ class CardResultMasterController extends Controller
         foreach($result_dates as $result_date){
             $temp_array['date'] = $result_date;
             $data = CardDrawMaster::select('card_result_masters.game_date','card_draw_masters.end_time',
-                                            'card_result_masters.card_combination_id','card_combinations.rank_name',
+                                            'card_result_details.card_combination_id','card_combinations.rank_name',
                                             'card_combinations.suit_name'
                 )
                 ->leftJoin('card_result_masters', function ($join) use ($result_date) {
                     $join->on('card_draw_masters.id','=','card_result_masters.card_draw_master_id')
                         ->where('card_result_masters.game_date','=', $result_date);
                 })
-                // ->leftJoin('card_result_details','card_result_details.card_combination_id','card_combinations.id')
+                ->leftJoin('card_result_details','card_result_details.card_combination_id','card_combinations.id')
                 ->leftJoin('card_combinations','card_result_masters.card_combination_id','card_combinations.id')
                 // ->leftJoin('card_combinations','result_masters.card_combination_id','card_combinations.id')
                 ->get();
