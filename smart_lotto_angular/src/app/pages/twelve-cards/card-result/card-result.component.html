@@ -18,7 +18,7 @@
         cardResult.length / columnNumber : cardResult.length / columnNumber + 1); let idx = index">
           <td *ngFor="let row of cardResult.slice(idx * columnNumber, idx * columnNumber + columnNumber)" style="width: 100px; text-align: center;">
             <div style="background-color: rgba(255, 108, 211, 0.5);">{{row.end_time}}</div>
-            <img src="assets/images/{{row.card_combination_id}}.jpg" width="50" alt="" style="padding-top: 10px;">
+            <img src="assets/images/{{row.card_combination_id}}.jpg" width="100" alt="" style="padding-top: 10px;">
           </td>
         </tr>
       </tbody>
