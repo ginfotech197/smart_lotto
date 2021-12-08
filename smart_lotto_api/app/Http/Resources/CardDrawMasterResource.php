@@ -13,7 +13,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @property mixed visible_time
  * @property mixed time_diff
  */
-class DrawMasterResource extends JsonResource
+
+class CardDrawMasterResource extends JsonResource
 {
     public function toArray($request)
     {

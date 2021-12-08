@@ -22,6 +22,8 @@ export class TwelveCardsComponent implements OnInit {
   cardResultVisibility = false;
   totalPurchasedPrice = 0;
   totalPurchasedQuantity = 0;
+  alwaysTime: number;
+  remainingTime: number;
 
 
 
@@ -48,6 +50,17 @@ export class TwelveCardsComponent implements OnInit {
     this.authService.userBehaviorSubject.subscribe(user => {
       this.user = user;
     });
+
+    this.commonService.currentTimeBehaviorSubject.asObservable().subscribe(response => {
+      this.alwaysTime = response;
+    });
+    this.commonService.CardRemainingTimeBehaviorSubject.asObservable().subscribe(response => {
+      this.remainingTime = response;
+      // const x = String(this.remainingTime).split(':');
+      // // tslint:disable-next-line:radix
+      // this.value = (((parseInt(x[1])*60)+parseInt(x[2]))/(15*60))*100;
+    });
+
 
     this.activeDrawTime = this.commonService.getActiveDrawTime();
     this.commonService.getActiveDrawTimeListener().subscribe((response: DrawTime) => {

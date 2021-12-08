@@ -29,6 +29,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   projectData: ProjectData;
   alwaysTime: number;
   remainingTime: number;
+  cardRemainingTime: number;
   @Input() deviceXs: boolean;
   userSub: Subscription;
   isAuthenticated = false;
@@ -68,9 +69,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     this.commonService.remainingTimeBehaviorSubject.asObservable().subscribe(response => {
       this.remainingTime = response;
-      const x = String(this.remainingTime).split(':');
-      // tslint:disable-next-line:radix
-      this.value = (((parseInt(x[1])*60)+parseInt(x[2]))/(15*60))*100;
+      // const x = String(this.remainingTime).split(':');
+      // // tslint:disable-next-line:radix
+      // this.value = (((parseInt(x[1])*60)+parseInt(x[2]))/(15*60))*100;
+    });
+
+    this.commonService.CardRemainingTimeBehaviorSubject.asObservable().subscribe(response => {
+      this.cardRemainingTime = response;
+      console.log(this.cardRemainingTime);
+      // const x = String(this.remainingTime).split(':');
+      // // tslint:disable-next-line:radix
+      // this.value = (((parseInt(x[1])*60)+parseInt(x[2]))/(15*60))*100;
     });
 
     this.userSub = this.authService.userBehaviorSubject.subscribe(user => {

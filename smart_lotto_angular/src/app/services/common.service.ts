@@ -22,6 +22,7 @@ export class CommonService {
   value$ = new BehaviorSubject(20);
   currentTimeBehaviorSubject = new  BehaviorSubject(null);
   remainingTimeBehaviorSubject = new  BehaviorSubject(null);
+  CardRemainingTimeBehaviorSubject = new  BehaviorSubject(null);
   currentValue = 0;
 
 
@@ -36,7 +37,9 @@ export class CommonService {
   private BASE_API_URL = environment.BASE_API_URL;
 
   activeDrawTime: DrawTime;
+  CardActiveDrawTime: DrawTime;
   activeDrawTimeSubject = new Subject<DrawTime>();
+  cardActiveDrawTimeSubject = new Subject<DrawTime>();
 
   barcodeReportRecordsSubject = new Subject<TerminalBarcodeReport[]>();
 
@@ -124,7 +127,7 @@ export class CommonService {
 
       // @ts-ignore
       // const remainingSec = Math.abs(60 - (this.currentTimeObj.second-this.activeDrawTime.endTime.split(':')[2]));
-      const remainingSec = Math.abs((this.currentTimeObj.second-this.activeDrawTime.endTime.split(':')[2]) - 60);
+      const remainingSec = Math.abs((this.currentTimeObj.second - this.activeDrawTime.endTime.split(':')[2]) - 60);
 
       // @ts-ignore
       const remainingTime = remainingHour + ':' + remainingMin + ':' + remainingSec;
@@ -138,15 +141,62 @@ export class CommonService {
       this.currentTimeBehaviorSubject.next(currentTime);
       this.remainingTimeBehaviorSubject.next(remainingTime);
       // just testing if it is working
+
+
+      let cardRemainingMin = 0;
+      let cardRemainingHour = 0;
+      // @ts-ignore
+      // const cardRemainingHour = this.CardActiveDrawTime.endTime.split(':')[0] - (this.currentTimeObj.hour);
+      // console.log('cardRemainingHour', cardRemainingHour);
+      // @ts-ignore
+      // if (((this.CardActiveDrawTime.endTime.split(':')[0] - (this.currentTimeObj.hour)) == 1)){
+      if ((this.CardActiveDrawTime.endTime.split(':')[0] - (this.currentTimeObj.hour)) === 1){
+        // tslint:disable-next-line:no-shadowed-variable
+        const cardRemainingHour = 0;
+      }else{
+        // @ts-ignore
+        cardRemainingHour = this.CardActiveDrawTime.endTime.split(':')[0] - (this.currentTimeObj.hour);
+      }
+      // @ts-ignore
+      if (this.CardActiveDrawTime.endTime.split(':')[1] == 0){
+        // @ts-ignore
+        cardRemainingMin = Math.abs(this.currentTimeObj.minute - 60);
+      }else{
+        // @ts-ignore
+        cardRemainingMin = Math.abs(this.currentTimeObj.minute - this.CardActiveDrawTime.endTime.split(':')[1]);
+      }
+
+      // @ts-ignore
+      // const remainingSec = Math.abs(60 - (this.currentTimeObj.second-this.CardActiveDrawTime.endTime.split(':')[2]));
+      const cardRemainingSec = Math.abs((this.currentTimeObj.second - this.CardActiveDrawTime.endTime.split(':')[2]) - 60);
+
+      // @ts-ignore
+      const cardRemainingTime = cardRemainingHour + ':' + cardRemainingMin + ':' + cardRemainingSec;
+
+      // console.log('rm_mn: '+ cardRemainingMin , 'rem_sec' + cardRemainingSec);
+
+      // if (cardRemainingMin <= 1){
+      //   this.updateTerminalCancellation();
+      // }
+
+      this.CardRemainingTimeBehaviorSubject.next(cardRemainingTime);
+
+
     }, 1000);
 
 
     // get active draw
     this.http.get(this.BASE_API_URL + '/dev/drawTimes/active').subscribe((response: ServerResponse) => {
       this.activeDrawTime = response.data;
-      // console.log('active draw', this.activeDrawTime);
       this.activeDrawTimeSubject.next({...this.activeDrawTime});
     });
+
+    // get active draw Card
+    this.http.get(this.BASE_API_URL + '/dev/drawTimes/activeCard').subscribe((response: ServerResponse) => {
+      this.CardActiveDrawTime = response.data;
+      this.cardActiveDrawTimeSubject.next({...this.activeDrawTime});
+    });
+
   }
 
   getServerTime(){

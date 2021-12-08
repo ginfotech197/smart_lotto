@@ -3,18 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\CardDrawMaster;
+use App\Http\Resources\CardDrawMasterResource;
+use App\Models\DrawMaster;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class CardDrawMasterController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function getActiveDraw()
     {
-        //
+        $result = CardDrawMaster::where('active',1)->first();
+        if(!empty($result)){
+            return response()->json(['success'=>1,'data'=> new CardDrawMasterResource($result)], 200,[],JSON_NUMERIC_CHECK);
+        }else{
+            return response()->json(['success'=>1,'data'=> null], 200,[],JSON_NUMERIC_CHECK);
+        }
+
     }
 
     /**
