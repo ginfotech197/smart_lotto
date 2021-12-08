@@ -38,7 +38,6 @@ export class AdminReportsComponent implements OnInit {
 
   // picker1: any;
   constructor(private adminReportService: AdminReportService) {
-    // console.log(this.thisDay);
   }
 
   ngOnInit(): void {
@@ -54,7 +53,6 @@ export class AdminReportsComponent implements OnInit {
       this.customerSaleReportRecords.forEach(function (value) {
         temp += Number(value.total);
       })
-      // console.log('total amount' + temp);
       this.totalAmount = temp;
     });
     this.searchByDateTab1();

@@ -43,7 +43,6 @@ export class CardResultService {
     this.http.get(this.BASE_API_URL + '/dev/cardResult').subscribe((response: ServerResponse) =>{
       this.cardResult = response.data.result;
       this.cardResultSubject.next([...this.cardResult]);
-      console.log(this.cardResult);
     });
 
     // this.http.get(this.BASE_API_URL + 'getResultByDate').subscribe((response: ServerResponse) => {
@@ -57,7 +56,6 @@ export class CardResultService {
   getCardResultByDate(cardResultDate: any){
     return this.http.post(this.BASE_API_URL + '/dev/cardReultByDate', {game_date: cardResultDate}).pipe(catchError(this.handleError),
     tap(((response: {success: number, data: CardResult[]}) => {
-      console.log(response);
     })));
   }
 

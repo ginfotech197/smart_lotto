@@ -33,7 +33,6 @@ export class CardResultComponent implements OnInit {
   ngOnInit(): void {
     this.cardResultService.getCardDateResultListener().subscribe(response => {
       this.cardResult = response;
-      console.log('TS ',this.cardResult);
     });
 
     // this.cardResultService.getCardResultByDateListener().subscribe((response: CardResult[]) => {
@@ -44,14 +43,10 @@ export class CardResultComponent implements OnInit {
 
   searchCardResultByDate(){
     let x = this.pipe.transform(this.startDate,'yyyy-MM-dd');
-    console.log(this.startDate);
-    console.log(x);
     this.cardResultService.getCardResultByDate(x).subscribe(response=>{
-      console.log('Component',response);
      // @ts-ignore
 
       this.cardResult = response.data;
-      console.log(this.cardResult);
     });
 
   }

@@ -122,7 +122,7 @@ export class MasterTerminalComponent implements OnInit {
           }
         }, (error) => {
           // when error occured
-          console.log('data saving error', error);
+          // console.log('data saving error', error);
         });
       }
     });
@@ -172,7 +172,7 @@ export class MasterTerminalComponent implements OnInit {
           }
         }, (error) => {
           // when error occured
-          console.log('data saving error', error);
+          // console.log('data saving error', error);
         });
       }
     });
@@ -266,7 +266,7 @@ export class MasterTerminalComponent implements OnInit {
           }
         }, (error) => {
           // when error occured
-          console.log('data saving error', error);
+          // console.log('data saving error', error);
         });
       }
     });

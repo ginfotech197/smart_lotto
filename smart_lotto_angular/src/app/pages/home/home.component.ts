@@ -242,7 +242,6 @@ export class HomeComponent implements OnInit {
     this.twoDigitNumberSet =  this.playGameService.getTwoDigitNumberSetNumbers();
     this.playGameService.getTwoDigitNumberSetListener().subscribe((response: TwoDigitNumberSet[]) => {
       this.twoDigitNumberSet = response;
-      console.log(this.twoDigitNumberSet);
     });
 
     this.nextDrawId = this.watchDrawService.getNextDraw();

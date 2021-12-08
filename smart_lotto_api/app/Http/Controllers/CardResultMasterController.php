@@ -22,11 +22,14 @@ class CardResultMasterController extends Controller
     {
         $result_dates= CardResultMaster::distinct()->orderBy('game_date','desc')->pluck('game_date');
         $result_array = array();
-        foreach($result_dates as $result_date){
+        $result_date = Carbon::today()->format('Y-m-d');
             $temp_array['date'] = $result_date;
-            $data = CardDrawMaster::select('card_result_masters.game_date','card_draw_masters.end_time',
+
+            $data =
+            CardDrawMaster::select('card_result_masters.game_date','card_draw_masters.end_time',
                                             'card_result_details.card_combination_id','card_combinations.rank_name',
                                             'card_combinations.suit_name'
+
                 )
                 ->leftJoin('card_result_masters', function ($join) use ($result_date) {
                     $join->on('card_draw_masters.id','=','card_result_masters.card_draw_master_id')
@@ -39,7 +42,7 @@ class CardResultMasterController extends Controller
             $temp_array['result'] = $data;
             $result_array[] = $temp_array;
 
-        }
+
 
         return response()->json(['success'=>1,'data'=>$result_array[0]], 200,[],JSON_NUMERIC_CHECK);
     }

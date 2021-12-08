@@ -118,14 +118,12 @@ export class PlayGameService {
   saveUserPlayInputDetails(inputData){
     return this.http.post<GameInputSaveResponse>(this.BASE_API_URL + '/buyTicket', inputData)
       .pipe(catchError(this.errorService.serverError), tap(response => {
-        console.log('service ', response);
     }));
   }
 
   saveUserPlayInputDetailsCard(inputData){
     return this.http.post<GameInputSaveResponse>(this.BASE_API_URL + '/buyTicketCard', inputData)
       .pipe(catchError(this.errorService.serverError), tap(response => {
-        console.log('service ', response);
       }));
   }
 
