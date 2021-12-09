@@ -26,8 +26,10 @@ export class AdminReportsComponent implements OnInit {
   isProduction = environment.production;
   showDevArea = false;
   barcodeReportRecords: CPanelBarcodeReport[] = [];
+  cardBarcodeReportRecords: CPanelBarcodeReport[] = [];
   barcodeDetails: BarcodeDetails;
   customerSaleReportRecords: CPanelCustomerSaleReport[] = [];
+  cardCustomerSaleReportRecords: CPanelCustomerSaleReport[] = [];
 
   StartDateFilter = this.startDate;
   EndDateFilter = this.startDate;
@@ -46,15 +48,31 @@ export class AdminReportsComponent implements OnInit {
       this.barcodeReportRecords = response;
     });
 
+    this.cardBarcodeReportRecords = this.adminReportService.getCardBarcodeReportRecords();
+    this.adminReportService.getCardBarcodeReportListener().subscribe((response: CPanelBarcodeReport[]) => {
+      this.cardBarcodeReportRecords = response;
+    });
+
     this.customerSaleReportRecords = this.adminReportService.getCustomerSaleReportRecords();
     this.adminReportService.getCustomerSaleReportListener().subscribe((response: CPanelCustomerSaleReport[]) => {
       this.customerSaleReportRecords = response;
       let temp = 0;
       this.customerSaleReportRecords.forEach(function (value) {
         temp += Number(value.total);
-      })
+      });
       this.totalAmount = temp;
     });
+
+    this.cardCustomerSaleReportRecords = this.adminReportService.getCardCustomerSaleReportRecords();
+    this.adminReportService.getCardCustomerSaleReportListener().subscribe((response: CPanelCustomerSaleReport[]) => {
+      this.cardCustomerSaleReportRecords = response;
+      let temp = 0;
+      this.cardCustomerSaleReportRecords.forEach(function (value) {
+        temp += Number(value.total);
+      });
+      this.totalAmount = temp;
+    });
+
     this.searchByDateTab1();
     this.searchByDateTab2();
   }
@@ -70,8 +88,13 @@ export class AdminReportsComponent implements OnInit {
     });
     var startDate = this.pipe.transform(this.StartDateFilter, 'yyyy-MM-dd');
     var endDate = this.pipe.transform(this.EndDateFilter, 'yyyy-MM-dd');
-    this.adminReportService.customerSaleReportByDate(startDate,endDate).subscribe((response)=>{
-      if(response.data){
+    this.adminReportService.customerSaleReportByDate(startDate, endDate).subscribe((response) => {
+      if (response.data){
+        Swal.close();
+      }
+    });
+    this.adminReportService.cardCustomerSaleReportByDate(startDate, endDate).subscribe((response) => {
+      if (response.data){
         Swal.close();
       }
     });
@@ -88,7 +111,12 @@ export class AdminReportsComponent implements OnInit {
     });
     var startDate = this.pipe.transform(this.StartDateFilter, 'yyyy-MM-dd');
     var endDate = this.pipe.transform(this.EndDateFilter, 'yyyy-MM-dd');
-    this.adminReportService.barcodeReportByDate(startDate,endDate).subscribe((response)=>{
+    this.adminReportService.barcodeReportByDate(startDate, endDate).subscribe((response) => {
+      if (response.data){
+        Swal.close();
+      }
+    });
+    this.adminReportService.cardBarcodeReportByDate(startDate, endDate).subscribe((response) => {
       if (response.data){
         Swal.close();
       }

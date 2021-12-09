@@ -19,11 +19,17 @@ export class AdminReportService {
   barcodeReportRecords: CPanelBarcodeReport[] = [];
   barcodeReportSubject = new Subject<CPanelBarcodeReport[]>();
 
+  cardBarcodeReportRecords: CPanelBarcodeReport[] = [];
+  cardBarcodeReportSubject = new Subject<CPanelBarcodeReport[]>();
+
   barcodeDetails: BarcodeDetails;
   barcodeDetailsSubject = new Subject<BarcodeDetails>();
 
   customerSaleReportRecords: CPanelCustomerSaleReport[] = [];
   customerSaleReportSubject = new Subject<CPanelCustomerSaleReport[]>();
+
+  cardCustomerSaleReportRecords: CPanelCustomerSaleReport[] = [];
+  cardCustomerSaleReportSubject = new Subject<CPanelCustomerSaleReport[]>();
 
   constructor(private http: HttpClient, private errorService: ErrorService) {
     // // get all barcode reports
@@ -53,6 +59,20 @@ export class AdminReportService {
     return this.customerSaleReportSubject.asObservable();
   }
 
+  getCardCustomerSaleReportRecords(){
+    return [...this.cardCustomerSaleReportRecords];
+  }
+  getCardCustomerSaleReportListener(){
+    return this.cardCustomerSaleReportSubject.asObservable();
+  }
+
+  getCardBarcodeReportRecords(){
+    return [...this.barcodeReportRecords];
+  }
+  getCardBarcodeReportListener(){
+    return this.barcodeReportSubject.asObservable();
+  }
+
   getBarcodeDetails(playMasterId: number){
     return this.http.get<{success: number; data: BarcodeDetails}>(this.BASE_API_URL + '/cPanel/barcodeReport/particulars/' + playMasterId)
       .pipe(catchError(this.handleError), tap((response: {success: number, data: BarcodeDetails}) => {
@@ -61,6 +81,10 @@ export class AdminReportService {
       }));
   }
   getBarcodeDetailsListener(){
+    return this.barcodeDetailsSubject.asObservable();
+  }
+
+  getCardBarcodeDetailsListener(){
     return this.barcodeDetailsSubject.asObservable();
   }
 
@@ -74,12 +98,32 @@ export class AdminReportService {
       })));
   }
 
+  cardCustomerSaleReportByDate(startDate, endDate){
+    return this.http.post<{success: number; data: any}>( this.BASE_API_URL + '/cPanel/cardCustomerSaleReports', {startDate, endDate})
+      .pipe(catchError(this.handleError), tap(((response: {success: number, data: CPanelCustomerSaleReport[]}) => {
+        if (response.data){
+          this.cardCustomerSaleReportRecords = response.data;
+          this.cardCustomerSaleReportSubject.next([...this.cardCustomerSaleReportRecords]);
+        }
+      })));
+  }
+
   barcodeReportByDate(startDate, endDate){
     return this.http.post<{success: number; data: any}>( this.BASE_API_URL + '/cPanel/barcodeReportByDate', {startDate, endDate})
       .pipe(catchError(this.handleError), tap(((response: ServerResponse) => {
         if (response.data){
           this.barcodeReportRecords = response.data;
           this.barcodeReportSubject.next([...this.barcodeReportRecords]);
+        }
+      })));
+  }
+
+  cardBarcodeReportByDate(startDate, endDate){
+    return this.http.post<{success: number; data: any}>( this.BASE_API_URL + '/cPanel/cardBarcodeReportByDate', {startDate, endDate})
+      .pipe(catchError(this.handleError), tap(((response: ServerResponse) => {
+        if (response.data){
+          this.cardBarcodeReportRecords = response.data;
+          this.cardBarcodeReportSubject.next([...this.cardBarcodeReportRecords]);
         }
       })));
   }
