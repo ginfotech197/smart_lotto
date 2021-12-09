@@ -136,9 +136,7 @@ class CentralController extends Controller
 
         $playMasterObj = new TerminalReportController();
         $playMasterObj->updateCancellation();
-        $totalGame = GameType::count();
-
-//        for($i=1;$i<=$totalGame;$i++) {
+        
         $totalSale = $playMasterControllerObj->get_total_sale($today, $lastDrawId, 6);
         $gameType = GameType::find(6);
         $payout = ($totalSale * ($gameType->payout)) / 100;
@@ -169,9 +167,6 @@ class CentralController extends Controller
 
 
 
-
-
-        // result greater than equal to target value
         if (empty($result)) {
             $result = DB::select(DB::raw("select card_combinations.id as card_combination_id,
                     sum(card_play_details.quantity) as total_quantity
@@ -184,18 +179,10 @@ class CentralController extends Controller
                     order by rand() limit 1"));
         }
 
-        // LOG::info('$result: ',$result);
-        // LOG::info('card_combination_id: ',$result[0]->card_combination_id);
-        // LOG::info('$nextDrawId', $nextDrawId);
-
-
 
         $two_digit_result_id = $result[0]->card_combination_id;
 
         $test = CardDrawMaster::query()->update(['active' => 0]);
-        // LOG::info('test: ',$test);
-
-        //  return;
 
         if (!empty($nextGameDrawObj)) {
             CardDrawMaster::findOrFail($nextDrawId)->update(['active' => 1]);
@@ -206,13 +193,8 @@ class CentralController extends Controller
         LOG::info($two_digit_result_id);
         $resultMasterController = new ResultMasterController();
         $jsonData = $resultMasterController->save_auto_result_card($lastDrawId, $two_digit_result_id, 6);
-//        }
 
         $resultCreatedObj = json_decode($jsonData->content(),true);
-
-//        $actionId = 'score_update';
-//        $actionData = array('team1_score' => 46);
-//        event(new ActionEvent($actionId, $actionData));
 
         if( !empty($resultCreatedObj) && $resultCreatedObj['success']==1){
 

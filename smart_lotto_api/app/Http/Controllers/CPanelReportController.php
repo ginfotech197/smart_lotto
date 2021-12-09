@@ -164,24 +164,16 @@ class CPanelReportController extends Controller
         $play_master = CardPlayMaster::findOrFail($play_master_id);
         $play_details = CardPlayDetail::select()->where('card_play_master_id',$play_master_id)->get();
         $play_game_ids = CardPlayDetail::where('card_play_master_id',$play_master_id)->distinct()->pluck('game_type_id');
-//        return response()->json(['success' => 1, 'data' => $play_game_ids], 200);
         $play_date = Carbon::parse($play_master->created_at)->format('Y-m-d');
         $result_master = CardResultMaster::where('card_draw_master_id', $play_master->draw_master_id)->where('game_date',$play_date)->first();
         if(empty($result_master)){
             return 0 ;
         }
         $result_details = CardResultDetail::where('result_masters_id',$result_master->id)->get();
-//        return response()->json(['success' => 100, 'data' => $result_master, 'data2' => $result_details], 200);
         $prize_value = 0;
         foreach ($result_details as $tempDetails) {
             $temp_result_details = CardResultDetail::where('result_masters_id',$result_master->id)->where('game_type_id',$tempDetails->game_type_id)->first();
-//        return response()->json(['success' => 100, 'data' => $result_master, 'data2' => $result_details], 200);
             $result_number_combination_id = !empty($temp_result_details) ? $temp_result_details->card_combination_id : null;
-//            if ($result_number_combination_id) {
-//                $two_digit_number_set_id = (TwoDigitNumberCombinations::select('two_digit_number_set_id')->where('visible_number', $result_number_combination_id)->first())->two_digit_number_set_id;
-//            } else {
-//                $two_digit_number_set_id = null;
-//            }
 
             if ($result_number_combination_id) {
                 $two_digit_number_set_id = (CardCombination::select('id')->where('card_combination_id', $result_number_combination_id)->first())->card_combination_id;
@@ -189,11 +181,8 @@ class CPanelReportController extends Controller
                 $two_digit_number_set_id = null;
             }
 
-
-//        return response()->json(['success' => 1, 'data' => $result_number_combination_id, 'data2' => $two_digit_number_set_id], 200);
             $prize_value = 0;
             foreach ($play_game_ids as $game_id) {
-//            if($game_id == 1){
                 $singleGamePrize = CardPlayMaster::join('card_play_details', 'card_play_masters.id', 'card_play_details.play_master_id')
                     ->join('card_combinations', 'card_play_details.card_combination_id', 'card_combinations.id')
                     ->join('game_types', 'card_play_details.game_type_id', 'game_types.id')
@@ -203,28 +192,13 @@ class CPanelReportController extends Controller
                     ->where('card_play_details.card_combination_id', $two_digit_number_set_id)
                     ->groupBy('card_combinations.id')
                     ->first();
-//            }
-//            if($game_id == 2){
-//                $tripleGamePrize = PlayMaster::join('play_details','play_masters.id','play_details.play_master_id')
-//                    ->join('number_combinations','play_details.single_number_id','number_combinations.id')
-//                    ->join('game_types','play_details.game_type_id','game_types.id')
-//                    ->select(DB::raw("play_details.quantity * game_types.winning_price as prize_value") )
-//                    ->where('play_masters.id',$play_master_id)
-//                    ->where('play_details.game_type_id',$game_id)
-//                    ->where('play_details.single_number_id',$result_number_combination_id)
-//                    ->first();
-//            }
 
                 if (!empty($singleGamePrize)) {
                     $prize_value += $singleGamePrize->prize_value;
                 }
             }
         }
-//        return ['single' => $singleGamePrize];
 
-//        if(!empty($singleGamePrize)){
-//            $prize_value+= $singleGamePrize->prize_value;
-//        }
         return $prize_value;
     }
 
