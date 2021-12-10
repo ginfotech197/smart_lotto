@@ -553,6 +553,8 @@ class DatabaseSeeder extends Seeder
 
     ]);
 
+        $this->call(CardDrawMasterSeeder::class);
+
 //    CardDrawMaster::insert([
 //
 //        //5 min difference
