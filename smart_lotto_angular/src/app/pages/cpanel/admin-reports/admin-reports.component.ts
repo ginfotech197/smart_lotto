@@ -36,6 +36,7 @@ export class AdminReportsComponent implements OnInit {
   pipe = new DatePipe('en-US');
 
   totalAmount: number = 0;
+  cardTotalAmount: number = 0;
    columnNumber = 4;
 
   // picker1: any;
@@ -70,7 +71,7 @@ export class AdminReportsComponent implements OnInit {
       this.cardCustomerSaleReportRecords.forEach(function (value) {
         temp += Number(value.total);
       });
-      this.totalAmount = temp;
+      this.cardTotalAmount = temp;
     });
 
     this.searchByDateTab1();
