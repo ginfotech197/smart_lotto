@@ -226,7 +226,6 @@ class StockistController extends Controller
             foreach ($data as $y){
                 if($x->terminal_pin === $y->terminal_pin){
                     $y->total = $y->total + $x->total;
-//                    $y->ntp = $y->ntp + $x->ntp;
                     $y->commission = $y->commission + $x->commission;
                     $y->prize_value = $y->prize_value + $x->prize_value;
                 }
@@ -237,10 +236,6 @@ class StockistController extends Controller
     }
 
     public function card_customer_sale_report($start_date,$end_date,$userID){
-//        $requestedData = (object)$request->json()->all();
-//        $start_date = $requestedData->startDate;
-//        $end_date = $requestedData->endDate;
-//        $userID = $requestedData->userID;
 
         $cPanelRepotControllerObj = new CPanelReportController();
 
@@ -287,14 +282,11 @@ class StockistController extends Controller
 
     public function barcode_wise_report_by_date(Request $request){
         $requestedData = (object)$request->json()->all();
-        $requestedData = (object)$request->json()->all();
         $start_date = $requestedData->startDate;
         $end_date = $requestedData->endDate;
         $userID = $requestedData->userID;
 
         $cPanelRepotControllerObj = new CPanelReportController();
-
-//        $x = $this->get_total_quantity_by_barcode(1);
 
         $data = PlayMaster::select('play_masters.id as play_master_id', DB::raw('substr(play_masters.barcode_number, 1, 8) as barcode_number')
             ,'draw_masters.visible_time as draw_time',
@@ -306,8 +298,6 @@ class StockistController extends Controller
             ->join('stockist_to_terminals','stockist_to_terminals.terminal_id','play_masters.user_id')
             ->where('play_masters.is_cancelled',0)
             ->where('stockist_to_terminals.stockist_id',$userID)
-//            ->where('play_masters.created_at','>=',$start_date)
-//            ->where('play_masters.created_at','<=',$end_date)
             ->whereRaw('date(play_masters.created_at) >= ?', [$start_date])
             ->whereRaw('date(play_masters.created_at) <= ?', [$end_date])
             ->groupBy('play_masters.id','play_masters.barcode_number','draw_masters.visible_time','users.email','play_masters.created_at')
@@ -320,8 +310,79 @@ class StockistController extends Controller
             $detail->prize_value = $cPanelRepotControllerObj->get_prize_value_by_barcode($detail->play_master_id);
             $detail->amount = $cPanelRepotControllerObj->get_total_amount_by_barcode($detail->play_master_id);
         }
-        return response()->json(['success'=> 1, 'data' => $data], 200);
 
+        $card_data = $this->card_barcode_wise_reports_by_date($start_date,$end_date,$userID);
+        foreach ($card_data as $x){
+            $data->push($x);
+        }
+
+        return response()->json(['success'=> 1, 'data' => $data], 200);
+    }
+
+    public function card_barcode_wise_reports_by_date($start_date,$end_date,$userID){
+//        $requestedData = (object)$request->json()->all();
+//        $start_date = $requestedData->startDate;
+//        $end_date = $requestedData->endDate;
+//        $userID = $requestedData->userID;
+
+        $cPanelRepotControllerObj = new CPanelReportController();
+
+        $data = CardPlayMaster::select('card_play_masters.id as play_master_id', DB::raw('substr(card_play_masters.barcode_number, 1, 8) as barcode_number')
+            ,'card_draw_masters.visible_time as draw_time',
+            'users.email as terminal_pin','card_play_masters.created_at as ticket_taken_time'
+        )
+            ->join('card_draw_masters','card_play_masters.card_draw_master_id','card_draw_masters.id')
+            ->join('users','users.id','card_play_masters.user_id')
+            ->join('card_play_details','card_play_details.card_play_master_id','card_play_masters.id')
+            ->join('stockist_to_terminals','stockist_to_terminals.terminal_id','card_play_masters.user_id')
+            ->where('card_play_masters.is_cancelled',0)
+            ->where('stockist_to_terminals.stockist_id',$userID)
+            ->whereRaw('date(card_play_masters.created_at) >= ?', [$start_date])
+            ->whereRaw('date(card_play_masters.created_at) <= ?', [$end_date])
+            ->groupBy('card_play_masters.id','card_play_masters.barcode_number','card_draw_masters.visible_time','users.email','card_play_masters.created_at')
+            ->orderBy('card_play_masters.created_at','desc')
+            ->get();
+
+        foreach($data as $x){
+            $detail = (object)$x;
+            $detail->total_quantity = $cPanelRepotControllerObj->get_card_total_quantity_by_barcode($detail->play_master_id);
+            $detail->prize_value = $cPanelRepotControllerObj->get_card_prize_value_by_barcode($detail->play_master_id);
+            $detail->amount = $cPanelRepotControllerObj->get_card_total_amount_by_barcode($detail->play_master_id);
+        }
+        return $data;
+    }
+
+    public function card_barcode_wise_report_by_date(Request $request){
+        $requestedData = (object)$request->json()->all();
+        $start_date = $requestedData->startDate;
+        $end_date = $requestedData->endDate;
+        $userID = $requestedData->userID;
+
+        $cPanelRepotControllerObj = new CPanelReportController();
+
+        $data = CardPlayMaster::select('card_play_masters.id as play_master_id', DB::raw('substr(card_play_masters.barcode_number, 1, 8) as barcode_number')
+            ,'card_draw_masters.visible_time as draw_time',
+            'users.email as terminal_pin','card_play_masters.created_at as ticket_taken_time'
+        )
+            ->join('card_draw_masters','card_play_masters.card_draw_master_id','card_draw_masters.id')
+            ->join('users','users.id','card_play_masters.user_id')
+            ->join('card_play_details','card_play_details.card_play_master_id','card_play_masters.id')
+            ->join('stockist_to_terminals','stockist_to_terminals.terminal_id','card_play_masters.user_id')
+            ->where('card_play_masters.is_cancelled',0)
+            ->where('stockist_to_terminals.stockist_id',$userID)
+            ->whereRaw('date(card_play_masters.created_at) >= ?', [$start_date])
+            ->whereRaw('date(card_play_masters.created_at) <= ?', [$end_date])
+            ->groupBy('card_play_masters.id','card_play_masters.barcode_number','card_draw_masters.visible_time','users.email','card_play_masters.created_at')
+            ->orderBy('card_play_masters.created_at','desc')
+            ->get();
+
+        foreach($data as $x){
+            $detail = (object)$x;
+            $detail->total_quantity = $cPanelRepotControllerObj->get_card_total_quantity_by_barcode($detail->play_master_id);
+            $detail->prize_value = $cPanelRepotControllerObj->get_card_prize_value_by_barcode($detail->play_master_id);
+            $detail->amount = $cPanelRepotControllerObj->get_card_total_amount_by_barcode($detail->play_master_id);
+        }
+        return response()->json(['success'=> 1, 'data' => $data], 200);
     }
 
 }

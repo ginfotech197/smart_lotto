@@ -119,6 +119,8 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
     Route::post('stockist/customerSaleReports', [StockistController::class, 'customer_sale_reports']);
     Route::post('stockist/barcodeReportByDate', [StockistController::class, 'barcode_wise_report_by_date']);
 
+    Route::post('stockist/cardCustomerSaleReports', [StockistController::class, 'card_customer_sale_reports']);
+
     Route::post('terminal/updateCancellation', [TerminalReportController::class, 'updateCancellation']);
 
 
@@ -209,7 +211,7 @@ Route::group(array('prefix' => 'dev'), function() {
     Route::get('cPanel/customerSaleReport', [CPanelReportController::class, 'customer_sale_report']);
     Route::post('cPanel/customerSaleReports', [CPanelReportController::class, 'customer_sale_reports']);
     Route::post('cPanel/cardCustomerSaleReports', [CPanelReportController::class, 'card_customer_sale_reports']);
-    Route::post('terminal/terminal_sale_reports', [TerminalReportController::class, 'terminal_sale_reports']);
+    Route::post('terminal/terminalSaleReports', [TerminalReportController::class, 'terminal_sale_reports']);
     Route::post('terminal/terminalCardSaleReports', [TerminalReportController::class, 'terminal_card_sale_reports']);
     Route::post('terminal/barcodeReport',[TerminalReportController::class, 'barcode_wise_report_by_terminal']);
     Route::post('terminal/cardBarcodeReport',[TerminalReportController::class, 'card_barcode_wise_report_by_terminal']);
@@ -217,6 +219,7 @@ Route::group(array('prefix' => 'dev'), function() {
     Route::post('stockist/customerSaleReports', [StockistController::class, 'customer_sale_reports']);
     Route::post('stockist/cardCustomerSaleReports', [StockistController::class, 'card_customer_sale_reports']);
     Route::post('stockist/barcodeReportByDate', [StockistController::class, 'barcode_wise_report_by_date']);
+    Route::post('stockist/cardBarcodeReportByDate', [StockistController::class, 'card_barcode_wise_report_by_date']);
     Route::post('cPanel/cardBarcodeReportByDate', [CPanelReportController::class, 'card_barcode_wise_report_by_date']);
     Route::post('cPanel/barcodeReportByDate', [CPanelReportController::class, 'barcode_wise_report_by_date']);
 

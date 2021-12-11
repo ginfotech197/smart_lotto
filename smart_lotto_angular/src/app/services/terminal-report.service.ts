@@ -80,7 +80,7 @@ export class TerminalReportService {
   }
 
   getTerminalSaleReport(userId, startDate, endDate){
-    return this.http.post( this.BASE_API_URL + '/terminal/terminal_sale_reports', {terminalId: userId, startDate, endDate })
+    return this.http.post( this.BASE_API_URL + '/terminal/terminalSaleReports', {terminalId: userId, startDate, endDate })
       .pipe(catchError(this.handleError), tap(((response: {success: number, data: TerminalSaleReport[]}) => {
         if (response.data){
           this.terminalSaleRRecords = response.data;
