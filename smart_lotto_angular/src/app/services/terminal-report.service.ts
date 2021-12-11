@@ -89,6 +89,16 @@ export class TerminalReportService {
       })));
   }
 
+  getCardTerminalSaleReport(userId, startDate, endDate){
+    return this.http.post( this.BASE_API_URL + '/terminal/terminalCardSaleReports', {terminalId: userId, startDate, endDate})
+      .pipe(catchError(this.handleError), tap(((response: {success: number, data: TerminalSaleReport[]}) => {
+        if (response.data){
+          this.cardTerminalSaleRRecords = response.data;
+          this.cardTerminalSaleRecordsSubject.next([...this.cardTerminalSaleRRecords]);
+        }
+      })));
+  }
+
   private serverError(err: any) {
     if (err instanceof Response) {
       return throwError('backend server error');

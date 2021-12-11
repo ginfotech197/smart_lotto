@@ -106,14 +106,14 @@ class TerminalReportController extends Controller
             ->orderBy('card_play_masters.created_at','desc')
             ->get();
 
-//        $cPanelRepotControllerObj = new CPanelReportController();
-//
-//        foreach($data as $x){
-//            $detail = (object)$x;
-//            $detail->total_quantity = $cPanelRepotControllerObj->get_card_total_quantity_by_barcode($detail->play_master_id);
-//            $detail->prize_value = $cPanelRepotControllerObj->get_card_prize_value_by_barcode($detail->play_master_id);
-//            $detail->amount = $cPanelRepotControllerObj->get_card_total_amount_by_barcode($detail->play_master_id);
-//        }
+        $cPanelRepotControllerObj = new CPanelReportController();
+
+        foreach($data as $x){
+            $detail = (object)$x;
+            $detail->total_quantity = $cPanelRepotControllerObj->get_card_total_quantity_by_barcode($detail->play_master_id);
+            $detail->prize_value = $cPanelRepotControllerObj->get_card_prize_value_by_barcode($detail->play_master_id);
+            $detail->amount = $cPanelRepotControllerObj->get_card_total_amount_by_barcode($detail->play_master_id);
+        }
 
         return response()->json(['success' => 1, 'data' => $data], 200);
     }
@@ -160,13 +160,13 @@ class TerminalReportController extends Controller
                     $newPrize += 0;
                 }
 
-                $tempData = (PlayDetails::select(DB::raw("if(game_type_id = 1,(mrp*22)*quantity-(commission/100),mrp*quantity-(commission/100)) as total"))
-                    ->where('play_master_id',$y->id)->distinct()->get())[0];
-                $tempntp += $tempData->total;
+//                $tempData = (PlayDetails::select(DB::raw("if(game_type_id = 1,(mrp*22)*quantity-(commission/100),mrp*quantity-(commission/100)) as total"))
+//                    ->where('play_master_id',$y->id)->distinct()->get())[0];
+//                $tempntp += $tempData->total;
             }
             $detail = (object)$x;
             $detail->prize_value = $newPrize;
-            $detail->ntp = $tempntp;
+//            $detail->ntp = $tempntp;
         }
 
         $card = $this->terminal_card_sale_report($start_date,$end_date,$terminalId);
@@ -175,7 +175,7 @@ class TerminalReportController extends Controller
             foreach ($data as $y){
                 if($x->date === $y->date){
                     $y->total = $y->total + $x->total;
-                    $y->ntp = $y->ntp + $x->ntp;
+//                    $y->ntp = $y->ntp + $x->ntp;
                     $y->commission = $y->commission + $x->commission;
                     $y->prize_value = $y->prize_value + $x->prize_value;
                 }
@@ -222,13 +222,13 @@ class TerminalReportController extends Controller
                     $newPrize += 0;
                 }
 
-                $tempData = (PlayDetails::select(DB::raw("if(game_type_id = 1,(mrp*22)*quantity-(commission/100),mrp*quantity-(commission/100)) as total"))
-                    ->where('play_master_id',$y->id)->distinct()->get())[0];
-                $tempntp += $tempData->total;
+//                $tempData = (PlayDetails::select(DB::raw("if(game_type_id = 1,(mrp*22)*quantity-(commission/100),mrp*quantity-(commission/100)) as total"))
+//                    ->where('play_master_id',$y->id)->distinct()->get())[0];
+//                $tempntp += $tempData->total;
             }
             $detail = (object)$x;
             $detail->prize_value = $newPrize;
-            $detail->ntp = $tempntp;
+//            $detail->ntp = $tempntp;
         }
 
         return $data;
@@ -276,13 +276,13 @@ class TerminalReportController extends Controller
                     $newPrize += 0;
                 }
 
-                $tempData = (PlayDetails::select(DB::raw("if(game_type_id = 1,(mrp*22)*quantity-(commission/100),mrp*quantity-(commission/100)) as total"))
-                    ->where('play_master_id',$y->id)->distinct()->get())[0];
-                $tempntp += $tempData->total;
+//                $tempData = (PlayDetails::select(DB::raw("if(game_type_id = 1,(mrp*22)*quantity-(commission/100),mrp*quantity-(commission/100)) as total"))
+//                    ->where('play_master_id',$y->id)->distinct()->get())[0];
+//                $tempntp += $tempData->total;
             }
             $detail = (object)$x;
             $detail->prize_value = $newPrize;
-            $detail->ntp = $tempntp;
+//            $detail->ntp = $tempntp;
         }
 
         return response()->json(['success' => 1, 'data' => $data, JSON_NUMERIC_CHECK], 200);

@@ -32,6 +32,7 @@ export class TerminalReportComponent implements OnInit {
 
   terminalReportData: TerminalBarcodeReport[] = [];
   terminalSaleReportData: TerminalSaleReport[] = [];
+  cardTerminalSaleReportData: TerminalSaleReport[] = [];
 
   // tslint:disable-next-line:max-line-length
   constructor( private renderer: Renderer2, private terminalReportService: TerminalReportService, private adminReportService: AdminReportService,
@@ -43,6 +44,9 @@ export class TerminalReportComponent implements OnInit {
     });
     this.terminalReportService.terminalSaleListListener().subscribe((response) => {
       this.terminalSaleReportData = response;
+    });
+    this.terminalReportService.cardTerminalSaleListListener().subscribe((response) => {
+      this.cardTerminalSaleReportData = response;
     });
     this.getTerminalBarcodeReport();
     this.getTerminalSaleReport();
@@ -162,6 +166,11 @@ export class TerminalReportComponent implements OnInit {
     const startDate = this.pipe.transform(this.StartDateFilter, 'yyyy-MM-dd');
     const endDate = this.pipe.transform(this.EndDateFilter, 'yyyy-MM-dd');
     this.terminalReportService.getTerminalSaleReport(User.userId, startDate, endDate).subscribe((response) => {
+      if (response.data){
+        Swal.close();
+      }
+    });
+    this.terminalReportService.getCardTerminalSaleReport(User.userId, startDate, endDate).subscribe((response) => {
       if (response.data){
         Swal.close();
       }
