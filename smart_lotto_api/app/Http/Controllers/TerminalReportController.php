@@ -209,7 +209,7 @@ class TerminalReportController extends Controller
         foreach($data as $x) {
             $newPrize = 0;
             $tempntp = 0;
-            $newData = PlayMaster::whereRaw('date(created_at) = ?', [$x->date])->where('user_id',$terminalId)->get();
+            $newData = CardPlayMaster::whereRaw('date(created_at) = ?', [$x->date])->where('user_id',$terminalId)->get();
             foreach ($newData as $y){
 //                $tempData = 0;
 //                $newPrize += $cPanelRepotControllerObj->get_prize_value_by_barcode($y->id);
@@ -263,15 +263,15 @@ class TerminalReportController extends Controller
         foreach($data as $x) {
             $newPrize = 0;
             $tempntp = 0;
-            $newData = PlayMaster::whereRaw('date(created_at) = ?', [$x->date])->where('user_id',$terminalId)->get();
+            $newData = CardPlayMaster::whereRaw('date(created_at) = ?', [$x->date])->where('user_id',$terminalId)->get();
             foreach ($newData as $y){
 //                $tempData = 0;
 //                $newPrize += $cPanelRepotControllerObj->get_prize_value_by_barcode($y->id);
 
                 $tempPrize = 0;
-                $tempPrize = $cPanelRepotControllerObj->get_prize_value_by_barcode($y->id);
+                $tempPrize = $cPanelRepotControllerObj->get_card_prize_value_by_barcode($y->id);
                 if($tempPrize>0 && $y->is_claimed == 1){
-                    $newPrize += $cPanelRepotControllerObj->get_prize_value_by_barcode($y->id);
+                    $newPrize += $cPanelRepotControllerObj->get_card_prize_value_by_barcode($y->id);
                 }else{
                     $newPrize += 0;
                 }

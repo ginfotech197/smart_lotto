@@ -215,6 +215,7 @@ Route::group(array('prefix' => 'dev'), function() {
     Route::post('terminal/cardBarcodeReport',[TerminalReportController::class, 'card_barcode_wise_report_by_terminal']);
 
     Route::post('stockist/customerSaleReports', [StockistController::class, 'customer_sale_reports']);
+    Route::post('stockist/cardCustomerSaleReports', [StockistController::class, 'card_customer_sale_reports']);
     Route::post('stockist/barcodeReportByDate', [StockistController::class, 'barcode_wise_report_by_date']);
     Route::post('cPanel/cardBarcodeReportByDate', [CPanelReportController::class, 'card_barcode_wise_report_by_date']);
     Route::post('cPanel/barcodeReportByDate', [CPanelReportController::class, 'barcode_wise_report_by_date']);
