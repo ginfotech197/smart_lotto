@@ -1,5 +1,6 @@
 INSERT INTO `card_draw_masters` (`card_draw_name`, `start_time`, `end_time`, `time_diff`, `visible_time`, `active`) VALUES
-('Good Morning','09:00:00','09:00:00','5','09:05 am','1'),
+('Good Morning','09:00:00','09:00:00','5','09:00 am','1'),
+('Good Morning','09:00:00','09:05:00','5','09:05 am','0'),
 ('Good Morning','09:05:00','09:10:00','5','09:10 am','0'),
 ('Good Morning','09:10:00','09:15:00','5','09:15 am','0'),
 ('Good Morning','09:15:00','09:20:00','5','09:20 am','0'),

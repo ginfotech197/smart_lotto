@@ -484,7 +484,7 @@ class CPanelReportController extends Controller
                     $newPrize += 0;
                 }
 
-                $tempData = (CardPlayDetail::select(DB::raw("if(game_type_id = 1,(mrp*22)*quantity-(commission/100),mrp*quantity-(commission/100)) as total"))
+                $tempData = (CardPlayDetail::select(DB::raw("if(game_type_id = 6,(mrp**quantity)-(commission/100),mrp*quantity-(commission/100)) as total"))
                     ->where('card_play_master_id',$y->id)->distinct()->get())[0];
                 $tempntp += $tempData->total;
             }
@@ -529,7 +529,7 @@ class CPanelReportController extends Controller
                     $newPrize += 0;
                 }
 
-                $tempData = (CardPlayDetail::select(DB::raw("if(game_type_id = 1,(mrp*22)*quantity-(commission/100),mrp*quantity-(commission/100)) as total"))
+                $tempData = (CardPlayDetail::select(DB::raw("if(game_type_id = 6,(mrp*quantity)-(commission/100),mrp*quantity-(commission/100)) as total"))
                     ->where('card_play_master_id',$y->id)->distinct()->get())[0];
                 $tempntp += $tempData->total;
             }

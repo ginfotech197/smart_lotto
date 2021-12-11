@@ -106,14 +106,14 @@ class TerminalReportController extends Controller
             ->orderBy('card_play_masters.created_at','desc')
             ->get();
 
-        $cPanelRepotControllerObj = new CPanelReportController();
-
-        foreach($data as $x){
-            $detail = (object)$x;
-            $detail->total_quantity = $cPanelRepotControllerObj->get_card_total_quantity_by_barcode($detail->play_master_id);
-            $detail->prize_value = $cPanelRepotControllerObj->get_card_prize_value_by_barcode($detail->play_master_id);
-            $detail->amount = $cPanelRepotControllerObj->get_card_total_amount_by_barcode($detail->play_master_id);
-        }
+//        $cPanelRepotControllerObj = new CPanelReportController();
+//
+//        foreach($data as $x){
+//            $detail = (object)$x;
+//            $detail->total_quantity = $cPanelRepotControllerObj->get_card_total_quantity_by_barcode($detail->play_master_id);
+//            $detail->prize_value = $cPanelRepotControllerObj->get_card_prize_value_by_barcode($detail->play_master_id);
+//            $detail->amount = $cPanelRepotControllerObj->get_card_total_amount_by_barcode($detail->play_master_id);
+//        }
 
         return response()->json(['success' => 1, 'data' => $data], 200);
     }

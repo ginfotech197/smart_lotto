@@ -21,10 +21,12 @@ export class TerminalReportService {
   private BASE_API_URL = environment.BASE_API_URL;
   barcodeReportRecords: TerminalBarcodeReport[] = [];
   terminalSaleRRecords: TerminalSaleReport[] = [];
+  cardTerminalSaleRRecords: TerminalSaleReport[] = [];
   userData: User = JSON.parse(localStorage.getItem('user'));
 
   barcodeReportRecordsSubject = new Subject<TerminalBarcodeReport[]>();
   terminalSaleRecordsSubject = new Subject<TerminalSaleReport[]>();
+  cardTerminalSaleRecordsSubject = new Subject<TerminalSaleReport[]>();
 
   terminalListListener(){
     return this.barcodeReportRecordsSubject.asObservable();
@@ -34,16 +36,11 @@ export class TerminalReportService {
     return this.terminalSaleRecordsSubject.asObservable();
   }
 
-  constructor(private http: HttpClient, private errorService: ErrorService, private authService: AuthService) {
+  cardTerminalSaleListListener(){
+    return this.cardTerminalSaleRecordsSubject.asObservable();
+  }
 
-    // console.log(userData.userId);
-    // this.http.post<{success: number; data: any}>( this.BASE_API_URL + '/terminal/barcodeReport', {terminalId: userData.userId})
-    //   .pipe(catchError(this.handleError), tap(((response: {success: number, data: TerminalBarcodeReport[]}) => {
-    //     console.log(response);
-    //     // if (response.data){
-    //     //   console.log(response);
-    //     // }
-    //   })));
+  constructor(private http: HttpClient, private errorService: ErrorService, private authService: AuthService) {
   }
 
   cancelTicket(master_id){
