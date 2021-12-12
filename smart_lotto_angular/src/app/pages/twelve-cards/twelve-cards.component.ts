@@ -29,6 +29,7 @@ export class TwelveCardsComponent implements OnInit {
 
 
 
+
   constructor(private commonService: CommonService, private authService: AuthService, private gameTypeService: GameTypeService, private playGameService: PlayGameService) {
     this.gameTypes = this.gameTypeService.getGameType();
     this.gameTypeService.getGameTypeListener().subscribe((response: GameType[]) => {
@@ -171,5 +172,8 @@ export class TwelveCardsComponent implements OnInit {
     // console.log(masterData);
     // console.log(this.playDetails);
   }
+
+
+
 
 }
