@@ -89,7 +89,7 @@ export class TwelveCardsComponent implements OnInit {
       // tslint:disable-next-line:no-shadowed-variable
       const x = this.playDetails.findIndex(x => x.cardCombinationId === gameCombination);
       console.log(x);
-      this.playDetails.slice(x, 1);
+      this.playDetails.splice(x, 1);
     }else{
       const x = this.playDetails.findIndex(x => x.cardCombinationId === gameCombination);
       if (x >= 0) {
@@ -107,8 +107,8 @@ export class TwelveCardsComponent implements OnInit {
       // tslint:disable-next-line:radix
       totalQuantity = totalQuantity + parseInt(value.quantity) ;
     });
-    // tslint:disable-next-line:radix
-    this.totalPurchasedPrice = totalPrice;
+    // tslint:disable-next-line:radix triple-equals
+    this.totalPurchasedPrice = totalPrice ? totalPrice : null;
     this.totalPurchasedQuantity = totalQuantity ? totalQuantity : null;
 
     // console.log(this.totalPurchasedQuantity);
