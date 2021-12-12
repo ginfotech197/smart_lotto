@@ -91,7 +91,12 @@ export class TwelveCardsComponent implements OnInit {
       console.log(x);
       this.playDetails.slice(x, 1);
     }else{
-      this.playDetails.push(tempPlayDetail);
+      const x = this.playDetails.findIndex(x => x.cardCombinationId === gameCombination);
+      if (x >= 0) {
+        this.playDetails[x].quantity = tempPlayDetail.quantity;
+      }else{
+        this.playDetails.push(tempPlayDetail);
+      }
     }
     console.log(this.playDetails);
 
