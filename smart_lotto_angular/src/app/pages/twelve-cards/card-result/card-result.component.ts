@@ -10,8 +10,8 @@ import {DatePipe} from '@angular/common';
 })
 export class CardResultComponent implements OnInit {
 
-  cardResult: CardResult[]=[];
-  cardResultByDate: CardResult[]=[];
+  cardResult: CardResult[] =[];
+  cardResultByDate: CardResult[] =[];
 
 
 
@@ -25,14 +25,16 @@ export class CardResultComponent implements OnInit {
 
 
   constructor(private cardResultService: CardResultService) {
-    this.cardResultService.getCardDateResultListener().subscribe(response => {
-      this.cardResult = response;
-    });
+    // this.cardResultService.getCardDateResultListener().subscribe(response => {
+    //   this.cardResult = response;
+    //   // console.log(this.cardResult);
+    // });
    }
 
   ngOnInit(): void {
     this.cardResultService.getCardDateResultListener().subscribe(response => {
       this.cardResult = response;
+      // console.log(this.cardResult);
     });
 
     // this.cardResultService.getCardResultByDateListener().subscribe((response: CardResult[]) => {
@@ -42,13 +44,10 @@ export class CardResultComponent implements OnInit {
   }
 
   searchCardResultByDate(){
-    let x = this.pipe.transform(this.startDate,'yyyy-MM-dd');
-    this.cardResultService.getCardResultByDate(x).subscribe(response=>{
-     // @ts-ignore
-
-      this.cardResult = response.data;
+    const x = this.pipe.transform(this.startDate, 'yyyy-MM-dd');
+    this.cardResultService.getCardResultByDate(x).subscribe(response => {
+      // this.cardResult = response.data;
     });
-
   }
 
 }
