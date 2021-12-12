@@ -28,29 +28,31 @@ export class StockistReportComponent implements OnInit {
   barcodeReportRecords: CPanelBarcodeReport[] = [];
   barcodeDetails: BarcodeDetails;
   customerSaleReportRecords: CPanelCustomerSaleReport[] = [];
+  cardCustomerSaleReportRecords: CPanelCustomerSaleReport[] = [];
 
   StartDateFilter = this.startDate;
   EndDateFilter = this.startDate;
   pipe = new DatePipe('en-US');
 
   totalAmount = 0;
+  cardTotalAmount = 0;
   columnNumber = 4;
   userData: User;
 
   // picker1: any;
-  constructor(private adminReportService: StockistReportService) {
+  constructor(private stockistReportService: StockistReportService) {
     // console.log(this.thisDay);
     this.userData = JSON.parse(localStorage.getItem('user'));
   }
 
   ngOnInit(): void {
-    this.barcodeReportRecords = this.adminReportService.getBarcodeReportRecords();
-    this.adminReportService.getBarcodeReportListener().subscribe((response: CPanelBarcodeReport[]) => {
+    this.barcodeReportRecords = this.stockistReportService.getBarcodeReportRecords();
+    this.stockistReportService.getBarcodeReportListener().subscribe((response: CPanelBarcodeReport[]) => {
       this.barcodeReportRecords = response;
     });
 
-    this.customerSaleReportRecords = this.adminReportService.getCustomerSaleReportRecords();
-    this.adminReportService.getCustomerSaleReportListener().subscribe((response: CPanelCustomerSaleReport[]) => {
+    this.customerSaleReportRecords = this.stockistReportService.getCustomerSaleReportRecords();
+    this.stockistReportService.getCustomerSaleReportListener().subscribe((response: CPanelCustomerSaleReport[]) => {
       this.customerSaleReportRecords = response;
       let temp = 0;
       this.customerSaleReportRecords.forEach(function(value) {
@@ -58,6 +60,16 @@ export class StockistReportComponent implements OnInit {
       });
       // console.log('total amount' + temp);
       this.totalAmount = temp;
+    });
+
+    this.stockistReportService.getCardCustomerSaleReportListener().subscribe((response: CPanelCustomerSaleReport[]) => {
+      this.cardCustomerSaleReportRecords = response;
+      let temp = 0;
+      this.cardCustomerSaleReportRecords.forEach(function(value) {
+        temp += Number(value.total);
+      });
+      // console.log('total amount' + temp);
+      this.cardTotalAmount = temp;
     });
     this.searchByDateTab1();
     this.searchByDateTab2();
@@ -74,7 +86,12 @@ export class StockistReportComponent implements OnInit {
     });
     let startDate = this.pipe.transform(this.StartDateFilter, 'yyyy-MM-dd');
     let endDate = this.pipe.transform(this.EndDateFilter, 'yyyy-MM-dd');
-    this.adminReportService.customerSaleReportByDate(startDate, endDate, this.userData.userId).subscribe((response) => {
+    this.stockistReportService.customerSaleReportByDate(startDate, endDate, this.userData.userId).subscribe((response) => {
+      if (response.data){
+        Swal.close();
+      }
+    });
+    this.stockistReportService.cardCustomerSaleReportByDate(startDate, endDate, this.userData.userId).subscribe((response) => {
       if (response.data){
         Swal.close();
       }
@@ -92,7 +109,7 @@ export class StockistReportComponent implements OnInit {
     });
     let startDate = this.pipe.transform(this.StartDateFilter, 'yyyy-MM-dd');
     let endDate = this.pipe.transform(this.EndDateFilter, 'yyyy-MM-dd');
-    this.adminReportService.barcodeReportByDate(startDate, endDate, this.userData.userId).subscribe((response) => {
+    this.stockistReportService.barcodeReportByDate(startDate, endDate, this.userData.userId).subscribe((response) => {
       if (response.data){
         Swal.close();
       }
@@ -122,7 +139,7 @@ export class StockistReportComponent implements OnInit {
 
   openPopup(playMasterId: number, barcodeNumber: string){
 
-    this.adminReportService.getBarcodeDetails(playMasterId).subscribe(response => {
+    this.stockistReportService.getBarcodeDetails(playMasterId).subscribe(response => {
       this.barcodeDetails = response.data;
     });
   }

@@ -24,20 +24,11 @@ export class StockistReportService {
   customerSaleReportRecords: CPanelCustomerSaleReport[] = [];
   customerSaleReportSubject = new Subject<CPanelCustomerSaleReport[]>();
 
+  cardCustomerSaleReportRecords: CPanelCustomerSaleReport[] = [];
+  cardCustomerSaleReportSubject = new Subject<CPanelCustomerSaleReport[]>();
+
   constructor(private http: HttpClient, private errorService: ErrorService) {
 
-
-    // // get all barcode reports
-    // this.http.get(this.BASE_API_URL + '/cPanel/barcodeReport').subscribe((response: ServerResponse) => {
-    //   this.barcodeReportRecords = response.data;
-    //   this.barcodeReportSubject.next([...this.barcodeReportRecords]);
-    // });
-    //
-    // // get all customer sale reports
-    // this.http.get(this.BASE_API_URL + '/cPanel/customerSaleReport').subscribe((response: ServerResponse) => {
-    //   this.customerSaleReportRecords = response.data;
-    //   this.customerSaleReportSubject.next([...this.customerSaleReportRecords]);
-    // });
   }
 
   getBarcodeReportRecords(){
@@ -52,6 +43,10 @@ export class StockistReportService {
   }
   getCustomerSaleReportListener(){
     return this.customerSaleReportSubject.asObservable();
+  }
+
+  getCardCustomerSaleReportListener(){
+    return this.cardCustomerSaleReportSubject.asObservable();
   }
 
   getBarcodeDetails(playMasterId: number){
@@ -72,6 +67,17 @@ export class StockistReportService {
         if (response.data){
           this.customerSaleReportRecords = response.data;
           this.customerSaleReportSubject.next([...this.customerSaleReportRecords]);
+        }
+      })));
+  }
+
+  cardCustomerSaleReportByDate(startDate, endDate, userID){
+    // tslint:disable-next-line:max-line-length
+    return this.http.post<{success: number; data: any}>( this.BASE_API_URL + '/stockist/cardCustomerSaleReports', {startDate, endDate, userID})
+      .pipe(catchError(this.handleError), tap(((response: {success: number, data: CPanelCustomerSaleReport[]}) => {
+        if (response.data){
+          this.cardCustomerSaleReportRecords = response.data;
+          this.cardCustomerSaleReportSubject.next([...this.cardCustomerSaleReportRecords]);
         }
       })));
   }

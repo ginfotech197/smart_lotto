@@ -7,6 +7,8 @@ import {GameType} from '../../models/GameType.model';
 import {GameTypeService} from '../../services/game-type.service';
 import Swal from 'sweetalert2';
 import {PlayGameService} from '../../services/play-game.service';
+import {isEmpty} from 'rxjs/operators';
+import {empty} from 'rxjs';
 
 @Component({
   selector: 'app-twelve-cards',
@@ -20,8 +22,8 @@ export class TwelveCardsComponent implements OnInit {
   gameTypes: GameType[] = [];
   inputData: any[];
   cardResultVisibility = false;
-  totalPurchasedPrice = 0;
-  totalPurchasedQuantity = 0;
+  totalPurchasedPrice = null;
+  totalPurchasedQuantity = null;
   alwaysTime: number;
   remainingTime: number;
 
@@ -43,7 +45,7 @@ export class TwelveCardsComponent implements OnInit {
     for (let i = 1; i <= 11 ; i++){
       this.inputData[i] = [];
     }
-    this.cardResultVisibility= false;
+    this.cardResultVisibility = false;
 
     const user = JSON.parse(localStorage.getItem('user'));
 
@@ -69,30 +71,42 @@ export class TwelveCardsComponent implements OnInit {
 
   }
 
-  detailsData(value: string, gameCombination){
+  detailsData(value: number, gameCombination){
     let totalPrice = 0;
     let totalQuantity = 0;
 
     const tempPlayDetail = {
       gameTypeId: this.gameTypes[0].gameTypeId,
-      quantity: value,
+      quantity: value ? value : 0,
       cardCombinationId: gameCombination,
       mrp: this.gameTypes[0].mrp,
       payout: this.gameTypes[0].payout,
       commission: this.gameTypes[0].commission
     };
-    // console.log(tempPlayDetail);
 
     // @ts-ignore
-    this.playDetails.push(tempPlayDetail);
+    if (tempPlayDetail.quantity === 0){
+      // tslint:disable-next-line:no-shadowed-variable
+      const x = this.playDetails.findIndex(x => x.cardCombinationId === gameCombination);
+      console.log(x);
+      this.playDetails.slice(x, 1);
+    }else{
+      this.playDetails.push(tempPlayDetail);
+    }
+    console.log(this.playDetails);
+
+    // @ts-ignore
 
     this.playDetails.forEach(function(value){
       totalPrice = totalPrice + (value.quantity * value.mrp);
       // tslint:disable-next-line:radix
       totalQuantity = totalQuantity + parseInt(value.quantity) ;
     });
+    // tslint:disable-next-line:radix
     this.totalPurchasedPrice = totalPrice;
-    this.totalPurchasedQuantity = totalQuantity;
+    this.totalPurchasedQuantity = totalQuantity ? totalQuantity : null;
+
+    // console.log(this.totalPurchasedQuantity);
 
     // console.log(this.playDetails);
 
@@ -104,8 +118,8 @@ export class TwelveCardsComponent implements OnInit {
       this.inputData[i] = [];
     }
     this.playDetails = [];
-    this.totalPurchasedPrice = 0;
-    this.totalPurchasedQuantity = 0;
+    this.totalPurchasedPrice = null;
+    this.totalPurchasedQuantity = null;
   }
 
   saveUserInput(){
