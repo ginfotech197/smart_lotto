@@ -23,7 +23,7 @@ export class CardResultService {
 
   private BASE_API_URL = environment.BASE_API_URL;
   currentDateResult: CurrentGameResult;
-  cardResult: CardResult[]=[];
+  cardResult: CardResult[] =[];
   cardResultSubject = new Subject<CardResult[]>();
   cardResultByDateSubject = new Subject<CardResult[]>();
   resultByDateSubject = new Subject<GameResult>();
@@ -55,7 +55,10 @@ export class CardResultService {
 
   getCardResultByDate(cardResultDate: any){
     return this.http.post(this.BASE_API_URL + '/dev/cardReultByDate', {game_date: cardResultDate}).pipe(catchError(this.handleError),
-    tap(((response: {success: number, data: CardResult[]}) => {
+    // tap(((response: {success: number, data: CardResult[]}) => {
+    tap(((response: ServerResponse) => {
+      this.cardResult = response.data.result;
+      this.cardResultSubject.next([...this.cardResult]);
     })));
   }
 
