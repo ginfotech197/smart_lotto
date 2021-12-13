@@ -88,7 +88,7 @@
         </div>
 
         <div class="clock-container clock2 ml-1 mt-1 pt-1" *ngIf="alwaysTime" style="font-size: large; width: 150px">
-          <div class="time">{{remainingTime}}</div>
+          <div class="time">{{remainingTime>=0?remainingTime:'00:00:00'}}</div>
         </div>
       </div>
 
@@ -115,7 +115,7 @@
     </div>
     <div class="d-flex col-6" style="max-height: 50px; margin-left: 100px;">
       <div style="text-align: center;" class="ml-4">Bets<br><input [(ngModel)]="totalPurchasedQuantity" type="text" style="width: 150px; height: 40px; background-color: rgba(38, 175, 255, 0.836); border: 2px solid gold; border-radius: 15px;  box-shadow: 5px 10px rgba(0, 128, 0, 0.295); font-size: 50px;"></div>
-      <div *ngIf="gameTypes[0]" style="text-align: center;"  class="ml-4">Tickets<br><input [(ngModel)]="gameTypes[0].mrp" type="text" style="width: 150px; height: 40px; background-color: rgba(38, 175, 255, 0.836); border: 2px solid gold; border-radius: 15px;  box-shadow: 5px 10px rgba(0, 128, 0, 0.295); font-size: 50px;"></div>
+      <div *ngIf="gameTypes[0]" style="text-align: center;" class="ml-4">MRP<br><input [(ngModel)]="mrp" type="text" style="width: 150px; height: 40px; background-color: rgba(38, 175, 255, 0.836); border: 2px solid gold; border-radius: 15px;  box-shadow: 5px 10px rgba(0, 128, 0, 0.295); font-size: 50px;"></div>
       <div style="text-align: center;"  class="ml-4">Total<br><input [(ngModel)]="totalPurchasedPrice" type="text" style="width: 150px; height: 40px; background-color: rgba(38, 175, 255, 0.836); border: 2px solid gold; border-radius: 15px;  box-shadow: 5px 10px rgba(0, 128, 0, 0.295); font-size: 50px;"></div>
     </div>
   </div>
