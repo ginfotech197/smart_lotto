@@ -26,6 +26,7 @@ export class TwelveCardsComponent implements OnInit {
   totalPurchasedQuantity = null;
   alwaysTime: number;
   remainingTime: number;
+  mrp = null;
 
 
 
@@ -89,7 +90,6 @@ export class TwelveCardsComponent implements OnInit {
     if (tempPlayDetail.quantity === 0){
       // tslint:disable-next-line:no-shadowed-variable
       const x = this.playDetails.findIndex(x => x.cardCombinationId === gameCombination);
-      console.log(x);
       this.playDetails.splice(x, 1);
     }else{
       const x = this.playDetails.findIndex(x => x.cardCombinationId === gameCombination);
@@ -99,9 +99,6 @@ export class TwelveCardsComponent implements OnInit {
         this.playDetails.push(tempPlayDetail);
       }
     }
-    console.log(this.playDetails);
-
-    // @ts-ignore
 
     this.playDetails.forEach(function(value){
       totalPrice = totalPrice + (value.quantity * value.mrp);
@@ -110,12 +107,8 @@ export class TwelveCardsComponent implements OnInit {
     });
     // tslint:disable-next-line:radix triple-equals
     this.totalPurchasedPrice = totalPrice ? totalPrice : null;
+    this.mrp = totalPrice ? this.gameTypes[0].mrp : null;
     this.totalPurchasedQuantity = totalQuantity ? totalQuantity : null;
-
-    // console.log(this.totalPurchasedQuantity);
-
-    // console.log(this.playDetails);
-
   }
 
   clear(){
@@ -125,6 +118,7 @@ export class TwelveCardsComponent implements OnInit {
     }
     this.playDetails = [];
     this.totalPurchasedPrice = null;
+    thos.mrp = null;
     this.totalPurchasedQuantity = null;
   }
 
