@@ -43,13 +43,7 @@ export class AdminReportsComponent implements OnInit {
 
   totalAmount: number = 0;
   cardTotalAmount: number = 0;
-   columnNumber = 4;
-
-   saleReports: SaleReport[] = [
-    {value: '0', viewValue: 'All Game'},
-    {value: '1', viewValue: 'Card'},
-    // {value: 'tacos-2', viewValue: 'Tacos'},
-  ];
+  columnNumber = 4;
   selectedReport = '0';
 
 

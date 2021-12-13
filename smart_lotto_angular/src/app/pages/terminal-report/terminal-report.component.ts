@@ -29,6 +29,7 @@ export class TerminalReportComponent implements OnInit {
   pipe = new DatePipe('en-US');
   selectedIndex: number;
   columnNumber = 5;
+  selectedReport = '0';
 
   terminalReportData: TerminalBarcodeReport[] = [];
   terminalSaleReportData: TerminalSaleReport[] = [];

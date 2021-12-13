@@ -6,9 +6,6 @@
         <mat-form-field appearance="fill">
           <mat-label>Select Game</mat-label>
           <mat-select  [(ngModel)]= "selectedReport">
-<!--            <mat-option *ngFor="let x of saleReports" [value]="x.value">-->
-<!--              {{x.viewValue}}-->
-<!--            </mat-option>-->
             <mat-option value="0">All Game</mat-option>
             <mat-option value="1">Card</mat-option>
           </mat-select>
@@ -106,7 +103,7 @@
         </tbody>
       </table>
 
-      <div class="text-center" *ngIf="customerSaleReportRecords.length==0">
+      <div class="text-center" *ngIf="cardCustomerSaleReportRecords.length==0">
         <h1>No Data</h1>
       </div>
     </div>
