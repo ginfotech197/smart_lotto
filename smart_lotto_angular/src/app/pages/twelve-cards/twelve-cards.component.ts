@@ -66,7 +66,7 @@ export class TwelveCardsComponent implements OnInit {
 
 
     this.activeDrawTime = this.commonService.getActiveDrawTime();
-    this.commonService.getActiveDrawTimeListener().subscribe((response: DrawTime) => {
+    this.commonService.getCardActiveDrawTimeListener().subscribe((response: DrawTime) => {
       this.activeDrawTime = response;
     });
 
