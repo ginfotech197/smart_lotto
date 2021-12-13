@@ -41,7 +41,7 @@
         <span class="mt-2  mr-2" style="font-size: large;color: rgb(216, 0, 0); text-align: end;">Next draw: {{activeDrawTime.visibleTime}}</span>
       </div>
       <div class="col-2" style="padding-top: 10px;">
-        <button class="ml-5 btn" style="background-image: url('/assets/images/logo.gif');" (click)="viewResult()">View Results</button>
+        <!-- <button class="ml-5 btn" style="background-image: url('/assets/images/logo.gif');" (click)="viewResult()">View Results</button> -->
       </div>
       <div class="col-4" style="text-align: end; padding-left: 50px;">
         <div id="title-3-div-child-2" style="text-align: center; color: white;"><button type="button" class="btn btn-danger glow" [routerLink]="['/player']" style="font-size: x-large;border: 5px solid yellow; border-style: double; border-radius: 10px;">Play Online</button></div>
@@ -92,7 +92,7 @@
           <td scope="col"><input style="max-width: 50px; max-height: 25px;"></td>
           <td scope="col"><input style="max-width: 50px; max-height: 25px;"></td>
           <td scope="col"><input style="max-width: 50px; max-height: 25px;"></td>
-          <td scope="col" *ngIf="lastResult[0]!=undefined">{{lastResult[i].visible_number}}</td>
+          <!-- <td scope="col" *ngIf="lastResult[0]!=undefined">{{lastResult[i].visible_number}}</td> -->
         </tr>
       </tbody>
     </table>
