@@ -1,18 +1,30 @@
-<div style="background-image: url('/assets/images/twelve-card.background4.jpg'); background-size: cover; margin-top: 60px;border: 30px solid red; height: 530px;">
-  <button class="btn btn-primary" [routerLink]="['/terminal']"><i class="bi bi-arrow-return-left"></i> Back</button>
+
+<!-- <button class="btn btn-primary" [routerLink]="['/terminal']" style=" margin-top: 40px;"><i class="bi bi-arrow-return-left"></i> Back</button> -->
+<div style="background-image: url('/assets/images/twelve-card.background4.jpg'); background-size: cover;border: 30px solid red; height: 530px; margin-top: 30px;">
+  <!-- <button class="btn btn-primary" [routerLink]="['/terminal']"><i class="bi bi-arrow-return-left"></i> Back</button> -->
   <div class="d-flex">
+    <div>
+      <button class="btn btn-primary" [routerLink]="['/terminal']" style=" margin-top: 0px;"><i class="bi bi-arrow-return-left"></i> Back</button>
+    </div>
 
-<!--    <div class="col-4">-->
-<!--      &lt;!&ndash;      <span class="mt-2  mr-2" style="font-size: large;color: rgb(0, 0, 0); text-align: center;">Next draw: {{activeDrawTime.visibleTime}}</span>&ndash;&gt;-->
-<!--    </div>-->
-<!--    <div class="clock-container clock2 ml-1 mt-1 pt-1 col-1 " *ngIf="alwaysTime" style="font-size: large; width: 150px">-->
-<!--      <div class="time">{{alwaysTime}}</div>-->
-<!--    </div>-->
-<!--    <div class="clock-container clock2 ml-1 mt-1 pt-1 col-1 " *ngIf="alwaysTime" style="font-size: large; width: 150px">-->
-<!--      <div class="time">{{remainingTime}}</div>-->
-<!--    </div>-->
 
-    <div style="padding-left: 3%;">
+
+
+    <div style="padding-top: 10px;">
+
+      <!-- <div class="col-4"> -->
+        <!-- &lt;!&ndash; -->
+        <!-- <span class="mt-2  mr-2" style="font-size: large;color: rgb(0, 0, 0); text-align: center;">Next draw: {{activeDrawTime.visibleTime}}</span> -->
+        <!-- &ndash;&gt; -->
+      <!-- </div> -->
+      <!-- <div class="clock-container clock2 ml-1 mt-1 pt-1 col-1 " *ngIf="alwaysTime" style="font-size: large; width: 150px">
+        <div class="time">{{alwaysTime}}</div>
+      </div> -->
+      <!-- <div class="clock-container clock2 ml-1 mt-1 pt-1 col-1 " *ngIf="alwaysTime" style="font-size: large; width: 150px">
+        <div class="time">{{remainingTime}}</div>
+      </div> -->
+
+
       <table class="table table-striped table-hover" style="max-width: 200px; background-color: rgba(238, 255, 6, 0.336);">
       <thead>
         <tr>
@@ -63,12 +75,26 @@
     </div>
 
 
-    <div style="padding-left: 3%;">
-      <button class="btn btn-primary" (click)="cardResultVisibility=!cardResultVisibility">{{cardResultVisibility?"Hide":"Card Result"}}</button>
-      <div *ngIf="cardResultVisibility">
+    <div>
+      <div class="d-flex" style="padding-left: 40px;">
+        <div class="ml-2 mr-4 mt-2 mb-3" style="background-color: rgba(0, 0, 255, 0.521); border-radius: 5px;">
+          <!-- &lt;!&ndash; -->
+          <span class="mt-2 " style="font-size: large;color: rgb(0, 0, 0); text-align: center;">Next draw: {{activeDrawTime.visibleTime}}</span>
+          <!-- &ndash;&gt; -->
+        </div>
+
+        <div class="clock-container clock2 ml-1 mt-1 pt-1 ml-3" *ngIf="alwaysTime" style="font-size: large; width: 150px">
+          <div class="time">{{alwaysTime}}</div>
+        </div>
+
+        <div class="clock-container clock2 ml-1 mt-1 pt-1" *ngIf="alwaysTime" style="font-size: large; width: 150px">
+          <div class="time">{{remainingTime}}</div>
+        </div>
+      </div>
+
         <app-card-result></app-card-result>
 
-      </div>
+      <!-- </div> -->
       <div>
         <!-- <div class="d-flex col-6" style="max-height: 50px;">
           <div class="ml-3">bets<br><input type="text" style="width: 100px; height: 70px; background-color: rgba(241, 143, 203, 0.199); border: 2px solid gold; border-radius: 15px;  box-shadow: 5px 10px rgba(0, 128, 0, 0.295); font-size: 50px;"></div>
@@ -85,7 +111,7 @@
   <div class="d-flex">
     <div class="col-6">
       <button class="btn btn-primary" (click)="saveUserInput()">save</button>
-      <button class="btn btn-primary" (click)="clear()">clear</button>
+      <button class="btn btn-primary ml-3" (click)="clear()">clear</button>
     </div>
     <div class="d-flex col-6" style="max-height: 50px; margin-left: 100px;">
       <div style="text-align: center;" class="ml-4">Bets<br><input [(ngModel)]="totalPurchasedQuantity" type="text" style="width: 150px; height: 40px; background-color: rgba(38, 175, 255, 0.836); border: 2px solid gold; border-radius: 15px;  box-shadow: 5px 10px rgba(0, 128, 0, 0.295); font-size: 50px;"></div>
