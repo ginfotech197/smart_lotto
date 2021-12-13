@@ -194,7 +194,7 @@ export class CommonService {
     // get active draw Card
     this.http.get(this.BASE_API_URL + '/dev/drawTimes/activeCard').subscribe((response: ServerResponse) => {
       this.CardActiveDrawTime = response.data;
-      this.cardActiveDrawTimeSubject.next({...this.activeDrawTime});
+      this.cardActiveDrawTimeSubject.next({...this.CardActiveDrawTime});
     });
 
   }
@@ -249,11 +249,21 @@ export class CommonService {
     return this.activeDrawTimeSubject.asObservable();
   }
 
+  getCardActiveDrawTimeListener(){
+    return this.cardActiveDrawTimeSubject.asObservable();
+  }
+
   getActiveServerDrawTime(){
     // get active draw
     this.http.get(this.BASE_API_URL + '/dev/drawTimes/active').subscribe((response: ServerResponse) => {
       this.activeDrawTime = response.data;
       this.activeDrawTimeSubject.next({...this.activeDrawTime});
+    });
+
+    // get active draw card
+    this.http.get(this.BASE_API_URL + '/dev/drawTimes/activeCard').subscribe((response: ServerResponse) => {
+      this.CardActiveDrawTime = response.data;
+      this.cardActiveDrawTimeSubject.next({...this.CardActiveDrawTime});
     });
   }
 

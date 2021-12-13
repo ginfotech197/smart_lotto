@@ -18,6 +18,7 @@ import {MatBadgeModule} from "@angular/material/badge";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatInputModule} from "@angular/material/input";
 import {MatNativeDateModule, MatRippleModule} from "@angular/material/core";
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import {MatNativeDateModule, MatRippleModule} from "@angular/material/core";
     AdminReportsRoutingModule,
     MatTabsModule,
     MaterialModule,
+    MatSelectModule,
     FlexLayoutModule,
     MatCardModule,
     FormsModule,

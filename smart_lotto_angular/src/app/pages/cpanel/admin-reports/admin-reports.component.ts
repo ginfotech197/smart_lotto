@@ -43,14 +43,8 @@ export class AdminReportsComponent implements OnInit {
 
   totalAmount: number = 0;
   cardTotalAmount: number = 0;
-   columnNumber = 4;
-
-   saleReports: SaleReport[] = [
-    {value: '0', viewValue: 'All Game'},
-    {value: '1', viewValue: 'Card'},
-    // {value: 'tacos-2', viewValue: 'Tacos'},
-  ];
-  selectedReport = 0;
+  columnNumber = 4;
+  selectedReport = '0';
 
 
   // picker1: any;
@@ -166,9 +160,9 @@ export class AdminReportsComponent implements OnInit {
     });
   }
 
-  testFunction(){
-    console.log(this.selectedReport);
-  }
+  // testFunction(){
+  //   console.log('Working: ', this.selectedReport);
+  // }
 }
 
 function compare(a: number | string, b: number | string, isAsc: boolean) {

@@ -113,7 +113,7 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
     Route::post('cPanel/customerSaleReports', [CPanelReportController::class, 'customer_sale_reports']);
     Route::post('cPanel/cardCustomerSaleReports', [CPanelReportController::class, 'card_customer_sale_reports']);
     Route::post('terminal/barcodeReport',[TerminalReportController::class, 'barcode_wise_report_by_terminal']);
-    Route::post('terminal/terminal_sale_reports', [TerminalReportController::class, 'terminal_sale_reports']);
+    Route::post('terminal/terminalSaleReports', [TerminalReportController::class, 'terminal_sale_reports']);
     Route::post('terminal/terminalCardSaleReports', [TerminalReportController::class, 'terminal_card_sale_reports']);
 
     Route::post('stockist/customerSaleReports', [StockistController::class, 'customer_sale_reports']);

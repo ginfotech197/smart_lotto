@@ -375,15 +375,10 @@ class CPanelReportController extends Controller
             $tempntp = 0;
             $newData = PlayMaster::where('user_id',$x->user_id)->get();
             foreach($newData as $y) {
-                $tempData = 0;
                 $newPrize += $this->get_prize_value_by_barcode($y->id);
-                $tempData = (PlayDetails::select(DB::raw("if(game_type_id = 1,(mrp*22)*quantity-(commission/100),mrp*quantity-(commission/100)) as total"))
-                    ->where('play_master_id',$y->id)->distinct()->get())[0];
-                $tempntp += $tempData->total;
             }
             $detail = (object)$x;
             $detail->prize_value = $newPrize;
-            $detail->ntp = $tempntp;
         }
         return response()->json(['success'=> 1, 'data' => $data], 200);
     }
@@ -411,10 +406,8 @@ class CPanelReportController extends Controller
 
         foreach($data as $x){
             $newPrize = 0;
-            $tempntp = 0;
             $newData = PlayMaster::where('user_id',$x->user_id)->get();
             foreach($newData as $y) {
-                $tempData = 0;
 //                $newPrize += $this->get_prize_value_by_barcode($y->id);
                 $tempPrize = $this->get_prize_value_by_barcode($y->id);
                 if($tempPrize>0 && $y->is_claimed == 1){
@@ -422,14 +415,9 @@ class CPanelReportController extends Controller
                 }else{
                     $newPrize += 0;
                 }
-
-                $tempData = (PlayDetails::select(DB::raw("if(game_type_id = 1,(mrp*22)*quantity-(commission/100),mrp*quantity-(commission/100)) as total"))
-                    ->where('play_master_id',$y->id)->distinct()->get())[0];
-                $tempntp += $tempData->total;
             }
             $detail = (object)$x;
             $detail->prize_value = $newPrize;
-            $detail->ntp = $tempntp;
         }
 
         $card_data = ($this->card_customer_sale_report($start_date,$end_date));
@@ -438,15 +426,12 @@ class CPanelReportController extends Controller
             foreach ($data as $y){
                 if($x->terminal_pin === $y->terminal_pin){
                     $y->total = $y->total + $x->total;
-                    $y->ntp = $y->ntp + $x->ntp;
                     $y->commission = $y->commission + $x->commission;
                     $y->prize_value = $y->prize_value + $x->prize_value;
                 }
             }
         }
-
         return response()->json(['success'=> 1, 'data' => $data], 200);
-
     }
 
     public function card_customer_sale_reports(Request $request){
@@ -472,32 +457,23 @@ class CPanelReportController extends Controller
 
         foreach($data as $x){
             $newPrize = 0;
-            $tempntp = 0;
             $newData = CardPlayMaster::where('user_id',$x->user_id)->get();
             foreach($newData as $y) {
                 $tempData = 0;
 //                $newPrize += $this->get_prize_value_by_barcode($y->id);
-                $tempPrize = $this->get_prize_value_by_barcode($y->id);
+                $tempPrize = $this->get_card_prize_value_by_barcode($y->id);
                 if($tempPrize>0 && $y->is_claimed == 1){
-                    $newPrize += $this->get_prize_value_by_barcode($y->id);
+                    $newPrize += $this->get_card_prize_value_by_barcode($y->id);
                 }else{
                     $newPrize += 0;
                 }
-
-                $tempData = (CardPlayDetail::select(DB::raw("if(game_type_id = 6,(mrp**quantity)-(commission/100),mrp*quantity-(commission/100)) as total"))
-                    ->where('card_play_master_id',$y->id)->distinct()->get())[0];
-                $tempntp += $tempData->total;
             }
             $detail = (object)$x;
             $detail->prize_value = $newPrize;
-            $detail->ntp = $tempntp;
         }
         return response()->json(['success'=> 1, 'data' => $data], 200);
     }
     public function card_customer_sale_report($start_date,$end_date){
-//        $requestedData = (object)$request->json()->all();
-//        $start_date = $requestedData->startDate;
-//        $end_date = $requestedData->endDate;
 
 
         $data = DB::select("select table1.card_play_master_id, table1.terminal_pin, table1.user_name, table1.user_id, table1.stockist_id, table1.total, table1.commission, users.user_name as stokiest_name from (select max(card_play_master_id) as card_play_master_id,terminal_pin,user_name,user_id,stockist_id,
@@ -517,25 +493,17 @@ class CPanelReportController extends Controller
 
         foreach($data as $x){
             $newPrize = 0;
-            $tempntp = 0;
             $newData = CardPlayMaster::where('user_id',$x->user_id)->get();
             foreach($newData as $y) {
-                $tempData = 0;
-//                $newPrize += $this->get_prize_value_by_barcode($y->id);
-                $tempPrize = $this->get_prize_value_by_barcode($y->id);
+                $tempPrize = $this->get_card_prize_value_by_barcode($y->id);
                 if($tempPrize>0 && $y->is_claimed == 1){
-                    $newPrize += $this->get_prize_value_by_barcode($y->id);
+                    $newPrize += $this->get_card_prize_value_by_barcode($y->id);
                 }else{
                     $newPrize += 0;
                 }
-
-                $tempData = (CardPlayDetail::select(DB::raw("if(game_type_id = 6,(mrp*quantity)-(commission/100),mrp*quantity-(commission/100)) as total"))
-                    ->where('card_play_master_id',$y->id)->distinct()->get())[0];
-                $tempntp += $tempData->total;
             }
             $detail = (object)$x;
             $detail->prize_value = $newPrize;
-            $detail->ntp = $tempntp;
         }
         return $data;
     }

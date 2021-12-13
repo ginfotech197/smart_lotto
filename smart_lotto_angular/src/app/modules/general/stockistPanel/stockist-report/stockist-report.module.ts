@@ -32,6 +32,7 @@ import {StockistReportComponent} from '../../../../pages/stockistPanel/stockist-
     MatTabsModule,
     MaterialModule,
     FlexLayoutModule,
+    MatSelectModule,
     MatCardModule,
     FormsModule,
     ReactiveFormsModule,

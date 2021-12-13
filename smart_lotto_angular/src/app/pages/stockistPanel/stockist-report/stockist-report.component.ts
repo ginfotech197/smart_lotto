@@ -37,6 +37,7 @@ export class StockistReportComponent implements OnInit {
   totalAmount = 0;
   cardTotalAmount = 0;
   columnNumber = 4;
+  selectedReport = '0';
   userData: User;
 
   // picker1: any;
