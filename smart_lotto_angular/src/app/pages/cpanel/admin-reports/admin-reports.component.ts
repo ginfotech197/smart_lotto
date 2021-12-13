@@ -10,6 +10,12 @@ import {CPanelCustomerSaleReport} from '../../../models/CPanelCustomerSaleReport
 import {FormGroup} from "@angular/forms";
 import {DatePipe, formatDate} from '@angular/common';
 
+interface  SaleReport{
+  value: string;
+  viewValue: string;
+}
+
+
 @Component({
   selector: 'app-admin-reports',
   templateUrl: './admin-reports.component.html',
@@ -38,6 +44,14 @@ export class AdminReportsComponent implements OnInit {
   totalAmount: number = 0;
   cardTotalAmount: number = 0;
    columnNumber = 4;
+
+   saleReports: SaleReport[] = [
+    {value: '0', viewValue: 'All Game'},
+    {value: '1', viewValue: 'Card'},
+    // {value: 'tacos-2', viewValue: 'Tacos'},
+  ];
+  selectedReport = 0;
+
 
   // picker1: any;
   constructor(private adminReportService: AdminReportService) {
@@ -150,6 +164,10 @@ export class AdminReportsComponent implements OnInit {
     this.adminReportService.getBarcodeDetails(playMasterId).subscribe(response => {
       this.barcodeDetails = response.data;
     });
+  }
+
+  testFunction(){
+    console.log(this.selectedReport);
   }
 }
 

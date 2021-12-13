@@ -23,6 +23,8 @@ import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatIcon} from "@angular/material/icon";
+import { MatSelect } from '@angular/material/select';
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
@@ -47,6 +49,7 @@ import {MatIcon} from "@angular/material/icon";
     FormsModule,
     MatNativeDateModule,
     MatRippleModule,
+    MatSelectModule,
     // BrowserAnimationsModule,
 
     FormsModule,
