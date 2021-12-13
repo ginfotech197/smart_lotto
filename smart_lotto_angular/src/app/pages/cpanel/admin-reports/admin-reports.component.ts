@@ -50,7 +50,7 @@ export class AdminReportsComponent implements OnInit {
     {value: '1', viewValue: 'Card'},
     // {value: 'tacos-2', viewValue: 'Tacos'},
   ];
-  selectedReport = 0;
+  selectedReport = '0';
 
 
   // picker1: any;
@@ -166,9 +166,9 @@ export class AdminReportsComponent implements OnInit {
     });
   }
 
-  testFunction(){
-    console.log(this.selectedReport);
-  }
+  // testFunction(){
+  //   console.log('Working: ', this.selectedReport);
+  // }
 }
 
 function compare(a: number | string, b: number | string, isAsc: boolean) {

@@ -438,7 +438,7 @@ class CPanelReportController extends Controller
             foreach ($data as $y){
                 if($x->terminal_pin === $y->terminal_pin){
                     $y->total = $y->total + $x->total;
-                    $y->ntp = $y->ntp + $x->ntp;
+//                    $y->ntp = $y->ntp + $x->ntp;
                     $y->commission = $y->commission + $x->commission;
                     $y->prize_value = $y->prize_value + $x->prize_value;
                 }
@@ -484,13 +484,13 @@ class CPanelReportController extends Controller
                     $newPrize += 0;
                 }
 
-                $tempData = (CardPlayDetail::select(DB::raw("if(game_type_id = 6,(mrp**quantity)-(commission/100),mrp*quantity-(commission/100)) as total"))
-                    ->where('card_play_master_id',$y->id)->distinct()->get())[0];
-                $tempntp += $tempData->total;
+//                $tempData = (CardPlayDetail::select(DB::raw("if(game_type_id = 6,(mrp**quantity)-(commission/100),mrp*quantity-(commission/100)) as total"))
+//                    ->where('card_play_master_id',$y->id)->distinct()->get())[0];
+//                $tempntp += $tempData->total;
             }
             $detail = (object)$x;
             $detail->prize_value = $newPrize;
-            $detail->ntp = $tempntp;
+//            $detail->ntp = $tempntp;
         }
         return response()->json(['success'=> 1, 'data' => $data], 200);
     }
@@ -529,13 +529,13 @@ class CPanelReportController extends Controller
                     $newPrize += 0;
                 }
 
-                $tempData = (CardPlayDetail::select(DB::raw("if(game_type_id = 6,(mrp*quantity)-(commission/100),mrp*quantity-(commission/100)) as total"))
-                    ->where('card_play_master_id',$y->id)->distinct()->get())[0];
-                $tempntp += $tempData->total;
+//                $tempData = (CardPlayDetail::select(DB::raw("if(game_type_id = 6,(mrp*quantity)-(commission/100),mrp*quantity-(commission/100)) as total"))
+//                    ->where('card_play_master_id',$y->id)->distinct()->get())[0];
+//                $tempntp += $tempData->total;
             }
             $detail = (object)$x;
             $detail->prize_value = $newPrize;
-            $detail->ntp = $tempntp;
+//            $detail->ntp = $tempntp;
         }
         return $data;
     }
