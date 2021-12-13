@@ -118,7 +118,7 @@ export class TwelveCardsComponent implements OnInit {
     }
     this.playDetails = [];
     this.totalPurchasedPrice = null;
-    thos.mrp = null;
+    this.mrp = null;
     this.totalPurchasedQuantity = null;
   }
 
