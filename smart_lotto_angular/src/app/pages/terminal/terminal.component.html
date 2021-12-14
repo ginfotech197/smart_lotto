@@ -106,7 +106,9 @@
 <!--          <td scope="col"><input #value8 (change)="changeInputDetails(row,value8.value,twoDigitNumberSet[7].id)" style="max-width: 50px; max-height: 25px;"></td>-->
 <!--          <td scope="col"><input #value9 (change)="changeInputDetails(row,value9.value,twoDigitNumberSet[8].id)" style="max-width: 50px; max-height: 25px;"></td>-->
 <!--          <td scope="col"><input #value10 (change)="changeInputDetails(row,value10.value,twoDigitNumberSet[9].id)" style="max-width: 50px; max-height: 25px;"></td>-->
-          <td scope="col" *ngIf="lastResult[0]!=undefined" >{{lastResult[i].visible_number}}</td>
+          <td scope="col" *ngIf="lastResult[0]!=undefined" >
+            <!-- {{lastResult[i].visible_number}} -->
+          </td>
         </tr>
       </tbody>
     </table>
