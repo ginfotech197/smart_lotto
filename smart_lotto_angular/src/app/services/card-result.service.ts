@@ -45,12 +45,13 @@ export class CardResultService {
       this.cardResultSubject.next([...this.cardResult]);
     });
 
-    // this.http.get(this.BASE_API_URL + 'getResultByDate').subscribe((response: ServerResponse) => {
-    //   this.resultByDate = response.data;
-    //   this.resultByDateSubject.next({...this.resultByDate});
-    // });
+  }
 
-
+  getCardResult(){
+    this.http.get(this.BASE_API_URL + '/dev/cardResult').subscribe((response: ServerResponse) =>{
+      this.cardResult = response.data.result;
+      this.cardResultSubject.next([...this.cardResult]);
+    });
   }
 
   getCardResultByDate(cardResultDate: any){
@@ -61,9 +62,6 @@ export class CardResultService {
       this.cardResultSubject.next([...this.cardResult]);
     })));
   }
-
-
-
 
 
   getCurrentDateResult(){

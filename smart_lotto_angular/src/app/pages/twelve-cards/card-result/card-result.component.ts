@@ -34,19 +34,13 @@ export class CardResultComponent implements OnInit {
   ngOnInit(): void {
     this.cardResultService.getCardDateResultListener().subscribe(response => {
       this.cardResult = response;
-      // console.log(this.cardResult);
     });
-
-    // this.cardResultService.getCardResultByDateListener().subscribe((response: CardResult[]) => {
-    //   this.cardResultByDate = response;
-    //   console.log(response);
-    // });
+    this.cardResultService.getCardResult();
   }
 
   searchCardResultByDate(){
     const x = this.pipe.transform(this.startDate, 'yyyy-MM-dd');
     this.cardResultService.getCardResultByDate(x).subscribe(response => {
-      // this.cardResult = response.data;
     });
   }
 
