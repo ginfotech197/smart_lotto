@@ -79,7 +79,7 @@
       <div class="d-flex" style="padding-left: 40px;">
         <div class="ml-2 mr-4 mt-2 mb-3" style="background-color: rgba(0, 0, 255, 0.521); border-radius: 5px;">
           <!-- &lt;!&ndash; -->
-          <span class="mt-2 " style="font-size: large;color: rgb(0, 0, 0); text-align: center;">Next draw: {{activeDrawTime.visibleTime}}</span>
+          <span class="mt-2 " style="font-size: large;color: rgb(0, 0, 0); text-align: center;">Next draw: {{cardActiveDrawTime.visibleTime}}</span>
           <!-- &ndash;&gt; -->
         </div>
 
@@ -88,7 +88,8 @@
         </div>
 
         <div class="clock-container clock2 ml-1 mt-1 pt-1" *ngIf="alwaysTime" style="font-size: large; width: 150px">
-          <div class="time">{{remainingTime>=0?remainingTime:'00:00:00'}}</div>
+<!--          <div class="time">{{remainingTime>=0?remainingTime:'00:00:00'}}</div>-->
+          <div class="time">{{remainingTime}}</div>
         </div>
       </div>
 

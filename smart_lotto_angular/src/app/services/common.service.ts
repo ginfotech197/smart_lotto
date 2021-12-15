@@ -134,8 +134,19 @@ export class CommonService {
       // const remainingSec = Math.abs(60 - (this.currentTimeObj.second-this.activeDrawTime.endTime.split(':')[2]));
       const remainingSec = Math.abs((this.currentTimeObj.second - this.activeDrawTime.endTime.split(':')[2]) - 60);
 
-      // @ts-ignore
-      const remainingTime = remainingHour + ':' + remainingMin + ':' + remainingSec;
+
+      let remainingTime ;
+
+      if (remainingHour < 0){
+        // tslint:disable-next-line:no-shadowed-variable
+        remainingTime = '00:00:00';
+      }else{
+        // tslint:disable-next-line:no-shadowed-variable
+        remainingTime = remainingHour + ':' + remainingMin + ':' + remainingSec;
+      }
+
+      // // @ts-ignore
+      // const remainingTime = remainingHour + ':' + remainingMin + ':' + remainingSec;
 
       // console.log('rm_mn: '+ remainingMin , 'rem_sec' + remainingSec);
 
@@ -163,7 +174,8 @@ export class CommonService {
         cardRemainingHour = this.CardActiveDrawTime.endTime.split(':')[0] - (this.currentTimeObj.hour);
       }
       // @ts-ignore
-      if (this.CardActiveDrawTime.endTime.split(':')[1] == 0){
+      // tslint:disable-next-line:triple-equals
+      if (this.CardActiveDrawTime.endTime.split(':')[1] === 0){
         // @ts-ignore
         cardRemainingMin = Math.abs(this.currentTimeObj.minute - 60);
       }else{
@@ -171,12 +183,31 @@ export class CommonService {
         cardRemainingMin = Math.abs(this.currentTimeObj.minute - this.CardActiveDrawTime.endTime.split(':')[1]);
       }
 
+      // console.log(cardRemainingMin);
+      // @ts-ignore
+      // console.log(this.currentTimeObj.minute - this.CardActiveDrawTime.endTime.split(':')[1]);
+      // console.log(this.CardActiveDrawTime.endTime.split(':')[1]);
       // @ts-ignore
       // const remainingSec = Math.abs(60 - (this.currentTimeObj.second-this.CardActiveDrawTime.endTime.split(':')[2]));
       const cardRemainingSec = Math.abs((this.currentTimeObj.second - this.CardActiveDrawTime.endTime.split(':')[2]) - 60);
 
+      let cardRemainingTime ;
+
+      console.log(cardRemainingHour);
+
       // @ts-ignore
-      const cardRemainingTime = cardRemainingHour + ':' + cardRemainingMin + ':' + cardRemainingSec;
+      if ((cardRemainingHour <= 0) && (this.currentTimeObj.hour >= this.CardActiveDrawTime.endTime.split(':')[0])){
+        // tslint:disable-next-line:no-shadowed-variable
+        cardRemainingTime = '00:00:00';
+      }else{
+        // tslint:disable-next-line:no-shadowed-variable
+        cardRemainingTime = cardRemainingHour + ':' + cardRemainingMin + ':' + cardRemainingSec;
+      }
+
+      // console.log(cardRemainingMin);
+
+      // @ts-ignore
+      // const cardRemainingTime = cardRemainingHour + ':' + cardRemainingMin + ':' + cardRemainingSec;
 
       // console.log('rm_mn: '+ cardRemainingMin , 'rem_sec' + cardRemainingSec);
 
@@ -258,6 +289,15 @@ export class CommonService {
   getActiveDrawTime(){
     return {...this.activeDrawTime};
   }
+
+  getCardActiveDrawTime(){
+    // this.http.get(this.BASE_API_URL + '/dev/drawTimes/activeCard').subscribe((response: ServerResponse) => {
+    //   this.CardActiveDrawTime = response.data;
+    //   this.cardActiveDrawTimeSubject.next({...this.CardActiveDrawTime});
+    // });
+    return {...this.CardActiveDrawTime};
+  }
+
   getActiveDrawTimeListener(){
     return this.activeDrawTimeSubject.asObservable();
   }

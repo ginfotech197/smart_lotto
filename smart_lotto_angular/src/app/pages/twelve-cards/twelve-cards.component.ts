@@ -16,7 +16,7 @@ import {empty} from 'rxjs';
   styleUrls: ['./twelve-cards.component.scss']
 })
 export class TwelveCardsComponent implements OnInit {
-  activeDrawTime: DrawTime;
+  cardActiveDrawTime: DrawTime;
   user: User;
   playDetails: any[] = [];
   gameTypes: GameType[] = [];
@@ -60,16 +60,20 @@ export class TwelveCardsComponent implements OnInit {
     });
     this.commonService.CardRemainingTimeBehaviorSubject.asObservable().subscribe(response => {
       this.remainingTime = response;
+      // console.log(this.remainingTime);
       // const x = String(this.remainingTime).split(':');
       // // tslint:disable-next-line:radix
       // this.value = (((parseInt(x[1])*60)+parseInt(x[2]))/(15*60))*100;
     });
 
 
-    this.activeDrawTime = this.commonService.getActiveDrawTime();
+    // @ts-ignore
+    this.cardActiveDrawTime = this.commonService.getCardActiveDrawTime();
     this.commonService.getCardActiveDrawTimeListener().subscribe((response: DrawTime) => {
-      this.activeDrawTime = response;
+      this.cardActiveDrawTime = response;
     });
+
+    console.log(this.cardActiveDrawTime);
 
   }
 
@@ -129,7 +133,7 @@ export class TwelveCardsComponent implements OnInit {
     // };
 
     const masterData = {
-      playMaster: {drawMasterId: this.activeDrawTime.drawId, terminalId: this.user.userId},
+      playMaster: {drawMasterId: this.cardActiveDrawTime.drawId, terminalId: this.user.userId},
       playDetails: this.playDetails
     };
 
