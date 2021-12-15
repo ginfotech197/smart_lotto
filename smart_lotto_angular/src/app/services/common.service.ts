@@ -42,9 +42,14 @@ export class CommonService {
   cardActiveDrawTimeSubject = new Subject<DrawTime>();
 
   barcodeReportRecordsSubject = new Subject<TerminalBarcodeReport[]>();
+  cardBarcodeReportRecordsSubject = new Subject<TerminalBarcodeReport[]>();
 
   terminalCancelListListener(){
     return this.barcodeReportRecordsSubject.asObservable();
+  }
+
+  terminalCardCancelListListener(){
+    return this.cardBarcodeReportRecordsSubject.asObservable();
   }
 
   constructor(private http: HttpClient) {
@@ -175,9 +180,9 @@ export class CommonService {
 
       // console.log('rm_mn: '+ cardRemainingMin , 'rem_sec' + cardRemainingSec);
 
-      // if (cardRemainingMin <= 1){
-      //   this.updateTerminalCancellation();
-      // }
+      if (cardRemainingMin <= 1){
+        this.updateCardTerminalCancellation();
+      }
 
       this.CardRemainingTimeBehaviorSubject.next(cardRemainingTime);
 
@@ -233,6 +238,14 @@ export class CommonService {
     return this.http.post( this.BASE_API_URL + '/terminal/updateCancellation').subscribe((response: {success: number, data: TerminalBarcodeReport[]}) => {
       const x = response.data;
       this.barcodeReportRecordsSubject.next([...x]);
+    });
+  }
+
+  updateCardTerminalCancellation(){
+    // @ts-ignore
+    return this.http.post( this.BASE_API_URL + '/terminal/updateCardCancellation').subscribe((response: {success: number, data: TerminalBarcodeReport[]}) => {
+      const x = response.data;
+      this.cardBarcodeReportRecordsSubject.next([...x]);
     });
   }
 

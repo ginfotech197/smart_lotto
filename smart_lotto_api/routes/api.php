@@ -122,6 +122,7 @@ Route::group(['middleware' => 'auth:sanctum'], function(){
     Route::post('stockist/cardCustomerSaleReports', [StockistController::class, 'card_customer_sale_reports']);
 
     Route::post('terminal/updateCancellation', [TerminalReportController::class, 'updateCancellation']);
+    Route::post('terminal/updateCardCancellation', [TerminalReportController::class, 'updateCardCancellation']);
 
 
     Route::put('terminal/resetPassword', [TerminalController::class, 'reset_terminal_password']);

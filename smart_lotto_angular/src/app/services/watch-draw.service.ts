@@ -7,8 +7,8 @@ import {PlayGameService} from './play-game.service';
 import {NextDrawId} from '../models/NextDrawId.model';
 import {User} from '../models/user.model';
 import {CommonService} from './common.service';
-import {ServerResponse} from "../models/ServerResponse.model";
-import {LastResult} from "../models/LastResult.model";
+import {ServerResponse} from '../models/ServerResponse.model';
+import {LastResult} from '../models/LastResult.model';
 
 @Injectable({
   providedIn: 'root'
@@ -38,8 +38,8 @@ export class WatchDrawService {
       this.lastResultSubject.next([...this.lastResult]);
     });
 
-      const userData: User = JSON.parse(localStorage.getItem('user'));
-      setInterval(() => {
+    const userData: User = JSON.parse(localStorage.getItem('user'));
+    setInterval(() => {
       this.http.get(this.BASE_API_URL + '/dev/nextDrawId').subscribe((response: NextDrawId) => {
 
         // console.log(response);
