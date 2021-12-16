@@ -72,9 +72,12 @@ export class AuthService {
     if (loadedUser.authKey){
       this.userBehaviorSubject.next(loadedUser);
 
-      // if (loadedUser.isAdmin){
-      //   this.router.navigate(['/cPanel']);
-      // }
+      if (loadedUser.isAdmin){
+         this.router.navigate(['/cPanel']);
+      }
+      if (loadedUser.isTerminal){
+        this.router.navigate(['/terminal']);
+      }
     }
   }
 
