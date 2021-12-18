@@ -5,47 +5,37 @@
   <div  style="padding-top: 50px;" >
     <div class="d-flex" style="background-color: rgb(0, 255, 149);">
       <div class="col-2 ml-3">
-        <button class="btn" style="background-color: rgb(244, 255, 146);" (click)="viewResult()">Enq. Rslt-F4</button>
-        <!-- <i class="bi bi-bookmark-star-fill" style="font-size: 25px; color: white;"></i>
-        <span class="logo" style="color: white;">{{user.userName}}</span> -->
+        <button class="btn" style="background-color: rgb(244, 255, 146);" [routerLink]="'/resultSheet/double'" >Enq. Rslt-F4</button>
+        <!-- <button class="btn" style="background-color: rgb(244, 255, 146);" (click)="viewResult()">Enq. Rslt-F4</button> -->
+
       </div>
-      <!-- <div class="col-1"> -->
-        <!-- <button class="ml-1 mr-1" style="font-size: large;  background-color: rgb(255, 147, 46); border-radius: 5px; width: 80px; text-align: center; border: 2px solid greenyellow; border-style: dotted;" mat-button
-                        [routerLink]="['/chart']"
-                        routerLinkActive="MyActiveMenu"
-                        [routerLinkActiveOptions]="{exact: true}">Result</button> -->
-      <!-- </div> -->
+
       <div class="col-4 mt-1 mr-5" style="color: white;">
         <input type="text"  placeholder="" style="width: 450px; background-color: rgb(245, 232, 206);">
-        <!-- Balc: {{user.balance}} -->
+
       </div>
       <div class="col-2">
         <button class="btn" style="background-color: rgb(244, 255, 146);">Upd. Rlt - R</button>
-        <!-- <span class="mt-2  mr-2" style="font-size: large;color: white; text-align: center;">Next draw: {{activeDrawTime.visibleTime}}</span> -->
+
       </div>
-      <!-- <div class="clock-container clock2 ml-1 mt-1 pt-1 col-1 " *ngIf="alwaysTime" style="font-size: large; width: 150px"> -->
+
       <div class="col-2">
         <button class="btn" style="background-color: rgb(244, 255, 146);">Bet dtls - F7</button>
-        <!-- <div class="time">{{alwaysTime}}</div> -->
+
       </div>
       <div class="col-2">
         <button class="btn" style="background-color: rgb(244, 255, 146);" [routerLink]="'/terminalReport'" >Report - Y</button>
-        <!-- <div class="time">{{alwaysTime}}</div> -->
+
       </div>
     </div>
     <div class="d-flex" style="background-color: rgb(217, 255, 0);">
       <div class="col-2">
         <i class="bi bi-bookmark-star-fill" style="font-size: 25px; color: rgb(0, 0, 0);"></i>
-        <!-- <span class="logo" style="color: rgb(0, 0, 0)">{{user.userName}}</span> -->
+
       </div>
-      <!-- <div class="col-1"> -->
-        <!-- <button class="ml-1 mr-1" style="font-size: large;  background-color: rgb(255, 147, 46); border-radius: 5px; width: 80px; text-align: center; border: 2px solid greenyellow; border-style: dotted;" mat-button
-                        [routerLink]="['/chart']"
-                        routerLinkActive="MyActiveMenu"
-                        [routerLinkActiveOptions]="{exact: true}">Result</button> -->
-      <!-- </div> -->
+
       <div class="col-2" style="color: rgb(0, 0, 0);">
-        <!-- Balc: {{user.balance}} -->
+
       </div>
       <div class="col-4">
         <span class="mt-2  mr-2" style="font-size: large;color: rgb(0, 0, 0); text-align: center;">Next draw: {{activeDrawTime.visibleTime}}</span>

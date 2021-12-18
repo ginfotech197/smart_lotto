@@ -9,7 +9,8 @@ import {DatePipe} from '@angular/common';
 import { CardResult } from 'src/app/models/CardResult.model';
 import { CardResultService } from 'src/app/services/card-result.service';
 import { ActivatedRoute } from '@angular/router';
-import { MatTabChangeEvent } from '@angular/material/tabs';
+import {MatTabChangeEvent, MatTabGroup} from '@angular/material/tabs';
+
 
 @Component({
   selector: 'app-result-sheet',
@@ -35,6 +36,7 @@ export class ResultSheetComponent implements OnInit {
   cardResultByDate: CardResult[] =[];
 
   public routerParams: string;
+  public activeTab = 0;
 
 
   constructor(private playGameService: PlayGameService, private commonService: CommonService, private resultService: ResultService, private cardResultService: CardResultService, private router: ActivatedRoute) {
@@ -50,7 +52,11 @@ export class ResultSheetComponent implements OnInit {
   ngOnInit(): void {
 
     this.routerParams = this.router.snapshot.params.gameName;
-    console.log(this.routerParams);
+    if(this.routerParams==':twelveCard'){
+      this.activeTab = 1;
+    }else if(this.routerParams=='double'){
+      this.activeTab = 0;
+    }
 
     this.resultService.getResultByDate('2021-11-20').subscribe(response=>{
       // console.log('Component',response);
@@ -82,13 +88,19 @@ export class ResultSheetComponent implements OnInit {
     });
   }
 
-  tabChanged(tabChangeEvent: MatTabChangeEvent): void {
-    // tabChanged(tabGroup: MatTabGroup): void {
-    console.log('tabChangeEvent => ', tabChangeEvent);
-    console.log('index => ', tabChangeEvent.index);
-    if(this.routerParams=='twelveCard'){
-      console.log(this.routerParams);
-    }
+
+  // reference link
+  // https:
+  //stackoverflow.com/questions/41937176/programmatically-select-mat-tab-in-angular-2-material-using-mat-tab-group
+
+  // https:
+  //stackoverflow.com/questions/41937176/programmatically-select-mat-tab-in-angular-2-material-using-mat-tab-group
+
+
+  // tabChanged(tabChangeEvent: MatTabChangeEvent): void {}
+  tabChanged(tabGroup: MatTabGroup): void {
+    // console.log('tabChangeEvent => ', tabChangeEvent);
+    // console.log('index => ', tabChangeEvent.index);
   }
 
 
