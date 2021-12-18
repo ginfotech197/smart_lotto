@@ -193,7 +193,7 @@ export class CommonService {
 
       let cardRemainingTime ;
 
-      console.log(cardRemainingHour);
+      
 
       // @ts-ignore
       if ((cardRemainingHour <= 0) && (this.currentTimeObj.hour >= this.CardActiveDrawTime.endTime.split(':')[0])){

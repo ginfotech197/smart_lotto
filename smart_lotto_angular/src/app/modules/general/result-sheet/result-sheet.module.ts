@@ -21,6 +21,7 @@ import {NgxWheelModule} from "ngx-wheel";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {CurrentResultModule} from "../current-result/current-result.module";
 import {RouterModule} from "@angular/router";
+import { MatTabsModule } from '@angular/material/tabs';
 
 
 
@@ -57,6 +58,9 @@ import {RouterModule} from "@angular/router";
     CurrentResultModule,
     RouterModule,
     FormsModule,
+
+    MatTabsModule,
+
 
 
   ],

@@ -8,8 +8,8 @@ import {TodayLastResult} from '../../models/TodayLastResult.model';
 import {DatePipe} from '@angular/common';
 import { CardResult } from 'src/app/models/CardResult.model';
 import { CardResultService } from 'src/app/services/card-result.service';
-
-
+import { ActivatedRoute } from '@angular/router';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-result-sheet',
@@ -34,27 +34,23 @@ export class ResultSheetComponent implements OnInit {
   cardResult: CardResult[] =[];
   cardResultByDate: CardResult[] =[];
 
+  public routerParams: string;
 
 
-
-
-  constructor(private playGameService: PlayGameService, private commonService: CommonService, private resultService: ResultService, private cardResultService: CardResultService) {
+  constructor(private playGameService: PlayGameService, private commonService: CommonService, private resultService: ResultService, private cardResultService: CardResultService, private router: ActivatedRoute) {
     this.playGameService.getTodayLastResultListener().subscribe(response => {
       this.todayLastResult = response;
     });
     this.searchResultByDate();
+
+
+
   }
 
   ngOnInit(): void {
 
-    // this.currentDateResult = this.playGameService.getCurrentDateResult();
-    // this.playGameService.getCurrentDateResultListener().subscribe((response: CurrentGameResult) => {
-    //   // @ts-ignore
-    //   this.currentDateResult = response.result;
-    //   console.log("ResultSheetComponent", this.currentDateResult);
-    // });
-    // console.log("ResultSheetComponent", this.currentDateResult);
-
+    this.routerParams = this.router.snapshot.params.gameName;
+    console.log(this.routerParams);
 
     this.resultService.getResultByDate('2021-11-20').subscribe(response=>{
       // console.log('Component',response);
@@ -69,26 +65,30 @@ export class ResultSheetComponent implements OnInit {
     });
     this.cardResultService.getCardResult();
 
+
+
   }
 
   searchResultByDate(){
     let x = this.pipe.transform(this.startDate,'yyyy-MM-dd');
-    // console.log(this.startDate);
-    // console.log(x);
     this.resultService.getResultByDate(x).subscribe(response=>{
-      // console.log('Component',response);
-     // @ts-ignore
-
       this.currentResult = response.data;
-      // console.log(this.currentResult);
     });
-
   }
 
   searchCardResultByDate(){
     const x = this.pipe.transform(this.startDate, 'yyyy-MM-dd');
     this.cardResultService.getCardResultByDate(x).subscribe(response => {
     });
+  }
+
+  tabChanged(tabChangeEvent: MatTabChangeEvent): void {
+    // tabChanged(tabGroup: MatTabGroup): void {
+    console.log('tabChangeEvent => ', tabChangeEvent);
+    console.log('index => ', tabChangeEvent.index);
+    if(this.routerParams=='twelveCard'){
+      console.log(this.routerParams);
+    }
   }
 
 
