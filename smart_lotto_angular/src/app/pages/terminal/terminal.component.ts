@@ -95,7 +95,7 @@ export class TerminalComponent implements OnInit {
   timeoutSec = 10;
 
   public showCurrentResult = false;
-  public showResultSheet = false;
+  public showResultSheet = false;      
   public lastPurchasedTicketDetails: GameInputSaveResponse;
   public lastPurchasedTicketSingle: {singleNumber: number, quantity: number}[];
   public lastPurchasedTicketTriple: {visibleTripleNumber: number, quantity: number, singleNumber: number}[];

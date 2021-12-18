@@ -28,6 +28,8 @@ export class TwelveCardsComponent implements OnInit {
   remainingTime: number;
   mrp = null;
 
+  public showResultSheet = false;
+
 
 
 
@@ -171,7 +173,9 @@ export class TwelveCardsComponent implements OnInit {
     // console.log(this.playDetails);
   }
 
-
+  viewResult(){
+    this.showResultSheet = true ;
+  }
 
 
 }

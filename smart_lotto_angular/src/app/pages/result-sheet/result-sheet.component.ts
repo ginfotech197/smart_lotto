@@ -6,6 +6,8 @@ import { PlayGameService } from 'src/app/services/play-game.service';
 import { ResultService } from 'src/app/services/result.service';
 import {TodayLastResult} from '../../models/TodayLastResult.model';
 import {DatePipe} from '@angular/common';
+import { CardResult } from 'src/app/models/CardResult.model';
+import { CardResultService } from 'src/app/services/card-result.service';
 
 
 
@@ -27,10 +29,16 @@ export class ResultSheetComponent implements OnInit {
   startDate = new Date(this.thisYear, this.thisMonth, this.thisDay);
   pipe = new DatePipe('en-US');
 
+  columnNumber = 4;
+
+  cardResult: CardResult[] =[];
+  cardResultByDate: CardResult[] =[];
 
 
 
-  constructor(private playGameService: PlayGameService, private commonService: CommonService, private resultService: ResultService) {
+
+
+  constructor(private playGameService: PlayGameService, private commonService: CommonService, private resultService: ResultService, private cardResultService: CardResultService) {
     this.playGameService.getTodayLastResultListener().subscribe(response => {
       this.todayLastResult = response;
     });
@@ -55,6 +63,12 @@ export class ResultSheetComponent implements OnInit {
       this.resultByDate = response;
       // console.log(response);
     });
+
+    this.cardResultService.getCardDateResultListener().subscribe(response => {
+      this.cardResult = response;
+    });
+    this.cardResultService.getCardResult();
+
   }
 
   searchResultByDate(){
@@ -69,6 +83,12 @@ export class ResultSheetComponent implements OnInit {
       // console.log(this.currentResult);
     });
 
+  }
+
+  searchCardResultByDate(){
+    const x = this.pipe.transform(this.startDate, 'yyyy-MM-dd');
+    this.cardResultService.getCardResultByDate(x).subscribe(response => {
+    });
   }
 
 

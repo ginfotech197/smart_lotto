@@ -142,6 +142,12 @@ const routes: Routes = [
   },
 
   {
+    path: 'resultSheet',
+    loadChildren: () => import('./modules/general/result-sheet/result-sheet.module')
+      .then(mod => mod.ResultSheetModule),
+  },
+
+  {
     path: 'bi-icon',
     loadChildren: () => import('./modules/general/bi-icon/bi-icon.module')
       .then(mod => mod.BiIconModule)

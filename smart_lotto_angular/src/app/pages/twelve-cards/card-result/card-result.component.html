@@ -1,6 +1,6 @@
 <div style="padding-left: 100px;">
 
-  <div class="ml-4" style=" max-height: 90px;">
+  <!-- <div class="ml-4" style=" max-height: 90px;">
 
     <mat-form-field appearance="fill">
       <mat-label>Choose a date</mat-label>
@@ -9,9 +9,9 @@
       <mat-datepicker #picker [(ngModel)]= "startDate"></mat-datepicker>
     </mat-form-field>
     <button mat-button type="button" class="btn" (click)="searchCardResultByDate()">Search</button>
-  </div>
+  </div> -->
 
-  <div class="scroll" style="max-height: 250px; overflow: scroll;">
+  <div class="scroll" style="max-height: 400px; overflow: scroll; padding-top: 50px;">
     <table class="table table-bordered" >
       <tbody>
         <tr *ngFor="let row of cardResult.slice(0, cardResult.length % columnNumber  === 0 ?
