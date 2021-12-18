@@ -11,7 +11,7 @@
     <button mat-button type="button" class="btn" (click)="searchCardResultByDate()">Search</button>
   </div> -->
 
-  <div class="scroll" style="max-height: 400px; overflow: scroll; padding-top: 50px;">
+  <div style=" padding-top: 50px;">
     <table class="table table-bordered" >
       <tbody>
         <tr *ngFor="let row of cardResult.slice(0, cardResult.length % columnNumber  === 0 ?
