@@ -40,6 +40,7 @@ class ResultMasterController extends Controller
                     $join->on('draw_masters.id','=','result_masters.draw_master_id')
                         ->where('result_masters.game_date','=', $result_date);
                 })
+                ->join('result_details','result_masters.id','result_details.result_masters_id')
                 ->leftJoin('two_digit_number_combinations','result_details.two_digit_number_combination_id','two_digit_number_combinations.id')
                 ->get();
 
