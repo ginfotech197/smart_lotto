@@ -114,7 +114,7 @@
     <button class="mr-2 btn btn-warning" [routerLink]="'/twelveCards'" >🃏Cards🃏</button>
     <!-- <button class="mr-2 btn btn-warning" (click)="viewResult()">View Results</button> -->
     <!-- <button class="mr-2 btn btn-warning" [routerLink]="'/terminalReport'" >View Report</button> -->
-    <button class="mr-2 btn btn-warning" (click)="saveUserPlayInputDetails()">save</button>
+    <button class="mr-2 btn btn-warning" [disabled]="value>100 || value<0" (click)="saveUserPlayInputDetails()">save</button>
     <button class="mr-2 btn btn-warning" (click)="clear()">Clear</button>
 
     <div class="ml-2" style="color: rgb(0, 0, 0); padding-left: 305px; font-size: 30px;">
